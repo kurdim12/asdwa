@@ -19,7 +19,10 @@ function getFeaturedProjects() {
     if (p && p.folder) {
       try {
         // p.folder is like "images/projects/Name"
-        const dir = path.join(process.cwd(), 'public', p.folder);
+        // In Vercel/Next.js build, we need to be careful with paths
+        const publicPath = path.join(process.cwd(), 'public');
+        const dir = path.join(publicPath, p.folder);
+
         if (fs.existsSync(dir)) {
           const files = fs.readdirSync(dir);
           const firstImage = files.find(f => /\.(jpg|jpeg|png|webp)$/i.test(f));
@@ -28,7 +31,7 @@ function getFeaturedProjects() {
           }
         }
       } catch (e) {
-        console.error(`Error loading image for ${p.name}:`, e);
+        console.warn(`Warning: Could not load image for project ${p.name}.`, e);
       }
     }
     // Ensure strictly matched types or spread
