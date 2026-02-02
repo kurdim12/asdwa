@@ -19,17 +19,15 @@ export function Hero() {
     return (
         <section ref={ref} className="h-screen w-full relative overflow-hidden flex items-center justify-center">
             {/* Video Background with Parallax */}
-            <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full z-0">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover grayscale opacity-60"
-                >
-                    <source src="/hero.mp4" type="video/mp4" />
-
-                </video>
+            {/* Video Background with Parallax */}
+            <motion.div style={{ y, opacity }} className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+                <iframe
+                    className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60 grayscale"
+                    src="https://www.youtube.com/embed/EDKuZlFULe4?autoplay=1&mute=1&controls=0&loop=1&playlist=EDKuZlFULe4&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ border: 0 }}
+                />
                 <div className="absolute inset-0 bg-background/50 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
             </motion.div>
