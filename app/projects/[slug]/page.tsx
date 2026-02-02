@@ -5,26 +5,24 @@ import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
 import Link from "next/link";
 import { ArrowLeft, MapPin, Calendar, Camera } from "lucide-react";
-import fs from 'fs';
-import path from 'path';
+
 
 interface PageProps {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-    const allProjects = COMPANY_DATA.projects.categories.flatMap(c => c.projects);
-    return allProjects.map((project) => ({
-        slug: project.name,
+    return COMPANY_DATA.projects.all.map((project) => ({
+        slug: project.title.en, // Assuming slug is the English title
     }));
 }
 
-export default function ProjectDetail({ params }: PageProps) {
-    // Decode slug back to name
+export default async function ProjectDetail(props: PageProps) {
+    const params = await props.params;
     const projectName = decodeURIComponent(params.slug);
 
-    const allProjects = COMPANY_DATA.projects.categories.flatMap(c => c.projects.map(p => ({ ...p, categoryName: c.name.en })));
-    const project = allProjects.find(p => p.name === projectName);
+    // Find project in the flat list
+    const project = COMPANY_DATA.projects.all.find(p => p.title.en === projectName);
 
     if (!project) {
         return (
@@ -37,23 +35,26 @@ export default function ProjectDetail({ params }: PageProps) {
         )
     }
 
+    // Resolve category name (taking the first one for now)
+    const categoryId = project.categories[0];
+    const categoryObj = COMPANY_DATA.projects.categories.find(c => c.id === String(categoryId));
+    const categoryName = categoryObj ? categoryObj.name.en : "Portfolio";
+
     // Dynamic Image Loading
     let images: string[] = [];
-    try {
-        if (project.folder) {
-            const projectsDir = path.join(process.cwd(), 'public', project.folder);
-            if (fs.existsSync(projectsDir)) {
-                images = fs.readdirSync(projectsDir)
-                    .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
-                    .map(file => `/${project.folder}/${file}`);
-            }
-        }
-    } catch (error) {
-        console.error("Error reading project images:", error);
+    // If project has explicit images array (from extraction)
+    if (project.images && project.images.length > 0) {
+        images = project.images.map(img => `/images/projects/${img}`);
+    } else {
+        // Fallback or legacy folder check if needed
+        images.push('/images/logo.jpg');
     }
 
-    // Use the first image as hero background, or a default
-    const heroImage = images.length > 0 ? images[0] : '/patterns/mesh.png';
+    // Ensure we have at least one image
+    if (images.length === 0) {
+        images.push('/images/logo.jpg');
+    }
+    const heroImage = images[0];
 
     return (
         <main className="bg-background min-h-screen">
@@ -76,12 +77,12 @@ export default function ProjectDetail({ params }: PageProps) {
 
                     <Reveal>
                         <div className="text-primary font-heading uppercase tracking-widest text-sm mb-4">
-                            {project.categoryName}
+                            {categoryName}
                         </div>
                     </Reveal>
                     <Reveal delay={0.2}>
                         <h1 className="text-5xl md:text-7xl font-heading font-bold text-white max-w-4xl">
-                            {project.name}
+                            {project.title.en}
                         </h1>
                     </Reveal>
                 </div>
@@ -101,7 +102,7 @@ export default function ProjectDetail({ params }: PageProps) {
                                 </div>
                                 <div className="flex items-center gap-3 text-white/70">
                                     <Calendar className="text-primary" size={20} />
-                                    <span>2024 (Completed)</span>
+                                    <span>Completed</span>
                                 </div>
                                 <div className="flex items-center gap-3 text-white/70">
                                     <Camera className="text-primary" size={20} />
@@ -116,9 +117,9 @@ export default function ProjectDetail({ params }: PageProps) {
                         <Reveal>
                             <h2 className="text-3xl font-heading font-bold text-white mb-6">About the Project</h2>
                             <p className="text-white/70 text-lg leading-relaxed mb-8">
-                                {project.description}
+                                {project.description.en}
                                 <br /><br />
-                                This project represents a significant milestone in Jordan's infrastructure development.
+                                This project represents a significant milestone in Jordan&apos;s infrastructure development.
                                 Utilizing state-of-the-art engineering techniques and adhering to the highest safety and quality standards (ISO 9001),
                                 {COMPANY_DATA.company.name.en} successfully delivered this project on time and within budget.
                             </p>
@@ -133,7 +134,7 @@ export default function ProjectDetail({ params }: PageProps) {
                                         <div key={i} className="aspect-video bg-neutral-800 rounded-lg border border-white/5 hover:border-primary/50 transition-colors relative group overflow-hidden">
                                             <img
                                                 src={img}
-                                                alt={`${project.name} photo ${i + 1}`}
+                                                alt={`${project.title.en} photo ${i + 1}`}
                                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
                                             />
                                         </div>

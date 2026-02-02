@@ -21,16 +21,16 @@ echo Copying AQABA THERMAL POWER STATION...
 xcopy /E /I /Y "%Source1%\AQABA THERMAL POWER STATION" "%ProjectsRoot%\AQABA THERMAL POWER STATION"
 
 echo Copying Amman Dev. Corridor...
-xcopy /E /I /Y "%Source1%\Amman Dev. Corridor" "%ProjectsRoot%\Amman Development Corridor"
+xcopy /E /I /Y "%Source1%\Amman Dev. Corridor (           )" "%ProjectsRoot%\Amman Development Corridor"
 
 echo Copying Aqaba Entrance...
 xcopy /E /I /Y "%Source1%\Aqaba Entrance" "%ProjectsRoot%\Aqaba Entrance"
 
 echo Copying Dissi Pipe line...
-xcopy /E /I /Y "%Source1%\Dissi Pipe line" "%ProjectsRoot%\Dissi Pipeline"
+xcopy /E /I /Y "%Source1%\Dissi Pipe line (             )" "%ProjectsRoot%\Dissi Pipeline"
 
 echo Copying Ayla...
-xcopy /E /I /Y "%Source1%\Ayla" "%ProjectsRoot%\Ayla"
+xcopy /E /I /Y "%Source1%\Ayla (           )" "%ProjectsRoot%\Ayla"
 
 echo Copying Dead sea Panorama...
 xcopy /E /I /Y "%Source1%\Dead sea Panorama" "%ProjectsRoot%\Dead Sea Panorama"

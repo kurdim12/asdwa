@@ -39,4 +39,9 @@ body {
     -webkit-text-stroke: 1px currentColor;
     color: transparent;
   }
+
+  .silver-navbar {
+    background: linear-gradient(90deg, #E0E0E0 0%, #F5F5F5 50%, #C0C0C0 100%);
+    color: black !important;
+  }
 }

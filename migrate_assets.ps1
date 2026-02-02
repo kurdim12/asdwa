@@ -1,9 +1,9 @@
 $ErrorActionPreference = "Stop"
 
 $WebsiteRoot = "public"
-$ImagesRoot = "$WebsiteRoot\images"
-$ProjectsRoot = "$ImagesRoot\projects"
-$HeroRoot = "$ImagesRoot\hero"
+$ImagesRoot = "public\images"
+$ProjectsRoot = "public\images\projects"
+$HeroRoot = "public\images\hero"
 
 $Source1 = "..\Catalog and web site\Brochures_2017 by main office"
 $Source2 = "..\كتالوج الشركة\PHOTOS"
@@ -13,13 +13,19 @@ $Source3 = "..\كتالوج الشركة"
 if (!(Test-Path $ProjectsRoot)) { New-Item -ItemType Directory -Force -Path $ProjectsRoot | Out-Null }
 if (!(Test-Path $HeroRoot)) { New-Item -ItemType Directory -Force -Path $HeroRoot | Out-Null }
 
-function Copy-ProjectImages($SourcePath, $DestName) {
+function Copy-ProjectImages {
+    param (
+        [string]$SourcePath,
+        [string]$DestName
+    )
+
     $DestPath = "$ProjectsRoot\$DestName"
     if (Test-Path $SourcePath) {
         Write-Host "Copying $DestName..." -ForegroundColor Cyan
         if (!(Test-Path $DestPath)) { New-Item -ItemType Directory -Force -Path $DestPath | Out-Null }
         Copy-Item "$SourcePath\*" -Destination $DestPath -Recurse -Force
-    } else {
+    }
+    else {
         Write-Host "Warning: Source not found for $DestName at $SourcePath" -ForegroundColor Yellow
     }
 }

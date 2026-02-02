@@ -2,16 +2,28 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ZoomIn, ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { X, ZoomIn, ChevronLeft, ChevronRight, Award, FileCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/app/providers";
 
 const ITEMS_PER_PAGE = 9;
 
-export function ReferencesGallery({ certificates }: { certificates: string[] }) {
+interface Category {
+    id: string;
+    label: { en: string; ar: string };
+    images: string[];
+}
+
+export function ReferencesGallery({ categories }: { categories: Category[] }) {
+    const { language } = useLanguage();
+    const [activeTab, setActiveTab] = useState(categories[0]?.id || "all");
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
 
-    // Pagination Logic
+    const activeCategory = categories.find(c => c.id === activeTab) || categories[0];
+    const certificates = activeCategory?.images || [];
+
+    // Pagination Logic (Reset on tab change)
     const totalPages = Math.ceil(certificates.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const paginatedItems = certificates.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -19,28 +31,60 @@ export function ReferencesGallery({ certificates }: { certificates: string[] }) 
     const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
     const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
 
+    // Reset pagination when tab changes
+    const handleTabChange = (id: string) => {
+        setActiveTab(id);
+        setCurrentPage(1);
+    };
+
     // Helper to format filename into a title
     const formatTitle = (path: string) => {
         const filename = path.split('/').pop() || "";
         return filename
             .replace(/\.[^/.]+$/, "") // remove extension
+            .replace(/^Copy of\s+/i, "") // remove Copy of prefix
             .replace(/_/g, " ")       // underscores to spaces
             .replace(/-/g, " ")       // dashes to spaces
-            .replace(/Copy of/i, "")  // remove "Copy of"
             .trim();
     };
+
+    if (categories.length === 0) {
+        return (
+            <div className="h-64 flex items-center justify-center border border-dashed border-white/10 rounded-lg bg-white/5 mt-8">
+                <p className="text-white/40 font-heading uppercase tracking-widest">No certificates found.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-12">
 
+            {/* Tabs */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                {categories.map(cat => (
+                    <button
+                        key={cat.id}
+                        onClick={() => handleTabChange(cat.id)}
+                        className={cn(
+                            "px-6 py-3 rounded-full text-sm font-heading font-bold uppercase tracking-widest transition-all border",
+                            activeTab === cat.id
+                                ? "bg-primary text-background border-primary"
+                                : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                        )}
+                    >
+                        {cat.label[language]}
+                    </button>
+                ))}
+            </div>
+
             {/* Gallery Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence mode="popLayout" initial={false}>
                     {paginatedItems.map((cert, index) => {
                         const title = formatTitle(cert);
                         return (
                             <motion.div
-                                key={cert}
+                                key={`${activeTab}-${cert}`} // Re-key on tab change for animation
                                 layout
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -66,7 +110,7 @@ export function ReferencesGallery({ certificates }: { certificates: string[] }) 
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
                                         <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                             <div className="w-10 h-1 bg-primary mb-4" />
-                                            <h3 className="text-white font-bold text-lg leading-tight mb-2">
+                                            <h3 className="text-white font-bold text-lg leading-tight mb-2" dir="auto">
                                                 {title}
                                             </h3>
                                             <div className="flex items-center gap-2 text-primary text-sm font-heading uppercase tracking-widest">
@@ -78,7 +122,7 @@ export function ReferencesGallery({ certificates }: { certificates: string[] }) 
 
                                     {/* Corner Accents */}
                                     <div className="absolute top-4 right-4 text-white/20 group-hover:text-primary transition-colors">
-                                        <Award size={24} />
+                                        {activeTab === 'registration' ? <FileCheck size={24} /> : <Award size={24} />}
                                     </div>
                                 </div>
                             </motion.div>
