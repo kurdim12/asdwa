@@ -101,28 +101,40 @@ export default function ContactPage() {
                     {/* Form */}
                     <Reveal delay={0.4} width="100%">
                         <div className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-lg">
-                            <h3 className="text-2xl font-heading font-bold text-white mb-6">Send Message</h3>
+                            <h3 className="text-2xl font-heading font-bold text-white mb-6">
+                                {language === 'ar' ? 'أرسل رسالة' : 'Send Message'}
+                            </h3>
                             <form className="space-y-6" name="contact" method="POST" data-netlify="true">
                                 <input type="hidden" name="form-name" value="contact" />
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-xs uppercase tracking-widest text-white/40 font-heading">Name</label>
-                                        <input type="text" name="name" className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder="John Doe" required />
+                                        <label className="text-xs uppercase tracking-widest text-white/40 font-heading">
+                                            {language === 'ar' ? 'الاسم' : 'Name'}
+                                        </label>
+                                        <input type="text" name="name" className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder={language === 'ar' ? 'الاسم الكامل' : 'John Doe'} required />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-xs uppercase tracking-widest text-white/40 font-heading">Email</label>
-                                        <input type="email" name="email" className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder="john@example.com" required />
+                                        <label className="text-xs uppercase tracking-widest text-white/40 font-heading">
+                                            {language === 'ar' ? 'البريد الإلكتروني' : 'Email'}
+                                        </label>
+                                        <input type="email" name="email" className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder="email@example.com" required />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs uppercase tracking-widest text-white/40 font-heading">Subject</label>
-                                    <input type="text" name="subject" className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder="Project Inquiry" required />
+                                    <label className="text-xs uppercase tracking-widest text-white/40 font-heading">
+                                        {language === 'ar' ? 'الموضوع' : 'Subject'}
+                                    </label>
+                                    <input type="text" name="subject" className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder={language === 'ar' ? 'استفسار عن مشروع' : 'Project Inquiry'} required />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs uppercase tracking-widest text-white/40 font-heading">Message</label>
-                                    <textarea name="message" rows={4} className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder="Tell us about your project..." required />
+                                    <label className="text-xs uppercase tracking-widest text-white/40 font-heading">
+                                        {language === 'ar' ? 'الرسالة' : 'Message'}
+                                    </label>
+                                    <textarea name="message" rows={4} className="w-full bg-background border border-white/10 rounded-none p-4 text-white focus:border-primary focus:outline-none transition-colors" placeholder={language === 'ar' ? 'تفاصيل رسالتك...' : 'Tell us about your project...'} required />
                                 </div>
-                                <Button className="w-full">Send Message</Button>
+                                <Button className="w-full">
+                                    {language === 'ar' ? 'إرسال الرسالة' : 'Send Message'}
+                                </Button>
                             </form>
                         </div>
                     </Reveal>

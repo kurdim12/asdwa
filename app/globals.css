@@ -45,3 +45,19 @@ body {
     color: black !important;
   }
 }
+
+/* Arabic Typography */
+:root[lang="ar"] body {
+  font-family: var(--font-noto-kufi), sans-serif;
+}
+
+:root[lang="ar"] h1,
+:root[lang="ar"] h2,
+:root[lang="ar"] h3,
+:root[lang="ar"] h4,
+:root[lang="ar"] h5,
+:root[lang="ar"] h6 {
+  font-family: var(--font-noto-kufi), sans-serif;
+  letter-spacing: 0;
+  /* Arabic doesn't need wide letter spacing typical of English headings */
+}

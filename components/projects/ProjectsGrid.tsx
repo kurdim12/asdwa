@@ -9,8 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 interface Project {
-    name: string;
-    description: string;
+    name: string; // Used for ID/Slug (English)
+    title: { ar: string; en: string } | string;
+    description: { ar: string; en: string } | string;
     folder?: string;
     featured?: boolean;
     categoryIds: string[];
@@ -28,9 +29,14 @@ interface ProjectsGridProps {
     allProjects: Project[];
 }
 
+import { COMPANY_DATA } from "@/lib/data";
+import { useLanguage } from "@/app/providers";
+
 export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
     const searchParams = useSearchParams();
     const categoryParam = searchParams.get("category");
+    const { language, t } = useLanguage();
+    const { filterAll, title, description, viewProject } = COMPANY_DATA.homeComponents.portfolio;
 
     const [filter, setFilter] = useState("all");
 
@@ -49,12 +55,12 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
             <div className="mb-16">
                 <Reveal>
                     <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6">
-                        Our Portfolio
+                        {t(title)}
                     </h1>
                 </Reveal>
                 <Reveal delay={0.2}>
                     <p className="text-white/60 max-w-2xl text-lg">
-                        A collection of infrastructure landmarks shaping the future of Jordan.
+                        {t(description)}
                     </p>
                 </Reveal>
             </div>
@@ -66,7 +72,7 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                     className={`text-sm font-heading font-bold uppercase tracking-widest px-4 py-2 rounded-full transition-all ${filter === "all" ? "bg-primary text-background" : "bg-white/5 text-white hover:bg-white/10"
                         }`}
                 >
-                    All Projects
+                    {t(filterAll)}
                 </button>
                 {categories.map(cat => (
                     <button
@@ -75,7 +81,7 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                         className={`text-sm font-heading font-bold uppercase tracking-widest px-4 py-2 rounded-full transition-all ${filter === cat.id ? "bg-primary text-background" : "bg-white/5 text-white hover:bg-white/10"
                             }`}
                     >
-                        {cat.name.en}
+                        {t(cat.name)}
                     </button>
                 ))}
             </div>
@@ -95,7 +101,7 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                             <Link href={`/projects/${encodeURIComponent(project.name)}`} className="group block bg-neutral-900 border border-white/5 hover:border-primary/50 transition-colors h-full flex flex-col">
                                 {/* Image Placeholder */}
                                 <div className="aspect-video bg-neutral-800 relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110"
+                                    <div className="absolute inset-0 bg-cover bg-center transition-all duration-500 scale-100 group-hover:scale-110"
                                         style={{
                                             backgroundImage: project.thumbnail
                                                 ? `url('${project.thumbnail}')`
@@ -104,20 +110,20 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                                     />
                                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
                                         <span className="bg-primary text-background px-4 py-2 font-bold font-heading uppercase text-sm flex items-center gap-2">
-                                            View Project <ArrowUpRight size={16} />
+                                            {t(viewProject)} <ArrowUpRight size={16} />
                                         </span>
                                     </div>
                                 </div>
 
                                 <div className="p-6 flex flex-col flex-grow">
                                     <div className="text-xs text-primary font-heading uppercase tracking-widest mb-2">
-                                        {project.categoryNames && project.categoryNames.join(', ')}
+                                        {project.categoryNames && project.categoryNames.filter(Boolean).join(', ')}
                                     </div>
                                     <h3 className="text-xl font-heading font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                                        {project.name}
+                                        {t(project.title)}
                                     </h3>
                                     <p className="text-white/50 text-sm line-clamp-3 mb-4 flex-grow">
-                                        {project.description}
+                                        {t(project.description)}
                                     </p>
                                 </div>
                             </Link>

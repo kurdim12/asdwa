@@ -5,20 +5,27 @@ import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
 import { ArrowRight, Hammer, Cog } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/app/providers";
 
 export function Services() {
     const { mainServices } = COMPANY_DATA.services;
-    const icons = [Hammer, Cog]; // Map visually to the services
+    const { label, title, link } = COMPANY_DATA.homeComponents.services;
+    const { language, t } = useLanguage();
+
+    // Map visually to the services
+    const icons = [Hammer, Cog];
 
     return (
         <Section className="bg-secondary/30 border-y border-white/5">
             <div className="text-center max-w-3xl mx-auto mb-16">
                 <Reveal width="100%" className="mx-auto">
-                    <h4 className="text-primary font-heading uppercase tracking-widest text-sm mb-4">Our Expertise</h4>
+                    <h4 className="text-primary font-heading uppercase tracking-widest text-sm mb-4">
+                        {t(label)}
+                    </h4>
                 </Reveal>
                 <Reveal width="100%" delay={0.2} className="mx-auto">
                     <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
-                        Specialized Engineering Services
+                        {t(title)}
                     </h2>
                 </Reveal>
             </div>
@@ -38,15 +45,15 @@ export function Services() {
                                     </div>
 
                                     <h3 className="text-2xl font-heading font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                                        {service.title.en}
+                                        {t(service.title)}
                                     </h3>
 
                                     <p className="text-white/60 mb-8 leading-relaxed h-20">
-                                        {service.description}
+                                        {t(service.description)}
                                     </p>
 
                                     <Link href="/services" className="inline-flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm hover:gap-4 transition-all">
-                                        Learn More <ArrowRight size={16} />
+                                        {t(link)} <ArrowRight size={16} />
                                     </Link>
                                 </div>
                             </div>

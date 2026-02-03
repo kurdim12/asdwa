@@ -25,8 +25,9 @@ export default function ProjectsPage() {
         }).filter(n => n !== '');
 
         return {
-            name: p.title.en, // Use English title for now, or adapt for bilingual
-            description: p.description.en,
+            name: p.title.en, // Use English title for routing/keys
+            title: p.title,   // Pass full object
+            description: p.description, // Pass full object
             folder: '', // Legacy support
             categoryIds: p.categories.map(id => String(id)),
             categoryNames,

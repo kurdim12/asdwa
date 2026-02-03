@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { Calendar, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/app/providers";
 
 const NEWS_ITEMS = [
     {
@@ -42,6 +43,15 @@ const NEWS_ITEMS = [
 ];
 
 export default function NewsPage() {
+    const { language, t } = useLanguage();
+
+    // Static translations for headings
+    const text = {
+        title: { en: "Latest News", ar: "آخر الأخبار" },
+        subtitle: { en: "Updates from our projects, safety milestones, and company announcements.", ar: "تحديثات مشاريعنا، إنجازات السلامة، وإعلانات الشركة." },
+        readMore: { en: "Read Full Story", ar: "اقرأ القصة الكاملة" }
+    };
+
     return (
         <main className="bg-background min-h-screen">
             <Navbar />
@@ -49,9 +59,9 @@ export default function NewsPage() {
             <div className="pt-32 pb-20 container mx-auto px-4 md:px-8">
                 <Reveal>
                     <header className="mb-16">
-                        <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6">Latest News</h1>
+                        <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6">{t(text.title)}</h1>
                         <p className="text-white/60 max-w-2xl text-lg leading-relaxed">
-                            Updates from our projects, safety milestones, and company announcements.
+                            {t(text.subtitle)}
                         </p>
                     </header>
                 </Reveal>
@@ -89,7 +99,7 @@ export default function NewsPage() {
                                     </p>
 
                                     <Link href="#" className="inline-flex items-center gap-2 text-white/50 hover:text-white uppercase text-xs font-bold tracking-widest transition-colors mt-auto">
-                                        Read Full Story <ArrowUpRight size={14} />
+                                        {t(text.readMore)} <ArrowUpRight size={14} />
                                     </Link>
                                 </div>
                             </article>

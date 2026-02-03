@@ -104,7 +104,7 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                         >
                             <div className={cn(
                                 "w-full h-full bg-cover bg-center",
-                                "grayscale hover:grayscale-0 transition-all duration-700"
+                                "transition-all duration-700"
                             )}
                                 style={{
                                     backgroundImage: image

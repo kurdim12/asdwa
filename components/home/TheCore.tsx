@@ -88,7 +88,13 @@ function Globe() {
     );
 }
 
+import { COMPANY_DATA } from "@/lib/data";
+import { useLanguage } from "@/app/providers";
+
 export function TheCore() {
+    const { language, t } = useLanguage();
+    const { label, title, description } = COMPANY_DATA.homeComponents.theCore;
+
     return (
         <section className="h-[80vh] w-full bg-background relative overflow-hidden flex items-center justify-center border-y border-white/5">
 
@@ -110,17 +116,18 @@ export function TheCore() {
             <div className="container mx-auto px-4 relative z-10 pointer-events-none">
                 <div className="max-w-xl">
                     <Reveal>
-                        <h4 className="text-primary font-heading uppercase tracking-widest text-sm mb-4">Global Standards</h4>
+                        <h4 className="text-primary font-heading uppercase tracking-widest text-sm mb-4">
+                            {t(label)}
+                        </h4>
                     </Reveal>
                     <Reveal delay={0.2}>
                         <h2 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-none">
-                            The <br /> Core
+                            {t(title)}
                         </h2>
                     </Reveal>
                     <Reveal delay={0.4}>
                         <p className="text-white/60 text-lg leading-relaxed backdrop-blur-sm p-4 bg-black/20 rounded-lg border border-white/5">
-                            At the heart of our operations lies an unwavering commitment to engineering precision.
-                            We don't just build structures; we orchestrate complex systems that power nations.
+                            {t(description)}
                         </p>
                     </Reveal>
                 </div>

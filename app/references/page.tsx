@@ -109,8 +109,23 @@ function getCertificates() {
     return { all: [], registration: [], projects: [], appreciation: [], other: [] };
 }
 
+import { useLanguage } from "@/app/providers";
+
+// ... existing imports
+
 export default function ReferencesPage() {
     const certificates = getCertificates();
+    const { t } = useLanguage();
+
+    // Add translations for the header
+    const text = {
+        title: { en: "References & Certifications", ar: "المراجع والشهادات" },
+        subtitle: {
+            en: "Our commitment to excellence is validated by recognized industry bodies and a history of successful partnerships.",
+            ar: "شهادات عالمية ومحلية تؤكد التزامنا بالتميز وقصص نجاح شركائنا."
+        }
+    };
+
     const categoriesList = [
         { ...CATEGORIES.all, images: certificates.all },
         { ...CATEGORIES.registration, images: certificates.registration },
@@ -126,11 +141,11 @@ export default function ReferencesPage() {
                 <Reveal>
                     <header className="mb-16 text-center">
                         <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6 uppercase tracking-tight">
-                            References <span className="text-primary">&</span> Certifications
+                            {t(text.title).split('&')[0]} <span className="text-primary">&</span> {t(text.title).split('&')[1] || ""}
                         </h1>
                         <div className="h-1 w-24 bg-primary mx-auto mb-8" />
                         <p className="text-white/60 max-w-2xl mx-auto text-lg leading-relaxed">
-                            Our commitment to excellence is validated by recognized industry bodies and a history of successful partnerships.
+                            {t(text.subtitle)}
                         </p>
                     </header>
                 </Reveal>
