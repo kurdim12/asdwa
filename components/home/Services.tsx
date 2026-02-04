@@ -52,7 +52,7 @@ export function Services() {
                                         {t(service.description)}
                                     </p>
 
-                                    <Link href="/services" className="inline-flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm hover:gap-4 transition-all">
+                                    <Link href={`/services?gallery=${service.id}`} className="inline-flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm hover:gap-4 transition-all">
                                         {t(link)} <ArrowRight size={16} />
                                     </Link>
                                 </div>

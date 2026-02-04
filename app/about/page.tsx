@@ -9,6 +9,7 @@ import { COMPANY_DATA } from "@/lib/data";
 import { useLanguage } from "@/app/providers";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Target, Award } from "lucide-react";
+import { LightboxGallery } from "@/components/ui/LightboxGallery";
 
 export default function AboutPage() {
     const [activeTab, setActiveTab] = useState("overview");
@@ -165,6 +166,20 @@ export default function AboutPage() {
                                                 </span>
                                             </div>
                                         ))}
+                                    </div>
+
+                                    {/* Certificates Gallery */}
+                                    <div className="mt-16 pt-16 border-t border-white/10">
+                                        <h3 className="text-2xl font-heading font-bold text-white mb-8">
+                                            {/* @ts-ignore */}
+                                            {COMPANY_DATA.about.certifications.title[language]}
+                                        </h3>
+                                        <LightboxGallery
+                                            /* @ts-ignore */
+                                            images={COMPANY_DATA.about.certifications.images}
+                                            /* @ts-ignore */
+                                            title={COMPANY_DATA.about.certifications.title[language]}
+                                        />
                                     </div>
                                 </motion.div>
                             )}

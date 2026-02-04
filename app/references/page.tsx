@@ -89,13 +89,21 @@ function getCertificates() {
                     matched = true;
                 }
 
+                // Fallback: If it's a "Copy of..." or "Document_...", put it in 'projects' or 'other' to ensure it's seen
                 if (!matched) {
-                    categorized.other.push(cert.path);
+                    if (normalizedName.includes('document')) {
+                        categorized.appreciation.push(cert.path); // Assume documents are often letters/appreciation
+                    } else {
+                        categorized.other.push(cert.path);
+                    }
                 }
             });
 
             // Merge 'other' into 'projects' (or keep separate if desired, but here we fallback to projects)
-            categorized.projects.push(...categorized.other);
+            // ensuring everything is somewhere
+            if (categorized.other.length > 0) {
+                categorized.projects.push(...categorized.other);
+            }
 
             return categorized;
         }

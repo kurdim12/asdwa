@@ -43,12 +43,15 @@ export function Navbar() {
             >
                 <div className="container mx-auto px-6 h-full flex items-center justify-between">
                     {/* Logo */}
+                    {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <img
-                            src={`/${COMPANY_DATA.company.logo.high}`}
-                            alt={t(COMPANY_DATA.company.name)}
-                            className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                        />
+                        <div className="bg-white/90 p-1.5 rounded-lg backdrop-blur-sm shadow-lg transition-all duration-300 group-hover:bg-white">
+                            <img
+                                src={`/${COMPANY_DATA.company.logo.high}`}
+                                alt={t(COMPANY_DATA.company.name)}
+                                className="h-10 w-auto object-contain"
+                            />
+                        </div>
                     </Link>
 
                     {/* Desktop Menu */}
