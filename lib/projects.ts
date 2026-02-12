@@ -37,7 +37,7 @@ export const PROJECTS = [
         ],
         "description": {
             "ar": "يتضمن هذا المشروع إنشاء طريق سريع حول مدينة عمان بهدف تجاوز مناطق الازدحام المروري في العاصمة وكذلك للحد من مرور الشاحنات في شوارع عمان والزرقاء ويتألف المشروع من ثلاث مراحل رئيسة.وكانت أعمالنا ضمن المرحلة الأولى والتي يبلغ طولها 18.5 كم تقريبا.\\r\\n\\r\\nتم تنفيذ عدد من التقاطعات الرئيسية في هذا المشروع والتي تحتوي بمجملها على ستة جسور لاحقة الشد مفرغة قائمة على قواعد محملة على أوتاد عميقة وعلى عشرة أنفاق موزعة على امتداد هذا الطريق.",
-            "en": "The purpose of this project is to construct a highway that bypasses  the City of Amman, namely to bypass the populated areas and reduce on traffic jams in the City and to limit trucks passing these areas.  This project consisted of three phases, and our Company was involved in the construction of phase 1 having a length of approximately 18.5 km.\\r\\n\\r\\nThe main components of the Project consisted of constructing 6 bridges that were designed of post tensioned voided slab with deep foundations supported by piles. There were also 10 underpasses constructed along the length of this section"
+            "en": "The purpose of this project is to construct a highway that bypasses the City of Amman, namely to bypass the populated areas and reduce on traffic jams in the City and to limit trucks passing these areas.  This project consisted of three phases, and our Company was involved in the construction of phase 1 having a length of approximately 18.5 km.\\r\\n\\r\\nThe main components of the Project consisted of constructing 6 bridges that were designed of post tensioned voided slab with deep foundations supported by piles. There were also 10 underpasses constructed along the length of this section"
         },
         "images": [
             "c7d5b45beb78e164.jpg",
@@ -708,7 +708,7 @@ export const PROJECTS = [
             "1"
         ],
         "description": {
-            "ar": "يقع الجسر في جنوب المملكة الاردنية الهاشمية على طريق العقبة-نزول المزفر كما ان الجسر قائم على التقاء وادي اليتم ووادي عمران.\\r\\nيتكون الجسر من 8 بحور متصلة طول كل منها 30 م وبطول كلي 240 متر ومقطعT متغير الارتفاع لجوائز الجسر.\\r\\n\\r\\nاشتمل العمل على توسعة الجسر من خلال زيادة عرض البلاطة لتصبح 2x10.6 م بدلاً من 2x6.4 م وذلك بإضافة اربع جوائز اثنان في كل اتجاه ومن كافة جوانب اجسر",
+            "ar": "يقع الجسر في جنوب المملكة الاردنية الهاشمية على طريق العقبة-نزول المزفر كما ان الجسر قائم على التقاء وادي اليتم ووادي عمران.\\r\\nيتكون الجسر من 8 بحور متصلة طول كل منها 30 م وبطول كلي 240 متر ومقطعT متغير الارتفاع لجوائز الجسر.\\r\\n\\r\\nاشتمل العمل على توسعة الجسر من خلال زيادة عرض البلاطة لتصبح 2x10.6 م بدلاً من 2x6.4 م وذلك بإضافة اربع جوائز اثنان في كل اتجاه ومن كافة جوانب الجسر",
             "en": "Wadi Al Yutum Bridge is located in south of Jordan on Aqaba Road and stands on the concourse of Wadi Al yutum and Wadi Imran.\\r\\n\\r\\nThe bridge is a reinforced concrete bridge, eight continuous spans of 30 meter each and a total length of 240 m, with varying height T-beam section for girders.\\r\\n\\r\\nThe work consisted of widening the bridge by increasing the deck slab width, from 2x6.4m to 2x10.60m by adding 4 girders, two in each direction and from all sides of the bridge."
         },
         "images": [
@@ -765,7 +765,7 @@ export const PROJECTS = [
         ],
         "description": {
             "ar": "تميز المشروع بإعادة تصميم جسرين منفصلين يتقاطعان مع طريق أوتوستراد عمان الزرقاء الرئيسي والذي أدّى بنجاح  إلى تقليص مدة الانجاز واضافة مسارب تحت الجسر ليصبح 4 مسارب بدلا من مسربين. واشتمل العمل ايضا على انشاء دواوير لتنظيم انسيابية حركة السير وأعمال ترابية واسفلت وحمايات للتربة من نوع جيوجريد.\\r\\nيهدف هذا المشروع الى حل الاختناقات والأزمات المرورية على هذا الشارع الحيوي الذي يربط مدينة الزرقاء بالعاصمة عمان والذي يشهد أعلى حركة مرورية من قبل جميع أنواع المركبات في المملكة وبعمل التحويلات الأزمة أثناء إنشاء الطريق والجسر وذلك بهدف السماح بتدفق السير وعدم إرباك الحركة المرورية أثناء فترة التنفيذ.",
-            "en": "The new re-design of the 2 separate bridges was very successful to reduce the time required for opening the road to traffic and to addi two additional lanes to be 4 lanes instead of 2. The scope of work also included earth work, asphalt works, slope protection and Reinforced Soil Walls  of geogrid type.\\r\\n\\r\\nThe purpose of the project was to solve the traffic jam problem on the most congested highway in Jordan. Construction of traffic detours was essential in order not to disrupt the traffic flow during construction."
+            "en": "The new re-design of the 2 separate bridges was very successful to reduce the time required for opening the road to traffic and to add two additional lanes to be 4 lanes instead of 2. The scope of work also included earth work, asphalt works, slope protection and Reinforced Soil Walls  of geogrid type.\\r\\n\\r\\nThe purpose of the project was to solve the traffic jam problem on the most congested highway in Jordan. Construction of traffic detours was essential in order not to disrupt the traffic flow during construction."
         },
         "images": [
             "f2b5a1d88a0ca819.jpg",
@@ -791,7 +791,7 @@ export const PROJECTS = [
         ],
         "description": {
             "ar": "يقع المشروع في محافظة اربد وهو المشروع الاول لنقل حركة الشحن خارج حدود المدينة\\r\\nونظرا لتميز جسر وادي الغفر بارتفاعات تناهز 65 متر وصعوبة الوصول الى الركائز تم تركيب الجسور مسبقة الاجهاد بواسطة شركتنا باستخدام تقنية الرافعة المنزلقة حيث تم الانتهاء من الاعمال خلال فترة قياسية",
-            "en": "The project aims at improving land transportation services on the road network in Irbid greater city and the surrounding areas. Our company completed installation Wadi \\r\\n alghafar bridge precast girder in accordance with planed schedule using launching girder 100Ton/40m"
+            "en": "The project aims at improving land transportation services on the road network in Irbid greater city and the surrounding areas. Our company completed installation Wadi \\r\\n Al Ghafar bridge precast girder in accordance with planned schedule using launching girder 100Ton/40m"
         },
         "images": [
             "fb32c32cd19bab5e.jpg",

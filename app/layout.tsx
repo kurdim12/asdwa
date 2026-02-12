@@ -9,13 +9,13 @@ const notoKufi = Noto_Kufi_Arabic({ subsets: ["arabic"], variable: "--font-noto-
 
 export const metadata: Metadata = {
   title: "Marwan Ahmad Alkurdi & Partners",
-  description: "25 Years of Engineering Excellence in Jordan - Dams, Power Stations, & Infrastructure",
+  description: "45 Years of Engineering Excellence in Jordan - Dams, Power Stations, & Infrastructure",
   icons: {
     icon: '/favicon.ico',
   },
   openGraph: {
     title: "Marwan Ahmad Alkurdi & Partners",
-    description: "25 Years of Engineering Excellence in Jordan - Dams, Power Stations, & Infrastructure",
+    description: "45 Years of Engineering Excellence in Jordan - Dams, Power Stations, & Infrastructure",
     url: "https://mkurdi.com",
     siteName: "Marwan Ahmad Alkurdi & Partners",
     images: [

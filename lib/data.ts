@@ -255,7 +255,7 @@ export const COMPANY_DATA = {
         "title": { "en": "Engineering the Future of Jordan", "ar": "هندسة مستقبل الأردن" },
         "subtitle": { "en": "Our Legacy", "ar": "إرثنا" },
         "description": {
-            "en": "Marwan Ahmad Alkurdi & Partners Co. Ltd has been a cornerstone of Jordan's infrastructure development for over four decades. From the massive **Dissi Pipeline** to critical **Dam Construction**, we deliver engineering solutions that stand the test of time. Authorized by the highest standards and Royal Patronage.",
+            "en": "Marwan Ahmad Alkurdi & Partners Co. Ltd has been a cornerstone of Jordan's infrastructure development for over four decades. From the massive Dissi Pipeline to critical Dam Construction, we deliver engineering solutions that stand the test of time. Authorized by the highest standards and Royal Patronage.",
             "ar": "تُعد شركة مروان أحمد الكردي وشركاؤه المحدودة ركناً أساسياً في تطوير البنية التحتية في الأردن لأكثر من أربعة عقود. من مشروع ناقل الديسي العملاق إلى مشاريع السدود الحيوية، نقدم حلولاً هندسية تصمد أمام اختبار الزمن، وفق أعلى المعايير وباعتماد رسمي ورعاية ملكية."
         },
         "image": "images/legacy_45_years.png"
