@@ -1,140 +1,68 @@
 "use client";
 
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars, Environment } from "@react-three/drei";
-import * as THREE from "three";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
-
-function Globe() {
-    const meshRef = useRef<THREE.Mesh>(null);
-    const groupRef = useRef<THREE.Group>(null);
-
-    // Auto-rotate
-    useFrame((state, delta) => {
-        if (groupRef.current) {
-            groupRef.current.rotation.y += delta * 0.1;
-        }
-    });
-
-    const particles = useMemo(() => {
-        const temp = [];
-        for (let i = 0; i < 1500; i++) {
-            const theta = THREE.MathUtils.randFloatSpread(360);
-            const phi = THREE.MathUtils.randFloatSpread(360);
-            const r = 2.2; // Radius slightly larger than sphere
-
-            const x = r * Math.sin(theta) * Math.cos(phi);
-            const y = r * Math.sin(theta) * Math.sin(phi);
-            const z = r * Math.cos(theta);
-
-            temp.push(x, y, z);
-        }
-        return new Float32Array(temp);
-    }, []);
-
-    return (
-        <group ref={groupRef}>
-            {/* Main Sphere */}
-            <mesh ref={meshRef}>
-                <sphereGeometry args={[2, 64, 64]} />
-                <meshStandardMaterial
-                    color="#0a0a0a"
-                    emissive="#111"
-                    roughness={0.7}
-                    metalness={0.8}
-                    wireframe={false}
-                />
-            </mesh>
-
-            {/* Wireframe Overlay */}
-            <mesh>
-                <sphereGeometry args={[2.01, 64, 64]} />
-                <meshStandardMaterial
-                    color="#D4AF37"
-                    wireframe={true}
-                    transparent
-                    opacity={0.1}
-                />
-            </mesh>
-
-
-            {/* Particles / Atmosphere */}
-            <points>
-                <bufferGeometry>
-                    <bufferAttribute
-                        attach="attributes-position"
-                        count={particles.length / 3}
-                        array={particles}
-                        itemSize={3}
-                        args={[particles, 3]}
-                    />
-                </bufferGeometry>
-                <pointsMaterial
-                    size={0.015}
-                    color="#D4AF37"
-                    transparent
-                    opacity={0.6}
-                    sizeAttenuation={true}
-                />
-            </points>
-
-            {/* Jordan Marker (Approximate Position) */}
-            <mesh position={[1.2, 0.8, 1.3]}>
-                <sphereGeometry args={[0.05, 16, 16]} />
-                <meshStandardMaterial color="#D4AF37" emissive="#D4AF37" emissiveIntensity={2} />
-            </mesh>
-        </group>
-    );
-}
-
+import { SectionKicker } from "@/components/ui/primitives";
 import { COMPANY_DATA } from "@/lib/data";
 import { useLanguage } from "@/app/providers";
 
+const PRINCIPLES = [
+    { en: "Engineering precision", ar: "الدقة الهندسية" },
+    { en: "Safety & environment", ar: "السلامة والبيئة" },
+    { en: "ISO 9001 quality", ar: "جودة الآيزو 9001" },
+    { en: "Delivered on time", ar: "التسليم في الوقت" },
+];
+
 export function TheCore() {
-    const { language, t } = useLanguage();
+    const { t, direction } = useLanguage();
     const { label, title, description } = COMPANY_DATA.homeComponents.theCore;
 
     return (
-        <section className="h-[80vh] w-full bg-background relative overflow-hidden flex items-center justify-center border-y border-white/5">
+        <section className="relative bg-concrete border-y border-ink/10 overflow-hidden" dir={direction}>
+            <div className="absolute inset-0 grid-overlay opacity-40 pointer-events-none" />
 
-            <div className="absolute inset-0 z-0">
-                <Canvas camera={{ position: [0, 0, 5.5], fov: 45 }}>
-                    <ContextBridge>
-                        <ambientLight intensity={0.5} />
-                        <pointLight position={[10, 10, 10]} intensity={1} color="#D4AF37" />
-                        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#4A90E2" />
+            <div className="relative mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-24 md:py-32">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+                    <div className="lg:col-span-7">
+                        <Reveal>
+                            <SectionKicker index="01" label={t(label)} />
+                        </Reveal>
+                        <Reveal delay={0.1}>
+                            <h2 className="mt-8 font-display text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] text-ink">
+                                {t(title)}
+                            </h2>
+                        </Reveal>
+                        <Reveal delay={0.2}>
+                            <p className="mt-8 max-w-2xl text-xl md:text-2xl leading-relaxed text-ink-soft font-display text-pretty">
+                                {t(description)}
+                            </p>
+                        </Reveal>
+                    </div>
 
-                        <Globe />
-
-                        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-                        <OrbitControls enableZoom={false} enablePan={false} autoRotate={false} />
-                    </ContextBridge>
-                </Canvas>
-            </div>
-
-            <div className="container mx-auto px-4 relative z-10 pointer-events-none">
-                <div className="max-w-xl">
-                    <Reveal>
-                        <h4 className="text-primary font-heading uppercase tracking-widest text-sm mb-4">
-                            {t(label)}
-                        </h4>
-                    </Reveal>
-                    <Reveal delay={0.2}>
-                        <h2 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-none">
-                            {t(title)}
-                        </h2>
-                    </Reveal>
-                    <Reveal delay={0.4}>
-                        <p className="text-white/60 text-lg leading-relaxed backdrop-blur-sm p-4 bg-black/20 rounded-lg border border-white/5">
-                            {t(description)}
-                        </p>
-                    </Reveal>
+                    <div className="lg:col-span-5 lg:pt-4">
+                        <div className="border-t border-ink/15">
+                            {PRINCIPLES.map((p, i) => (
+                                <Reveal key={i} delay={0.15 + i * 0.08} width="100%">
+                                    <motion.div
+                                        whileHover={{ x: direction === "rtl" ? -6 : 6 }}
+                                        className="flex items-center justify-between gap-4 py-5 border-b border-ink/15 group"
+                                    >
+                                        <div className="flex items-center gap-5">
+                                            <span className="index-num text-sm">
+                                                {String(i + 1).padStart(2, "0")}
+                                            </span>
+                                            <span className="text-lg md:text-xl text-ink group-hover:text-brass transition-colors">
+                                                {t(p)}
+                                            </span>
+                                        </div>
+                                        <span className="h-2 w-2 rounded-full bg-brass/40 group-hover:bg-brass transition-colors" />
+                                    </motion.div>
+                                </Reveal>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     );
 }
-
-// Simple bridge to allow using context if needed inside Canvas, though we aren't using it yet.
-const ContextBridge = ({ children }: { children: React.ReactNode }) => <>{children}</>;

@@ -3,54 +3,102 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --paper: #f3f1ec;
+  --ink: #18160f;
+  --brass: #9a7b2f;
+  --line: rgba(24, 22, 15, 0.12);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: #0a0a0a;
+  background: var(--paper);
+  color: var(--ink);
+  font-feature-settings: "ss01", "cv01";
+}
+
+/* ---------- Base type rhythm ---------- */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--brass);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Eyebrow / kicker label — the mono technical tag used across sections */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-label text-brass;
+  }
+
+  /* Full-bleed hairline divider */
+  .hairline {
+    @apply border-t border-ink/10;
+  }
+
+  /* Thin brass link with animated arrow spacing */
+  .link-arrow {
+    @apply inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-ink transition-all duration-300 hover:gap-3 hover:text-brass;
+  }
+
+  /* Editorial index number (Swiss grid numerals) */
+  .index-num {
+    @apply font-mono text-brass tabular-nums;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  /* Utility class to simulate text-stroke if needed */
-  .text-stroke {
-    -webkit-text-stroke: 1px currentColor;
+  /* Blueprint / architectural grid overlay */
+  .grid-overlay {
+    background-image:
+      linear-gradient(to right, rgba(24, 22, 15, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(24, 22, 15, 0.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .grid-overlay-dark {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* Outlined display text (used sparingly for large editorial numerals) */
+  .text-outline-ink {
+    -webkit-text-stroke: 1px rgba(24, 22, 15, 0.35);
     color: transparent;
   }
-
-  .silver-navbar {
-    background: linear-gradient(90deg, #E0E0E0 0%, #F5F5F5 50%, #C0C0C0 100%);
-    color: black !important;
-  }
 }
 
-/* Arabic Typography */
-:root[lang="ar"] body {
-  font-family: var(--font-noto-kufi), sans-serif;
-}
-
+/* ---------- Arabic Typography ---------- */
+:root[lang="ar"] body,
 :root[lang="ar"] h1,
 :root[lang="ar"] h2,
 :root[lang="ar"] h3,
@@ -59,5 +107,10 @@ body {
 :root[lang="ar"] h6 {
   font-family: var(--font-noto-kufi), sans-serif;
   letter-spacing: 0;
-  /* Arabic doesn't need wide letter spacing typical of English headings */
+}
+
+:root[lang="ar"] .font-mono,
+:root[lang="ar"] .eyebrow {
+  font-family: var(--font-noto-kufi), sans-serif;
+  letter-spacing: 0.08em;
 }

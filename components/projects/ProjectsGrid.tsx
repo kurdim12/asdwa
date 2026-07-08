@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Section } from "@/components/ui/primitives";
-import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { COMPANY_DATA } from "@/lib/data";
+import { useLanguage } from "@/app/providers";
+import { cn, clean } from "@/lib/utils";
 
 interface Project {
-    name: string; // Used for ID/Slug (English)
+    name: string;
     title: { ar: string; en: string } | string;
     description: { ar: string; en: string } | string;
     folder?: string;
@@ -29,101 +30,90 @@ interface ProjectsGridProps {
     allProjects: Project[];
 }
 
-import { COMPANY_DATA } from "@/lib/data";
-import { useLanguage } from "@/app/providers";
-
 export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
     const searchParams = useSearchParams();
     const categoryParam = searchParams.get("category");
-    const { language, t } = useLanguage();
-    const { filterAll, title, description, viewProject } = COMPANY_DATA.homeComponents.portfolio;
+    const { language, t, direction } = useLanguage();
+    const { filterAll } = COMPANY_DATA.homeComponents.portfolio;
 
     const [filter, setFilter] = useState("all");
 
-    // If URL param exists, sync it
-    if (categoryParam && filter === "all" && categoryParam !== filter) {
-        setFilter(categoryParam);
-    }
+    useEffect(() => {
+        if (categoryParam) setFilter(categoryParam);
+    }, [categoryParam]);
 
-    const filteredProjects = filter === "all"
-        ? allProjects
-        : allProjects.filter(p => p.categoryIds.includes(filter));
+    const filtered =
+        filter === "all"
+            ? allProjects
+            : allProjects.filter((p) => p.categoryIds.includes(filter));
+
+    const chipCls = (active: boolean) =>
+        cn(
+            "font-mono text-[11px] uppercase tracking-[0.14em] px-4 py-2 border transition-all",
+            active
+                ? "bg-charcoal text-paper border-charcoal"
+                : "bg-transparent text-ink-soft border-ink/20 hover:border-ink hover:text-ink"
+        );
 
     return (
-        <Section className="min-h-screen pt-32">
-            {/* Header */}
-            <div className="mb-16">
-                <Reveal>
-                    <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6">
-                        {t(title)}
-                    </h1>
-                </Reveal>
-                <Reveal delay={0.2}>
-                    <p className="text-white/60 max-w-2xl text-lg">
-                        {t(description)}
-                    </p>
-                </Reveal>
-            </div>
-
+        <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-14 md:py-20" dir={direction}>
             {/* Filters */}
-            <div className="flex flex-wrap gap-4 mb-16 border-b border-white/10 pb-8">
-                <button
-                    onClick={() => setFilter("all")}
-                    className={`text-sm font-heading font-bold uppercase tracking-widest px-4 py-2 rounded-full transition-all ${filter === "all" ? "bg-primary text-background" : "bg-white/5 text-white hover:bg-white/10"
-                        }`}
-                >
+            <div className="flex flex-wrap gap-2.5 mb-12 pb-8 border-b border-ink/10">
+                <button onClick={() => setFilter("all")} className={chipCls(filter === "all")}>
                     {t(filterAll)}
                 </button>
-                {categories.map(cat => (
+                {categories.map((cat) => (
                     <button
                         key={cat.id}
                         onClick={() => setFilter(cat.id)}
-                        className={`text-sm font-heading font-bold uppercase tracking-widest px-4 py-2 rounded-full transition-all ${filter === cat.id ? "bg-primary text-background" : "bg-white/5 text-white hover:bg-white/10"
-                            }`}
+                        className={chipCls(filter === cat.id)}
                     >
                         {t(cat.name)}
                     </button>
                 ))}
+                <span className="ms-auto self-center font-mono text-[11px] tracking-[0.14em] text-ink-faint">
+                    {String(filtered.length).padStart(2, "0")} {language === "ar" ? "مشروع" : "projects"}
+                </span>
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
                 <AnimatePresence mode="popLayout">
-                    {filteredProjects.map((project) => (
+                    {filtered.map((project) => (
                         <motion.div
                             layout
                             key={project.name}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.96 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <Link href={`/projects/${encodeURIComponent(project.name)}`} className="group block bg-neutral-900 border border-white/5 hover:border-primary/50 transition-colors h-full flex flex-col">
-                                {/* Image Placeholder */}
-                                <div className="aspect-video bg-neutral-800 relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-cover bg-center transition-all duration-500 scale-100 group-hover:scale-110"
-                                        style={{
-                                            backgroundImage: project.thumbnail
-                                                ? `url('${project.thumbnail}')`
-                                                : `url('/patterns/mesh.png'), linear-gradient(45deg, #222, #111)`
-                                        }}
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
-                                        <span className="bg-primary text-background px-4 py-2 font-bold font-heading uppercase text-sm flex items-center gap-2">
-                                            {t(viewProject)} <ArrowUpRight size={16} />
+                            <Link href={`/projects/${encodeURIComponent(project.name)}`} className="group block">
+                                <div className="relative aspect-[4/3] overflow-hidden bg-concrete">
+                                    {project.thumbnail && (
+                                        <img
+                                            src={project.thumbnail}
+                                            alt={t(project.title)}
+                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
+                                        />
+                                    )}
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                                    <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/30 transition-colors duration-300 flex items-center justify-center">
+                                        <span className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 bg-paper text-ink px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] inline-flex items-center gap-2">
+                                            {language === "ar" ? "عرض" : "View"}
+                                            <ArrowUpRight size={14} />
                                         </span>
                                     </div>
                                 </div>
-
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <div className="text-xs text-primary font-heading uppercase tracking-widest mb-2">
-                                        {project.categoryNames && project.categoryNames.filter(Boolean).join(', ')}
+                                <div className="mt-5">
+                                    <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-brass mb-2">
+                                        {project.categoryNames?.filter(Boolean).join(" · ")}
                                     </div>
-                                    <h3 className="text-xl font-heading font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                                    <h3 className="font-display text-xl md:text-2xl text-ink group-hover:text-brass transition-colors leading-snug">
                                         {t(project.title)}
                                     </h3>
-                                    <p className="text-white/50 text-sm line-clamp-3 mb-4 flex-grow">
-                                        {t(project.description)}
+                                    <p className="mt-2 text-sm text-ink-soft leading-relaxed line-clamp-2">
+                                        {clean(t(project.description))}
                                     </p>
                                 </div>
                             </Link>
@@ -131,6 +121,6 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                     ))}
                 </AnimatePresence>
             </div>
-        </Section>
-    )
+        </section>
+    );
 }

@@ -1,65 +1,118 @@
 "use client";
 
-import { Section } from "@/components/ui/primitives";
+import { useState } from "react";
+import { Section, SectionKicker } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
-import { ArrowRight, Hammer, Cog } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/app/providers";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function Services() {
     const { mainServices } = COMPANY_DATA.services;
-    const { label, title, link } = COMPANY_DATA.homeComponents.services;
-    const { language, t } = useLanguage();
+    const { label, title } = COMPANY_DATA.homeComponents.services;
+    const { t, language, direction } = useLanguage();
+    const [active, setActive] = useState(0);
 
-    // Map visually to the services
-    const icons = [Hammer, Cog];
+    const activeImg = `/${(mainServices[active] as any).gallery?.[0] || "images/logo.jpg"}`;
 
     return (
-        <Section className="bg-secondary/30 border-y border-white/5">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-                <Reveal width="100%" className="mx-auto">
-                    <h4 className="text-primary font-heading uppercase tracking-widest text-sm mb-4">
-                        {t(label)}
-                    </h4>
-                </Reveal>
-                <Reveal width="100%" delay={0.2} className="mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
-                        {t(title)}
-                    </h2>
-                </Reveal>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {mainServices.map((service, index) => {
-                    const Icon = icons[index] || Hammer;
-                    return (
-                        <Reveal key={service.id} delay={0.3 + (index * 0.2)} width="100%">
-                            <div className="group relative bg-background border border-white/10 p-10 h-full hover:border-primary/50 transition-colors overflow-hidden">
-                                {/* Hover Gradient */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                <div className="relative z-10">
-                                    <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-background transition-colors duration-300">
-                                        <Icon size={32} />
-                                    </div>
-
-                                    <h3 className="text-2xl font-heading font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                                        {t(service.title)}
-                                    </h3>
-
-                                    <p className="text-white/60 mb-8 leading-relaxed h-20">
-                                        {t(service.description)}
-                                    </p>
-
-                                    <Link href={`/services?gallery=${service.id}`} className="inline-flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm hover:gap-4 transition-all">
-                                        {t(link)} <ArrowRight size={16} />
-                                    </Link>
-                                </div>
+        <Section className="bg-charcoal text-paper" >
+            <div dir={direction}>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+                    <div>
+                        <Reveal>
+                            <div className="flex items-center gap-3">
+                                <span className="index-num text-[12px]">03</span>
+                                <span className="h-px w-8 bg-brass/60" />
+                                <span className="font-mono text-[11px] uppercase tracking-label text-brass-soft">
+                                    {t(label)}
+                                </span>
                             </div>
                         </Reveal>
-                    )
-                })}
+                        <Reveal delay={0.1}>
+                            <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[1.0] text-paper text-balance max-w-2xl">
+                                {t(title)}
+                            </h2>
+                        </Reveal>
+                    </div>
+                    <Reveal delay={0.2}>
+                        <Link
+                            href="/services"
+                            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-paper border-b border-brass pb-1 hover:text-brass-soft transition-colors shrink-0"
+                        >
+                            {language === "ar" ? "كل الخدمات" : "All services"}
+                            <ArrowUpRight size={15} />
+                        </Link>
+                    </Reveal>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                    {/* List */}
+                    <div className="lg:col-span-7 border-t border-white/10">
+                        {mainServices.map((service, index) => (
+                            <Link
+                                key={service.id}
+                                href={`/services/${service.id}`}
+                                onMouseEnter={() => setActive(index)}
+                                className="group block border-b border-white/10 py-7 md:py-8"
+                            >
+                                <div className="flex items-start gap-5 md:gap-8">
+                                    <span className="index-num text-sm pt-2">
+                                        {String(index + 1).padStart(2, "0")}
+                                    </span>
+                                    <div className="flex-1">
+                                        <div className="flex items-center justify-between gap-4">
+                                            <h3 className="font-display text-2xl md:text-4xl text-paper group-hover:text-brass-soft transition-colors">
+                                                {t(service.title)}
+                                            </h3>
+                                            <ArrowUpRight
+                                                size={22}
+                                                className="shrink-0 text-paper/30 group-hover:text-brass-soft group-hover:-translate-y-1 group-hover:translate-x-1 transition-all"
+                                            />
+                                        </div>
+                                        <p className="mt-3 text-paper/50 leading-relaxed max-w-xl line-clamp-2">
+                                            {t(service.description)}
+                                        </p>
+                                        {/* Mobile thumbnail */}
+                                        <div className="lg:hidden mt-5 aspect-video overflow-hidden bg-white/5">
+                                            <img
+                                                src={`/${(service as any).gallery?.[0] || "images/logo.jpg"}`}
+                                                alt={t(service.title)}
+                                                className="h-full w-full object-cover"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Sticky preview (desktop) */}
+                    <div className="hidden lg:block lg:col-span-5">
+                        <div className="sticky top-28 aspect-[4/5] w-full overflow-hidden bg-white/5">
+                            <AnimatePresence mode="wait">
+                                <motion.img
+                                    key={activeImg}
+                                    initial={{ opacity: 0, scale: 1.05 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                    src={activeImg}
+                                    alt={t(mainServices[active].title)}
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                            </AnimatePresence>
+                            <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
+                            <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-charcoal to-transparent">
+                                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass-soft">
+                                    {t(mainServices[active].title)}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </Section>
     );

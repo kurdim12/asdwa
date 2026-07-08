@@ -2,12 +2,13 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Section } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, Camera } from "lucide-react";
+import { ArrowLeft, MapPin, CheckCircle2, Camera } from "lucide-react";
 import { useLanguage } from "@/app/providers";
+import { clean } from "@/lib/utils";
+import { LightboxGallery } from "@/components/ui/LightboxGallery";
 
 interface ProjectDetailViewProps {
     project: typeof COMPANY_DATA.projects.all[0];
@@ -16,7 +17,7 @@ interface ProjectDetailViewProps {
 }
 
 export function ProjectDetailView({ project, categoryName, images }: ProjectDetailViewProps) {
-    const { t, language } = useLanguage();
+    const { t, language, direction } = useLanguage();
     const heroImage = images[0];
 
     const labels = {
@@ -24,109 +25,108 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
         details: { en: "Project Details", ar: "تفاصيل المشروع" },
         location: { en: "Jordan", ar: "الأردن" },
         completed: { en: "Completed", ar: "مكتمل" },
-        photos: { en: "Photos Available", ar: "صور متاحة" },
-        about: { en: "About the Project", ar: "عن المشروع" },
-        gallery: { en: "Project Gallery", ar: "معرض الصور" },
+        photos: { en: "photographs", ar: "صورة" },
+        about: { en: "About the project", ar: "عن المشروع" },
+        gallery: { en: "Project gallery", ar: "معرض الصور" },
         noPhotos: { en: "No photos available for this project.", ar: "لا توجد صور متاحة لهذا المشروع." },
-        milestone: {
-            en: `This project represents a significant milestone in Jordan's infrastructure development. Utilizing state-of-the-art engineering techniques and adhering to the highest safety and quality standards (ISO 9001), ${t(COMPANY_DATA.company.name)} successfully delivered this project on time and within budget.`,
-            ar: `يمثل هذا المشروع علامة فارقة في تطوير البنية التحتية في الأردن. باستخدام أحدث التقنيات الهندسية والالتزام بأعلى معايير السلامة والجودة (ISO 9001)، نجحت ${t(COMPANY_DATA.company.name)} في تسليم هذا المشروع في الوقت المحدد وضمن الميزانية.`
-        }
     };
 
+    const milestone = {
+        en: `This project represents a significant milestone in Jordan's infrastructure development. Utilizing state-of-the-art engineering techniques and adhering to the highest safety and quality standards (ISO 9001), ${t(
+            COMPANY_DATA.company.name
+        )} successfully delivered this project on time and within budget.`,
+        ar: `يمثل هذا المشروع علامة فارقة في تطوير البنية التحتية في الأردن. باستخدام أحدث التقنيات الهندسية والالتزام بأعلى معايير السلامة والجودة (ISO 9001)، نجحت ${t(
+            COMPANY_DATA.company.name
+        )} في تسليم هذا المشروع في الوقت المحدد وضمن الميزانية.`,
+    };
+
+    const galleryImages = images.map((src) => (src.startsWith("/") ? src.slice(1) : src));
+
     return (
-        <main className="bg-background min-h-screen">
+        <main className="bg-paper min-h-screen" dir={direction}>
             <Navbar />
 
-            {/* Hero Banner */}
-            <div className="h-[60vh] relative overflow-hidden bg-neutral-900">
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
-
-                {/* Hero Image */}
+            {/* Hero banner */}
+            <div className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-concrete">
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-50 grayscale"
+                    className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url('${heroImage}')` }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-charcoal/10" />
 
-                <div className="container mx-auto px-4 h-full flex flex-col justify-end pb-16 relative z-20">
-                    <Link href="/projects" className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-6 transition-colors" dir="ltr">
-                        <ArrowLeft size={20} /> {t(labels.back)}
+                <div className="absolute inset-0 z-10 mx-auto max-w-8xl px-6 md:px-10 lg:px-16 flex flex-col justify-end pb-14 md:pb-16">
+                    <Link
+                        href="/projects"
+                        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/80 hover:text-paper mb-6 transition-colors w-fit"
+                    >
+                        <ArrowLeft size={16} /> {t(labels.back)}
                     </Link>
-
-                    <Reveal>
-                        <div className="text-primary font-heading uppercase tracking-widest text-sm mb-4">
+                    <Reveal width="100%">
+                        <div className="font-mono text-[11px] uppercase tracking-label text-brass-soft mb-4">
                             {t(categoryName)}
                         </div>
-                    </Reveal>
-                    <Reveal delay={0.2}>
-                        <h1 className="text-5xl md:text-7xl font-heading font-bold text-white max-w-4xl">
+                        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[0.98] text-paper max-w-4xl text-balance">
                             {t(project.title)}
                         </h1>
                     </Reveal>
                 </div>
             </div>
 
-            <Section className="py-20">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-                    {/* Project Info Sidebar */}
-                    <div className="space-y-8">
-                        <div className="p-6 border border-white/10 rounded-lg bg-white/5">
-                            <h3 className="text-xl font-heading font-bold text-white mb-6 border-b border-white/10 pb-4">
+            {/* Body */}
+            <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-16 md:py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    {/* Sidebar */}
+                    <aside className="lg:col-span-4">
+                        <div className="lg:sticky lg:top-28 border border-ink/10 bg-surface p-7">
+                            <h3 className="font-mono text-[11px] uppercase tracking-label text-ink-soft pb-5 mb-5 border-b border-ink/10">
                                 {t(labels.details)}
                             </h3>
-
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3 text-white/70">
-                                    <MapPin className="text-primary" size={20} />
+                            <ul className="space-y-5">
+                                <li className="flex items-center gap-3 text-ink">
+                                    <MapPin className="text-brass shrink-0" size={18} />
                                     <span>{t(labels.location)}</span>
-                                </div>
-                                <div className="flex items-center gap-3 text-white/70">
-                                    <Calendar className="text-primary" size={20} />
+                                </li>
+                                <li className="flex items-center gap-3 text-ink">
+                                    <CheckCircle2 className="text-brass shrink-0" size={18} />
                                     <span>{t(labels.completed)}</span>
-                                </div>
-                                <div className="flex items-center gap-3 text-white/70">
-                                    <Camera className="text-primary" size={20} />
-                                    <span>{images.length} {t(labels.photos)}</span>
-                                </div>
-                            </div>
+                                </li>
+                                <li className="flex items-center gap-3 text-ink">
+                                    <Camera className="text-brass shrink-0" size={18} />
+                                    <span>
+                                        {images.length} {t(labels.photos)}
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
+                    </aside>
 
-                    {/* Main Content */}
-                    <div className="lg:col-span-2">
-                        <Reveal>
-                            <h2 className="text-3xl font-heading font-bold text-white mb-6">{t(labels.about)}</h2>
-                            <p className="text-white/70 text-lg leading-relaxed mb-8 whitespace-pre-line">
-                                {t(project.description)}
-                                <br /><br />
-                                {t(labels.milestone)}
+                    {/* Main */}
+                    <div className="lg:col-span-8">
+                        <Reveal width="100%">
+                            <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                                {t(labels.about)}
+                            </h2>
+                            <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line text-pretty">
+                                {clean(t(project.description))}
+                            </p>
+                            <p className="mt-6 text-lg text-ink-soft leading-relaxed text-pretty">
+                                {t(milestone)}
                             </p>
                         </Reveal>
 
-                        {/* Gallery */}
-                        <div className="mt-16">
-                            <h3 className="text-2xl font-heading font-bold text-white mb-8">{t(labels.gallery)}</h3>
-                            {images.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {images.map((img, i) => (
-                                        <div key={i} className="aspect-video bg-neutral-800 rounded-lg border border-white/5 hover:border-primary/50 transition-colors relative group overflow-hidden">
-                                            <img
-                                                src={img}
-                                                alt={`${t(project.title)} photo ${i + 1}`}
-                                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
+                        <div className="mt-14">
+                            <h3 className="font-display text-2xl text-ink mb-2">{t(labels.gallery)}</h3>
+                            {galleryImages.length > 0 ? (
+                                <LightboxGallery images={galleryImages} title={t(project.title)} />
                             ) : (
-                                <div className="text-white/40 italic p-8 border border-white/10 rounded-lg text-center">
+                                <div className="mt-6 text-ink-faint italic p-8 border border-dashed border-ink/15 text-center">
                                     {t(labels.noPhotos)}
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-            </Section>
+            </section>
 
             <Footer />
         </main>

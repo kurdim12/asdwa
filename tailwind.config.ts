@@ -9,39 +9,75 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                background: "#0a0a0a", // Deep Charcoal
-                foreground: "#ededed",
+                // --- New light architectural / editorial system ---
+                paper: "#F3F1EC",       // warm off-white canvas
+                surface: "#FFFFFF",     // cards / raised surfaces
+                concrete: "#E7E3DB",    // muted panel fill
+                "concrete-dark": "#DAD5CB",
+                ink: {
+                    DEFAULT: "#18160F", // near-black warm charcoal (text)
+                    soft: "#6E6A61",    // secondary text
+                    faint: "#9C978C",   // tertiary / captions
+                },
+                brass: {
+                    DEFAULT: "#9A7B2F", // refined architectural gold (accessible on paper)
+                    soft: "#B7935A",
+                    bright: "#C8A24A",
+                },
+                charcoal: "#141209",    // dark contrast blocks / footer
+
+                // --- Legacy token aliases (mapped to light system for safety) ---
+                background: "#F3F1EC",
+                foreground: "#18160F",
                 primary: {
-                    DEFAULT: "#D4AF37", // Metallic Gold
-                    foreground: "#0a0a0a",
+                    DEFAULT: "#9A7B2F",
+                    foreground: "#FFFFFF",
                 },
                 secondary: {
-                    DEFAULT: "#333333", // Dark Steel
-                    foreground: "#ededed",
+                    DEFAULT: "#141209",
+                    foreground: "#F3F1EC",
                 },
                 industrial: {
-                    DEFAULT: "#FFD700", // Safety Yellow
-                    blue: "#4A90E2", // Blueprint Blue
+                    DEFAULT: "#C8A24A",
+                    blue: "#4A6E8A",
                 },
                 muted: {
-                    DEFAULT: "#1f1f1f",
-                    foreground: "#a3a3a3",
-                }
+                    DEFAULT: "#E7E3DB",
+                    foreground: "#6E6A61",
+                },
             },
             fontFamily: {
-                heading: ["var(--font-oswald)", "sans-serif"],
-                body: ["var(--font-inter)", "sans-serif"],
+                display: ["var(--font-fraunces)", "Georgia", "serif"],
+                heading: ["var(--font-fraunces)", "Georgia", "serif"],
+                body: ["var(--font-inter)", "system-ui", "sans-serif"],
+                sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+                mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
                 arabic: ["var(--font-noto-kufi)", "sans-serif"],
+            },
+            letterSpacing: {
+                label: "0.22em",
+            },
+            maxWidth: {
+                "8xl": "88rem",
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "gradient-conic":
-                    "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-                "industrial-mesh": "url('/patterns/mesh.png')",
+                "grid-lines":
+                    "linear-gradient(to right, rgba(24,22,15,0.06) 1px, transparent 1px)",
+            },
+            keyframes: {
+                "fade-up": {
+                    "0%": { opacity: "0", transform: "translateY(24px)" },
+                    "100%": { opacity: "1", transform: "translateY(0)" },
+                },
+                "ken-burns": {
+                    "0%": { transform: "scale(1)" },
+                    "100%": { transform: "scale(1.08)" },
+                },
             },
             animation: {
-                "accordion-down": "accordion-down 0.2s ease-out",
-                "accordion-up": "accordion-up 0.2s ease-out",
+                "fade-up": "fade-up 0.7s cubic-bezier(0.16,1,0.3,1) forwards",
+                "ken-burns": "ken-burns 16s ease-out forwards",
             },
         },
     },

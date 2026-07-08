@@ -17,59 +17,53 @@ interface Category {
 export function ReferencesGallery({ categories }: { categories: Category[] }) {
     const { language } = useLanguage();
     const [activeTab, setActiveTab] = useState(categories[0]?.id || "all");
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [selected, setSelected] = useState<string | null>(null);
+    const [page, setPage] = useState(1);
 
-    const activeCategory = categories.find(c => c.id === activeTab) || categories[0];
+    const activeCategory = categories.find((c) => c.id === activeTab) || categories[0];
     const certificates = activeCategory?.images || [];
 
-    // Pagination Logic (Reset on tab change)
     const totalPages = Math.ceil(certificates.length / ITEMS_PER_PAGE);
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const paginatedItems = certificates.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const paginated = certificates.slice(start, start + ITEMS_PER_PAGE);
 
-    const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
-    const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
-
-    // Reset pagination when tab changes
-    const handleTabChange = (id: string) => {
+    const changeTab = (id: string) => {
         setActiveTab(id);
-        setCurrentPage(1);
+        setPage(1);
     };
 
-    // Helper to format filename into a title
     const formatTitle = (path: string) => {
-        const filename = path.split('/').pop() || "";
+        const filename = path.split("/").pop() || "";
         return filename
-            .replace(/\.[^/.]+$/, "") // remove extension
-            .replace(/^Copy of\s+/i, "") // remove Copy of prefix
-            .replace(/_/g, " ")       // underscores to spaces
-            .replace(/-/g, " ")       // dashes to spaces
+            .replace(/\.[^/.]+$/, "")
+            .replace(/^Copy of\s+/i, "")
+            .replace(/[_-]/g, " ")
             .trim();
     };
 
     if (categories.length === 0) {
         return (
-            <div className="h-64 flex items-center justify-center border border-dashed border-white/10 rounded-lg bg-white/5 mt-8">
-                <p className="text-white/40 font-heading uppercase tracking-widest">No certificates found.</p>
+            <div className="h-64 flex items-center justify-center border border-dashed border-ink/15 bg-concrete">
+                <p className="font-mono text-sm uppercase tracking-[0.16em] text-ink-faint">
+                    No certificates found.
+                </p>
             </div>
         );
     }
 
     return (
         <div className="space-y-12">
-
             {/* Tabs */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                {categories.map(cat => (
+            <div className="flex flex-wrap gap-2.5" dir={language === "ar" ? "rtl" : "ltr"}>
+                {categories.map((cat) => (
                     <button
                         key={cat.id}
-                        onClick={() => handleTabChange(cat.id)}
+                        onClick={() => changeTab(cat.id)}
                         className={cn(
-                            "px-6 py-3 rounded-full text-sm font-heading font-bold uppercase tracking-widest transition-all border",
+                            "font-mono text-[11px] uppercase tracking-[0.14em] px-4 py-2 border transition-all",
                             activeTab === cat.id
-                                ? "bg-primary text-background border-primary"
-                                : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white"
+                                ? "bg-charcoal text-paper border-charcoal"
+                                : "bg-transparent text-ink-soft border-ink/20 hover:border-ink hover:text-ink"
                         )}
                     >
                         {cat.label[language]}
@@ -77,128 +71,117 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                 ))}
             </div>
 
-            {/* Gallery Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
                 <AnimatePresence mode="popLayout" initial={false}>
-                    {paginatedItems.map((cert, index) => {
+                    {paginated.map((cert, index) => {
                         const title = formatTitle(cert);
                         return (
-                            <motion.div
-                                key={`${activeTab}-${cert}`} // Re-key on tab change for animation
+                            <motion.button
+                                key={`${activeTab}-${cert}`}
                                 layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3, delay: index * 0.05 }}
-                                className="group cursor-pointer"
-                                onClick={() => setSelectedImage(cert)}
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.96 }}
+                                transition={{ duration: 0.3, delay: index * 0.04 }}
+                                onClick={() => setSelected(cert)}
+                                className="group text-start"
                             >
-                                <div className="bg-neutral-900 border border-white/10 rounded-xl overflow-hidden relative aspect-[3/4] shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_40px_-10px_rgba(255,215,0,0.3)] group-hover:border-primary/50">
-
-                                    {/* Image as Background with treatment */}
-                                    <div className="absolute inset-0 p-4">
-                                        <div className="w-full h-full relative overflow-hidden rounded-lg">
-                                            <img
-                                                src={cert}
-                                                alt={title}
-                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-90 group-hover:brightness-100"
-                                            />
-                                        </div>
+                                <div className="relative aspect-[3/4] overflow-hidden bg-surface border border-ink/10 group-hover:border-brass/50 transition-colors">
+                                    <div className="absolute inset-3 overflow-hidden bg-concrete">
+                                        <img
+                                            src={cert}
+                                            alt={title}
+                                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        />
                                     </div>
-
-                                    {/* Glass Overlay on Hover */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                            <div className="w-10 h-1 bg-primary mb-4" />
-                                            <h3 className="text-white font-bold text-lg leading-tight mb-2" dir="auto">
-                                                {title}
-                                            </h3>
-                                            <div className="flex items-center gap-2 text-primary text-sm font-heading uppercase tracking-widest">
-                                                <ZoomIn size={16} />
-                                                <span>View Document</span>
-                                            </div>
-                                        </div>
+                                    <div className="absolute top-3 end-3 text-ink/20 group-hover:text-brass transition-colors">
+                                        {activeTab === "registration" ? <FileCheck size={20} /> : <Award size={20} />}
                                     </div>
-
-                                    {/* Corner Accents */}
-                                    <div className="absolute top-4 right-4 text-white/20 group-hover:text-primary transition-colors">
-                                        {activeTab === 'registration' ? <FileCheck size={24} /> : <Award size={24} />}
+                                    <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-charcoal/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div className="h-px w-8 bg-brass mb-3" />
+                                        <h3 className="text-paper text-sm leading-tight mb-2 line-clamp-2" dir="auto">
+                                            {title}
+                                        </h3>
+                                        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-brass-soft">
+                                            <ZoomIn size={13} /> View
+                                        </span>
                                     </div>
                                 </div>
-                            </motion.div>
+                            </motion.button>
                         );
                     })}
                 </AnimatePresence>
             </div>
 
-            {/* Pagination Controls */}
+            {/* Pagination */}
             {totalPages > 1 && (
-                <div className="flex justify-center items-center gap-6 mt-16">
+                <div className="flex justify-center items-center gap-5 pt-4">
                     <button
-                        onClick={prevPage}
-                        disabled={currentPage === 1}
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white/60"
+                        onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                        disabled={page === 1}
+                        className="w-11 h-11 border border-ink/20 flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink"
+                        aria-label="Previous page"
                     >
-                        <ChevronLeft size={24} />
+                        <ChevronLeft size={20} />
                     </button>
-
                     <div className="flex items-center gap-2">
                         {Array.from({ length: totalPages }).map((_, i) => (
                             <button
                                 key={i}
-                                onClick={() => setCurrentPage(i + 1)}
+                                onClick={() => setPage(i + 1)}
                                 className={cn(
-                                    "w-3 h-3 rounded-full transition-all duration-300",
-                                    currentPage === i + 1
-                                        ? "bg-primary w-8"
-                                        : "bg-white/20 hover:bg-white/50"
+                                    "h-1.5 rounded-full transition-all duration-300",
+                                    page === i + 1 ? "bg-brass w-8" : "bg-ink/20 w-1.5 hover:bg-ink/40"
                                 )}
+                                aria-label={`Page ${i + 1}`}
                             />
                         ))}
                     </div>
-
                     <button
-                        onClick={nextPage}
-                        disabled={currentPage === totalPages}
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white/60"
+                        onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                        disabled={page === totalPages}
+                        className="w-11 h-11 border border-ink/20 flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink"
+                        aria-label="Next page"
                     >
-                        <ChevronRight size={24} />
+                        <ChevronRight size={20} />
                     </button>
                 </div>
             )}
 
             {/* Lightbox */}
             <AnimatePresence>
-                {selectedImage && (
+                {selected && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
-                        onClick={() => setSelectedImage(null)}
+                        className="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur flex items-center justify-center p-4"
+                        onClick={() => setSelected(null)}
                     >
-                        {/* Close Button */}
                         <button
-                            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10 z-50"
-                            onClick={() => setSelectedImage(null)}
+                            className="absolute top-5 end-5 text-paper/60 hover:text-paper transition-colors p-2 z-50"
+                            onClick={() => setSelected(null)}
+                            aria-label="Close"
                         >
-                            <X size={32} />
+                            <X size={30} />
                         </button>
-
                         <motion.div
-                            initial={{ scale: 0.9, y: 20 }}
+                            initial={{ scale: 0.95, y: 16 }}
                             animate={{ scale: 1, y: 0 }}
-                            exit={{ scale: 0.9, y: 20 }}
+                            exit={{ scale: 0.95, y: 16 }}
                             className="relative max-w-4xl max-h-[90vh]"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <img
-                                src={selectedImage}
+                                src={selected}
                                 alt="Certificate"
-                                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl border border-white/10"
+                                className="max-w-full max-h-[84vh] object-contain shadow-2xl bg-paper"
                             />
                             <div className="mt-4 text-center">
-                                <span className="text-white/60 font-heading tracking-widest text-sm uppercase">Verified Document</span>
+                                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
+                                    {language === "ar" ? "وثيقة موثّقة" : "Verified document"}
+                                </span>
                             </div>
                         </motion.div>
                     </motion.div>

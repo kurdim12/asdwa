@@ -11,50 +11,42 @@ interface RevealProps {
     delay?: number;
 }
 
-export const Reveal = ({ children, width = "fit-content", className, delay = 0.25 }: RevealProps) => {
+/**
+ * Clean editorial fade-and-rise reveal. Keeps the same API used across the
+ * site (width, delay) but drops the old gold wipe bar for a calmer motion
+ * suited to the light architectural direction.
+ */
+export const Reveal = ({
+    children,
+    width = "fit-content",
+    className,
+    delay = 0.1,
+}: RevealProps) => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-    const mainControls = useAnimation();
-    const slideControls = useAnimation();
+    const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
+    const controls = useAnimation();
 
     useEffect(() => {
-        if (isInView) {
-            mainControls.start("visible");
-            slideControls.start("visible");
-        }
-    }, [isInView, mainControls, slideControls]);
+        if (isInView) controls.start("visible");
+    }, [isInView, controls]);
 
     return (
-        <div ref={ref} style={{ position: "relative", width, overflow: "hidden" }} className={className}>
+        <div
+            ref={ref}
+            style={{ width }}
+            className={cn("relative", className)}
+        >
             <motion.div
                 variants={{
-                    hidden: { opacity: 0, y: 75 },
+                    hidden: { opacity: 0, y: 28 },
                     visible: { opacity: 1, y: 0 },
                 }}
                 initial="hidden"
-                animate={mainControls}
-                transition={{ duration: 0.5, delay: delay }}
+                animate={controls}
+                transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
             >
                 {children}
             </motion.div>
-            <motion.div
-                variants={{
-                    hidden: { left: 0 },
-                    visible: { left: "100%" },
-                }}
-                initial="hidden"
-                animate={slideControls}
-                transition={{ duration: 0.5, ease: "easeIn" }}
-                style={{
-                    position: "absolute",
-                    top: 4,
-                    bottom: 4,
-                    left: 0,
-                    right: 0,
-                    background: "var(--primary)", // Gold
-                    zIndex: 20,
-                }}
-            />
         </div>
     );
 };

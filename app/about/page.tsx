@@ -3,111 +3,120 @@
 import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Section } from "@/components/ui/primitives";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
 import { useLanguage } from "@/app/providers";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Target, Award } from "lucide-react";
+import { Award, ArrowRight } from "lucide-react";
 import { LightboxGallery } from "@/components/ui/LightboxGallery";
 
 export default function AboutPage() {
     const [activeTab, setActiveTab] = useState("overview");
-    const { language } = useLanguage();
+    const { language, t, direction } = useLanguage();
 
-    const aboutSection = COMPANY_DATA.about.sections.find(s => s.id === "about_company");
-    const historySection = COMPANY_DATA.about.sections.find(s => s.id === "company_history");
-    const chairmanSection = COMPANY_DATA.about.sections.find(s => s.id === "chairman_word");
+    const aboutSection = COMPANY_DATA.about.sections.find((s) => s.id === "about_company");
+    const historySection = COMPANY_DATA.about.sections.find((s) => s.id === "company_history");
+    const chairmanSection = COMPANY_DATA.about.sections.find((s) => s.id === "chairman_word");
+    const membershipsSection = COMPANY_DATA.about.sections.find((s) => s.id === "memberships");
 
     const tabs = [
-        { id: "overview", label: language === 'ar' ? "نبذة عامة" : "Overview" },
-        { id: "history", label: language === 'ar' ? "التاريخ" : "History" },
-        { id: "memberships", label: language === 'ar' ? "العضويات" : "Memberships" },
-        { id: "leadership", label: language === 'ar' ? "كلمة الرئيس" : "Leadership" }
+        { id: "overview", label: { en: "Overview", ar: "نبذة عامة" } },
+        { id: "history", label: { en: "History", ar: "التاريخ" } },
+        { id: "memberships", label: { en: "Memberships", ar: "العضويات" } },
+        { id: "leadership", label: { en: "Leadership", ar: "كلمة الرئيس" } },
     ];
 
     return (
-        <main className="bg-background min-h-screen">
+        <main className="bg-paper min-h-screen">
             <Navbar />
 
-            <div className="pt-32 pb-16 container mx-auto px-4 md:px-8">
-                <Reveal>
-                    <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6">
-                        {language === 'ar' ? "من نحن" : "About Us"}
-                    </h1>
-                </Reveal>
+            <PageHeader
+                index="A / 01"
+                kicker={{ en: "Who We Are", ar: "من نحن" }}
+                title={{ en: "About the firm", ar: "من نحن" }}
+                subtitle={{
+                    en: "Four and a half decades of shaping Jordan's infrastructure — from private buildings in Zarqa to national dams, highways, and bridges.",
+                    ar: "أربعة عقود ونصف من تشكيل البنية التحتية في الأردن — من الأبنية الخاصة في الزرقاء إلى السدود والطرق والجسور الوطنية.",
+                }}
+            />
 
+            <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-16 md:py-24" dir={direction}>
                 {/* Tabs */}
-                <div className="flex gap-8 border-b border-white/10 mb-12" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                    {tabs.map(tab => (
+                <div className="flex flex-wrap gap-2 border-b border-ink/10 mb-14">
+                    {tabs.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`pb-4 text-sm font-heading font-bold uppercase tracking-widest transition-colors relative ${activeTab === tab.id ? "text-primary" : "text-white/40 hover:text-white"
-                                }`}
+                            className={`relative px-5 py-4 font-mono text-[12px] uppercase tracking-[0.14em] transition-colors ${
+                                activeTab === tab.id ? "text-ink" : "text-ink-faint hover:text-ink-soft"
+                            }`}
                         >
-                            {tab.label}
+                            {t(tab.label)}
                             {activeTab === tab.id && (
-                                <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
+                                <motion.div
+                                    layoutId="aboutTab"
+                                    className="absolute -bottom-px inset-x-0 h-0.5 bg-brass"
+                                />
                             )}
                         </button>
                     ))}
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-                    <div className="lg:col-span-2">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    <div className="lg:col-span-7">
                         <AnimatePresence mode="wait">
                             {activeTab === "overview" && (
                                 <motion.div
                                     key="overview"
-                                    initial={{ opacity: 0, y: 10 }}
+                                    initial={{ opacity: 0, y: 12 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
+                                    exit={{ opacity: 0, y: -8 }}
                                     className="space-y-8"
                                 >
-                                    <h2 className="text-3xl font-heading font-bold text-white">
-                                        {aboutSection?.title[language]}
+                                    <h2 className="font-display text-3xl md:text-4xl text-ink">
+                                        {t(aboutSection?.title)}
                                     </h2>
-                                    <p className="text-white/70 text-lg leading-relaxed whitespace-pre-line">
+                                    <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line text-pretty">
                                         {aboutSection?.content?.[language]}
                                     </p>
-
-                                    <div className="mt-8">
-                                        <div className="inline-flex items-center gap-2 bg-primary text-background px-6 py-3 rounded font-bold uppercase tracking-widest hover:bg-white transition-colors cursor-pointer">
-                                            <Award size={20} />
-                                            {language === 'ar' ? "تحميل ملف الشركة" : "Download Company Profile"}
-                                        </div>
-                                    </div>
-
-                                    {/* 45 Years Badge Display if present */}
-                                    <div className="mt-8">
-                                        <img src="/images/legacy_45_years.png" alt="45 Years of Excellence" className="max-w-xs rounded-lg border border-white/10" />
-                                    </div>
+                                    <a
+                                        href="#"
+                                        className="inline-flex items-center gap-2 bg-charcoal text-paper px-6 h-12 font-mono text-[12px] uppercase tracking-[0.16em] hover:bg-brass hover:text-white transition-colors"
+                                    >
+                                        <Award size={16} />
+                                        {language === "ar" ? "تحميل ملف الشركة" : "Download Company Profile"}
+                                    </a>
                                 </motion.div>
                             )}
 
                             {activeTab === "history" && (
                                 <motion.div
                                     key="history"
-                                    initial={{ opacity: 0, y: 10 }}
+                                    initial={{ opacity: 0, y: 12 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
+                                    exit={{ opacity: 0, y: -8 }}
                                 >
-                                    <h2 className="text-3xl font-heading font-bold text-white mb-6">
-                                        {historySection?.title[language]}
+                                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                                        {t(historySection?.title)}
                                     </h2>
-                                    <p className="text-white/70 text-lg leading-relaxed whitespace-pre-line">
+                                    <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line text-pretty">
                                         {historySection?.description?.[language]}
                                     </p>
 
-                                    <div className="mt-8 border-l border-white/10 pl-8 space-y-8">
-                                        <div className="relative">
-                                            <span className="absolute -left-[39px] top-0 w-5 h-5 bg-primary rounded-full border-4 border-background" />
-                                            <h3 className="text-white font-heading font-bold text-xl mb-2">1981</h3>
-                                            <p className="text-white/60">
-                                                {language === 'ar' ? "تأسيس الشركة" : "Company Established"}
-                                            </p>
-                                        </div>
+                                    <div className="mt-12 border-s-2 border-brass/40 ps-8 space-y-10">
+                                        {[
+                                            { year: "1981", en: "Founded in Zarqa as Modern Zarqa Establishment", ar: "التأسيس في الزرقاء" },
+                                            { year: "1990s", en: "Expansion into dams, bridges & highways", ar: "التوسع في السدود والجسور والطرق" },
+                                            { year: "2000s", en: "Regional reach — bridge construction in Saudi Arabia", ar: "توسع إقليمي — جسور في السعودية" },
+                                            { year: "Today", en: "First-grade contractor, 45+ years strong", ar: "مقاول درجة أولى، أكثر من ٤٥ عاماً" },
+                                        ].map((m, i) => (
+                                            <div key={i} className="relative">
+                                                <span className="absolute -start-[41px] top-1.5 w-4 h-4 bg-brass rounded-full ring-4 ring-paper" />
+                                                <h3 className="font-display text-2xl text-ink mb-1">{m.year}</h3>
+                                                <p className="text-ink-soft">{language === "ar" ? m.ar : m.en}</p>
+                                            </div>
+                                        ))}
                                     </div>
                                 </motion.div>
                             )}
@@ -115,23 +124,27 @@ export default function AboutPage() {
                             {activeTab === "leadership" && (
                                 <motion.div
                                     key="leadership"
-                                    initial={{ opacity: 0, y: 10 }}
+                                    initial={{ opacity: 0, y: 12 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
+                                    exit={{ opacity: 0, y: -8 }}
                                 >
-                                    <h2 className="text-3xl font-heading font-bold text-white mb-6">
-                                        {chairmanSection?.title[language]}
+                                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-8">
+                                        {t(chairmanSection?.title)}
                                     </h2>
-                                    <blockquote className="border-l-4 border-primary pl-6 py-2 italic text-white/80 text-xl leading-relaxed mb-8">
-                                        &quot;{chairmanSection?.content?.[language]}&quot;
+                                    <blockquote className="font-display text-2xl md:text-3xl leading-relaxed text-ink italic border-s-2 border-brass ps-6">
+                                        {chairmanSection?.content?.[language]}
                                     </blockquote>
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center">
-                                            <span className="text-2xl">MK</span>
+                                    <div className="flex items-center gap-4 mt-10">
+                                        <div className="w-14 h-14 bg-charcoal text-paper flex items-center justify-center font-display text-xl">
+                                            MK
                                         </div>
                                         <div>
-                                            <div className="text-white font-bold font-heading">Marwan Alkurdi</div>
-                                            <div className="text-primary text-sm uppercase tracking-widest">Chairman & Founder</div>
+                                            <div className="text-ink font-medium">
+                                                {language === "ar" ? "مروان الكردي" : "Marwan Alkurdi"}
+                                            </div>
+                                            <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-brass mt-1">
+                                                {language === "ar" ? "رئيس مجلس الإدارة والمؤسس" : "Chairman & Founder"}
+                                            </div>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -140,60 +153,73 @@ export default function AboutPage() {
                             {activeTab === "memberships" && (
                                 <motion.div
                                     key="memberships"
-                                    initial={{ opacity: 0, y: 10 }}
+                                    initial={{ opacity: 0, y: 12 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
+                                    exit={{ opacity: 0, y: -8 }}
                                 >
-                                    <h2 className="text-3xl font-heading font-bold text-white mb-6">
-                                        {COMPANY_DATA.about.sections.find(s => s.id === "memberships")?.title[language]}
+                                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                                        {t(membershipsSection?.title)}
                                     </h2>
-                                    <p className="text-white/70 text-lg leading-relaxed whitespace-pre-line mb-8">
-                                        {COMPANY_DATA.about.sections.find(s => s.id === "memberships")?.content?.[language]}
+                                    <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line mb-10 text-pretty">
+                                        {membershipsSection?.content?.[language]}
                                     </p>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink/10 border border-ink/10">
                                         {[
                                             { en: "First Grade Contractor (JCA)", ar: "مقاول درجة أولى (نقابة المقاولين)" },
                                             { en: "Arab Contractors Union", ar: "اتحاد المقاولين العرب" },
                                             { en: "Islamic Contractors Union", ar: "اتحاد المقاولين الإسلاميين" },
                                             { en: "Intl Real Estate Valuation (FIABCI)", ar: "الاتحاد العالمي للعقارات (FIABCI)" },
-                                            { en: "Aqaba Special Economic Zone (ASEZA)", ar: "سلطة منطقة العقبة الاقتصادية (ASEZA)" }
+                                            { en: "Aqaba Special Economic Zone (ASEZA)", ar: "سلطة منطقة العقبة الاقتصادية (ASEZA)" },
                                         ].map((item, i) => (
-                                            <div key={i} className="bg-white/5 p-4 rounded border border-white/10 flex items-center gap-3">
-                                                <Award className="text-primary shrink-0" size={24} />
-                                                <span className="text-white font-medium">
-                                                    {language === 'ar' ? item.ar : item.en}
+                                            <div key={i} className="bg-paper p-5 flex items-center gap-3">
+                                                <Award className="text-brass shrink-0" size={20} />
+                                                <span className="text-ink text-sm">
+                                                    {language === "ar" ? item.ar : item.en}
                                                 </span>
                                             </div>
                                         ))}
                                     </div>
 
-                                    {/* Certificates Gallery */}
-                                    <div className="mt-16 pt-16 border-t border-white/10">
-                                        <h3 className="text-2xl font-heading font-bold text-white mb-8">
-                                            {/* @ts-ignore */}
-                                            {COMPANY_DATA.about.certifications.title[language]}
-                                        </h3>
-                                        <LightboxGallery
-                                            /* @ts-ignore */
-                                            images={COMPANY_DATA.about.certifications.images}
-                                            /* @ts-ignore */
-                                            title={COMPANY_DATA.about.certifications.title[language]}
-                                        />
-                                    </div>
+                                    {COMPANY_DATA.about.certifications.images.length > 0 && (
+                                        <div className="mt-16 pt-12 border-t border-ink/10">
+                                            <h3 className="font-display text-2xl text-ink mb-6">
+                                                {t(COMPANY_DATA.about.certifications.title)}
+                                            </h3>
+                                            <LightboxGallery
+                                                images={COMPANY_DATA.about.certifications.images as any}
+                                                title={t(COMPANY_DATA.about.certifications.title)}
+                                            />
+                                        </div>
+                                    )}
                                 </motion.div>
                             )}
                         </AnimatePresence>
                     </div>
 
-                    {/* Sidebar Image */}
-                    <div className="hidden lg:block h-full min-h-[500px] bg-neutral-800 rounded-lg relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[url('/patterns/mesh.png')] opacity-20" />
-                        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/legacy_45_years.png')", opacity: 0.8 }} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+                    {/* Sidebar image */}
+                    <div className="lg:col-span-5">
+                        <Reveal width="100%">
+                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-concrete lg:sticky lg:top-28">
+                                <img
+                                    src="/images/hero/3.jpg"
+                                    alt="Marwan Ahmad Alkurdi & Partners"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                                <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-charcoal/80 to-transparent">
+                                    <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass-soft">
+                                        {language === "ar" ? "منذ ١٩٨١" : "Since 1981"}
+                                    </div>
+                                    <div className="mt-1 font-display text-2xl text-paper">
+                                        {language === "ar" ? "خبرة تبني الثقة" : "Experience that builds trust"}
+                                    </div>
+                                </div>
+                            </div>
+                        </Reveal>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <Footer />
         </main>

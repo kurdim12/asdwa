@@ -2,82 +2,104 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Calendar, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/app/providers";
-
 import { COMPANY_DATA } from "@/lib/data";
 
 export default function NewsPage() {
-    const { language, t } = useLanguage();
-
-    // Static translations for headings
-    const text = {
-        title: { en: "Latest News", ar: "آخر الأخبار" },
-        subtitle: { en: "Updates from our projects, safety milestones, and company announcements.", ar: "تحديثات مشاريعنا، إنجازات السلامة، وإعلانات الشركة." },
-        readMore: { en: "Read Full Story", ar: "اقرأ القصة الكاملة" }
-    };
+    const { language, t, direction } = useLanguage();
+    const news = COMPANY_DATA.news as any[];
+    const [featured, ...rest] = news;
 
     return (
-        <main className="bg-background min-h-screen">
+        <main className="bg-paper min-h-screen">
             <Navbar />
 
-            <div className="pt-32 pb-20 container mx-auto px-4 md:px-8">
-                <Reveal>
-                    <header className="mb-16">
-                        <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6">{t(text.title)}</h1>
-                        <p className="text-white/60 max-w-2xl text-lg leading-relaxed">
-                            {t(text.subtitle)}
-                        </p>
-                    </header>
-                </Reveal>
+            <PageHeader
+                index="N / 01"
+                kicker={{ en: "Newsroom", ar: "غرفة الأخبار" }}
+                title={{ en: "Latest news", ar: "آخر الأخبار" }}
+                subtitle={{
+                    en: "Updates from our projects, safety milestones, and company announcements.",
+                    ar: "تحديثات مشاريعنا، إنجازات السلامة، وإعلانات الشركة.",
+                }}
+            />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                    {/* @ts-ignore */}
-                    {COMPANY_DATA.news.map((item, index) => (
-                        <Reveal key={item.id} delay={index * 0.1}>
-                            <article className="group relative bg-neutral-900 border border-white/5 hover:border-primary/30 transition-all duration-300 h-full flex flex-col">
-                                {/* Image Container */}
-                                <div className="h-64 overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-16 md:py-20" dir={direction}>
+                {/* Featured */}
+                {featured && (
+                    <Reveal width="100%">
+                        <Link
+                            href={`/news/${featured.id}`}
+                            className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pb-16 mb-16 border-b border-ink/10"
+                        >
+                            <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-concrete">
+                                <img
+                                    src={`/${featured.image}`}
+                                    alt={featured.title[language]}
+                                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                                <div className="absolute top-4 start-4 bg-charcoal text-paper font-mono text-[10px] uppercase tracking-[0.16em] px-3 py-1.5">
+                                    {featured.category}
+                                </div>
+                            </div>
+                            <div className="lg:col-span-5">
+                                <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint mb-4">
+                                    <Calendar size={13} />
+                                    <span>{featured.date}</span>
+                                </div>
+                                <h2 className="font-display text-3xl md:text-5xl leading-[1.02] text-ink group-hover:text-brass transition-colors text-balance">
+                                    {featured.title[language]}
+                                </h2>
+                                <p className="mt-5 text-ink-soft leading-relaxed line-clamp-3">
+                                    {featured.summary[language]}
+                                </p>
+                                <span className="link-arrow mt-8">
+                                    {language === "ar" ? "اقرأ القصة" : "Read the story"}
+                                    <ArrowUpRight size={15} />
+                                </span>
+                            </div>
+                        </Link>
+                    </Reveal>
+                )}
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+                    {rest.map((item, index) => (
+                        <Reveal key={item.id} width="100%" delay={(index % 3) * 0.08}>
+                            <Link href={`/news/${item.id}`} className="group block h-full">
+                                <div className="relative aspect-[16/11] overflow-hidden bg-concrete">
                                     <img
                                         src={`/${item.image}`}
-                                        /* @ts-ignore */
                                         alt={item.title[language]}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                                     />
-                                    <div className="absolute top-4 left-4 bg-primary text-background text-xs font-bold uppercase tracking-widest px-3 py-1 z-20">
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                                    <div className="absolute top-3 start-3 bg-paper/90 backdrop-blur text-ink font-mono text-[10px] uppercase tracking-[0.14em] px-2.5 py-1">
                                         {item.category}
                                     </div>
                                 </div>
-
-                                {/* Content */}
-                                <div className="p-8 flex-1 flex flex-col">
-                                    <div className="flex items-center gap-2 text-white/40 text-sm mb-4 font-heading tracking-wide">
-                                        <Calendar size={14} />
+                                <div className="mt-5">
+                                    <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint mb-3">
+                                        <Calendar size={12} />
                                         <span>{item.date}</span>
                                     </div>
-
-                                    <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors leading-tight">
-                                        {/* @ts-ignore */}
+                                    <h3 className="font-display text-xl md:text-2xl leading-snug text-ink group-hover:text-brass transition-colors">
                                         {item.title[language]}
-                                    </h2>
-
-                                    <p className="text-white/60 mb-6 flex-1 line-clamp-3">
-                                        {/* @ts-ignore */}
+                                    </h3>
+                                    <p className="mt-3 text-sm text-ink-soft leading-relaxed line-clamp-2">
                                         {item.summary[language]}
                                     </p>
-
-                                    <Link href={`/news/${item.id}`} className="inline-flex items-center gap-2 text-white/50 hover:text-white uppercase text-xs font-bold tracking-widest transition-colors mt-auto">
-                                        {t(text.readMore)} <ArrowUpRight size={14} />
-                                    </Link>
                                 </div>
-                            </article>
+                            </Link>
                         </Reveal>
                     ))}
                 </div>
-            </div>
+            </section>
 
             <Footer />
         </main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { useLanguage } from "@/app/providers";
@@ -17,123 +17,121 @@ interface LightboxGalleryProps {
 }
 
 export function LightboxGallery({ images, title, defaultOpen = false }: LightboxGalleryProps) {
-    const [selectedindex, setSelectedIndex] = useState<number | null>(null);
+    const [selected, setSelected] = useState<number | null>(null);
     const { language, t } = useLanguage();
 
+    const normalized = images.map((img) => (typeof img === "string" ? { src: img } : img));
+
     useEffect(() => {
-        if (defaultOpen) {
-            setSelectedIndex(0);
-        }
+        if (defaultOpen) setSelected(0);
     }, [defaultOpen]);
 
-    const normalizedImages = images.map(img =>
-        typeof img === 'string' ? { src: img } : img
+    const close = () => setSelected(null);
+    const next = useCallback(
+        () => setSelected((p) => (p === null ? null : (p + 1) % normalized.length)),
+        [normalized.length]
+    );
+    const prev = useCallback(
+        () => setSelected((p) => (p === null ? null : (p - 1 + normalized.length) % normalized.length)),
+        [normalized.length]
     );
 
-    const openLightbox = (index: number) => setSelectedIndex(index);
-    const closeLightbox = () => setSelectedIndex(null);
-
-    const showNext = () => {
-        if (selectedindex === null) return;
-        setSelectedIndex((prev) => (prev === null ? null : (prev + 1) % normalizedImages.length));
-    };
-
-    const showPrev = () => {
-        if (selectedindex === null) return;
-        setSelectedIndex((prev) => (prev === null ? null : (prev - 1 + normalizedImages.length) % normalizedImages.length));
-    };
-
-    // Keyboard navigation
     useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (selectedindex === null) return;
-            if (e.key === "Escape") closeLightbox();
-            if (e.key === "ArrowRight") showNext();
-            if (e.key === "ArrowLeft") showPrev();
+        const onKey = (e: KeyboardEvent) => {
+            if (selected === null) return;
+            if (e.key === "Escape") close();
+            if (e.key === "ArrowRight") next();
+            if (e.key === "ArrowLeft") prev();
         };
-        window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [selectedindex]);
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [selected, next, prev]);
 
     return (
-        <div className="mt-8">
-            <h4 className="text-white/80 font-heading font-bold mb-4 text-sm uppercase tracking-widest flex items-center gap-2">
-                <ZoomIn size={16} className="text-primary" />
-                {language === 'ar' ? "معرض الصور" : "Project Gallery"}
-            </h4>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {normalizedImages.map((img, i) => (
-                    <motion.div
+        <div className="mt-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                {normalized.map((img, i) => (
+                    <button
                         key={i}
-                        className="relative aspect-video overflow-hidden rounded-lg border border-white/10 group cursor-pointer bg-neutral-900"
-                        whileHover={{ scale: 1.02 }}
-                        onClick={(e) => { e.stopPropagation(); openLightbox(i); }}
+                        onClick={() => setSelected(i)}
+                        className="relative aspect-[4/3] overflow-hidden bg-concrete group"
                     >
                         <img
                             src={`/${img.src}`}
                             alt={`${title} ${i + 1}`}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-background shadow-lg shadow-primary/20">
-                                <ZoomIn size={20} />
-                            </div>
+                        <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                        <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/30 transition-colors flex items-center justify-center">
+                            <span className="opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10 bg-paper text-ink flex items-center justify-center">
+                                <ZoomIn size={18} />
+                            </span>
                         </div>
-                    </motion.div>
+                    </button>
                 ))}
             </div>
 
             <AnimatePresence>
-                {selectedindex !== null && (
+                {selected !== null && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
-                        onClick={closeLightbox}
+                        className="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur flex items-center justify-center p-4"
+                        onClick={close}
                     >
                         <button
-                            className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
-                            onClick={closeLightbox}
+                            className="absolute top-4 end-4 text-paper/60 hover:text-paper transition-colors p-2"
+                            onClick={close}
+                            aria-label="Close"
                         >
-                            <X size={32} />
+                            <X size={30} />
                         </button>
-
                         <button
-                            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors hidden md:flex p-4 hover:bg-white/5 rounded-full"
-                            onClick={(e) => { e.stopPropagation(); showPrev(); }}
+                            className="absolute start-4 top-1/2 -translate-y-1/2 text-paper/50 hover:text-paper hidden md:block p-3"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                prev();
+                            }}
+                            aria-label="Previous"
                         >
-                            <ChevronLeft size={48} />
+                            <ChevronLeft size={44} />
                         </button>
 
-                        <div className="relative max-w-7xl max-h-[90vh] w-full h-full flex flex-col items-center justify-center gap-6" onClick={(e) => e.stopPropagation()}>
-                            <div className="relative flex-1 min-h-0 w-full flex items-center justify-center">
-                                <img
-                                    src={`/${normalizedImages[selectedindex].src}`}
-                                    alt={`${title} ${selectedindex + 1}`}
-                                    className="max-w-full max-h-full object-contain rounded-sm shadow-2xl"
-                                />
-                            </div>
-
-                            {/* Caption Section */}
-                            <div className="w-full max-w-3xl text-center space-y-2">
-                                <h3 className="text-white font-heading text-xl font-bold">
-                                    {title} <span className="text-primary mx-2">|</span> <span className="text-white/60 text-base font-sans">{selectedindex + 1} of {normalizedImages.length}</span>
-                                </h3>
-                                {normalizedImages[selectedindex].description && (
-                                    <p className="text-white/80 text-lg leading-relaxed">
-                                        {t(normalizedImages[selectedindex].description!)}
+                        <div
+                            className="relative max-w-6xl max-h-[90vh] w-full flex flex-col items-center gap-5"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <img
+                                src={`/${normalized[selected].src}`}
+                                alt={`${title} ${selected + 1}`}
+                                className="max-w-full max-h-[78vh] object-contain shadow-2xl"
+                            />
+                            <div className="text-center">
+                                <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-paper">
+                                    {title}
+                                    <span className="text-brass-soft mx-2">/</span>
+                                    <span className="text-paper/60">
+                                        {selected + 1} — {normalized.length}
+                                    </span>
+                                </span>
+                                {normalized[selected].description && (
+                                    <p className="mt-2 text-paper/80 leading-relaxed">
+                                        {t(normalized[selected].description!)}
                                     </p>
                                 )}
                             </div>
                         </div>
 
                         <button
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors hidden md:flex p-4 hover:bg-white/5 rounded-full"
-                            onClick={(e) => { e.stopPropagation(); showNext(); }}
+                            className="absolute end-4 top-1/2 -translate-y-1/2 text-paper/50 hover:text-paper hidden md:block p-3"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                next();
+                            }}
+                            aria-label="Next"
                         >
-                            <ChevronRight size={48} />
+                            <ChevronRight size={44} />
                         </button>
                     </motion.div>
                 )}

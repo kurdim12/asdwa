@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { COMPANY_DATA } from "@/lib/data";
 import { ProjectsGrid } from "@/components/projects/ProjectsGrid";
 
@@ -36,8 +37,17 @@ export default function ProjectsPage() {
     });
 
     return (
-        <main className="bg-background min-h-screen">
+        <main className="bg-paper min-h-screen">
             <Navbar />
+            <PageHeader
+                index="P / 01"
+                kicker={{ en: "Our Portfolio", ar: "محفظة أعمالنا" }}
+                title={{ en: "Projects", ar: "المشاريع" }}
+                subtitle={{
+                    en: "A collection of infrastructure landmarks shaping the future of Jordan.",
+                    ar: "مجموعة من المعالم الهندسية التي تُشكل مستقبل الأردن.",
+                }}
+            />
             <ProjectsGrid categories={categories} allProjects={allProjects} />
             <Footer />
         </main>
