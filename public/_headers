@@ -1,0 +1,9 @@
+# Long-cache immutable build assets (hashed filenames)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static media
+/images/*
+  Cache-Control: public, max-age=86400
+/documents/*
+  Cache-Control: public, max-age=86400

@@ -1,6 +1,5 @@
+# The site now builds as a fully static export (see next.config.ts -> output: "export").
+# Publish the generated `out/` folder as plain static assets on any host.
 [build]
   command = "npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  publish = "out"

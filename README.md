@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marwan Ahmad Alkurdi & Partners — Website
 
-## Getting Started
+Bilingual (EN / AR, RTL-aware) marketing site for the Jordanian
+engineering & construction firm, built with **Next.js 16** (App Router),
+**Tailwind CSS**, and **Framer Motion**.
 
-First, run the development server:
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The site is configured as a **fully static export** (`next.config.ts` →
+`output: "export"`). `npm run build` emits a static site into `out/` with
+no server runtime required.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build      # -> out/
+```
 
-## Learn More
+## Deploying to Cloudflare
 
-To learn more about Next.js, take a look at the following resources:
+The static `out/` folder can be hosted on Cloudflare with either product.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Option A — Cloudflare Pages (Git integration, recommended)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Connect the repo in the Cloudflare dashboard and set:
 
-## Deploy on Vercel
+| Setting             | Value           |
+| ------------------- | --------------- |
+| Build command       | `npm run build` |
+| Build output dir    | `out`           |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Cloudflare rebuilds on every push to the production branch.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Option B — Cloudflare Workers Static Assets (CLI)
+
+`wrangler.jsonc` is preconfigured (assets → `./out`). Deploy with:
+
+```bash
+npm run cf:deploy     # next build && wrangler deploy
+npm run cf:preview    # build + serve locally via `wrangler dev`
+```
+
+(Requires a one-time `npx wrangler login`.)
+
+### Caching / routing
+
+- `public/_headers` sets long-cache headers for hashed build assets and media.
+- `trailingSlash: true` emits `about/index.html`-style paths; the Worker uses
+  `html_handling: "auto-trailing-slash"` and serves `404.html` for unknown routes.
+
+## Other hosts
+
+The same static build deploys to Netlify (`netlify.toml` → publish `out`) or
+any static host.
+
+> **Note on the contact form:** the form uses Netlify Forms
+> (`data-netlify="true"`), which only works when hosted on Netlify. On
+> Cloudflare, wire the form to a Cloudflare Pages Function / Worker (or a
+> service like Formspree) to receive submissions.
