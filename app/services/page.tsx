@@ -42,14 +42,14 @@ function ServicesContent() {
                                 id={service.id}
                                 className={`group block ${isTarget ? "ring-1 ring-brass" : ""}`}
                             >
-                                <div className="relative aspect-[16/10] overflow-hidden bg-concrete">
+                                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-panel">
                                     <img
                                         src={thumb}
                                         alt={t(service.title)}
                                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                                     />
-                                    <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
-                                    <div className="absolute top-4 start-4 font-mono text-[12px] tracking-[0.16em] text-paper bg-charcoal/70 backdrop-blur px-2.5 py-1">
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
+                                    <div className="absolute top-4 start-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[12.5px] font-medium text-steel shadow-card tabular-nums">
                                         {String(index + 1).padStart(2, "0")}
                                     </div>
                                 </div>

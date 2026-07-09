@@ -58,8 +58,8 @@ function NewsArticlePage({ id }: { id: string }) {
                 <div className="absolute inset-0 z-10 mx-auto max-w-8xl px-6 md:px-10 lg:px-16 flex flex-col justify-end pb-14 md:pb-20">
                     <Reveal width="100%">
                         <div className="max-w-4xl">
-                            <div className="flex flex-wrap items-center gap-4 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/90 mb-6">
-                                <span className="bg-brass text-white px-3 py-1">{newsItem.category}</span>
+                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] font-medium text-white/90 mb-6">
+                                <span className="rounded-full bg-white/90 text-steel px-3.5 py-1">{newsItem.category}</span>
                                 <span className="flex items-center gap-2">
                                     <Calendar size={13} /> {newsItem.date}
                                 </span>
@@ -82,7 +82,7 @@ function NewsArticlePage({ id }: { id: string }) {
                         <div className="sticky top-28 border-s border-ink/10 ps-8 space-y-8">
                             <Link
                                 href="/news"
-                                className="group flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft hover:text-brass transition-colors"
+                                className="group flex items-center gap-2 text-[14px] font-medium text-steel-soft hover:text-blue transition-colors"
                             >
                                 <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform" />
                                 {language === "ar" ? "العودة للأخبار" : "Back to news"}
@@ -120,7 +120,7 @@ function NewsArticlePage({ id }: { id: string }) {
                         <div className="mt-14 lg:hidden border-t border-ink/10 pt-8">
                             <Link
                                 href="/news"
-                                className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft hover:text-brass transition-colors"
+                                className="inline-flex items-center gap-2 text-[14px] font-medium text-steel-soft hover:text-blue transition-colors"
                             >
                                 <ArrowLeft size={15} />
                                 {language === "ar" ? "العودة للأخبار" : "Back to news"}

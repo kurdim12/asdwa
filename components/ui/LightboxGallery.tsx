@@ -54,16 +54,16 @@ export function LightboxGallery({ images, title, defaultOpen = false }: Lightbox
                     <button
                         key={i}
                         onClick={() => setSelected(i)}
-                        className="relative aspect-[4/3] overflow-hidden bg-concrete group"
+                        className="relative aspect-[4/3] overflow-hidden rounded-xl bg-panel group"
                     >
                         <img
                             src={`/${img.src}`}
                             alt={`${title} ${i + 1}`}
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                        <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-xl" />
                         <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/30 transition-colors flex items-center justify-center">
-                            <span className="opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10 bg-paper text-ink flex items-center justify-center">
+                            <span className="opacity-0 group-hover:opacity-100 transition-opacity w-10 h-10 rounded-full bg-white text-steel flex items-center justify-center shadow-card">
                                 <ZoomIn size={18} />
                             </span>
                         </div>
@@ -108,7 +108,7 @@ export function LightboxGallery({ images, title, defaultOpen = false }: Lightbox
                                 className="max-w-full max-h-[78vh] object-contain shadow-2xl"
                             />
                             <div className="text-center">
-                                <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-paper">
+                                <span className="text-[13.5px] text-white">
                                     {title}
                                     <span className="text-brass-soft mx-2">/</span>
                                     <span className="text-paper/60">

@@ -10,27 +10,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = "primary", size = "md", ...props }, ref) => {
         const variants = {
             primary:
-                "bg-blue text-white hover:bg-navy transition-colors duration-300",
+                "bg-blue text-white hover:bg-blue-dim transition-colors duration-300",
             dark:
                 "bg-navy text-white hover:bg-blue transition-colors duration-300",
             light:
                 "bg-white text-navy hover:bg-sky transition-colors duration-300",
             outline:
-                "border border-steel/30 text-steel hover:border-blue hover:bg-blue hover:text-white transition-colors duration-300",
+                "border border-steel/20 text-steel hover:border-blue hover:text-blue transition-colors duration-300",
             ghost: "text-steel/70 hover:text-steel hover:bg-steel/5 transition-colors",
         };
 
         const sizes = {
-            sm: "h-9 px-4 text-[12px]",
-            md: "h-11 px-6 text-[13px]",
-            lg: "h-14 px-9 text-[13px]",
+            sm: "h-9 px-5 text-[13px]",
+            md: "h-11 px-7 text-[14px]",
+            lg: "h-12 md:h-14 px-8 md:px-9 text-[15px]",
         };
 
         return (
             <button
                 ref={ref}
                 className={cn(
-                    "relative inline-flex items-center justify-center gap-2 font-mono uppercase tracking-[0.18em] disabled:opacity-50 disabled:pointer-events-none",
+                    "relative inline-flex items-center justify-center gap-2 rounded-full font-medium disabled:opacity-50 disabled:pointer-events-none",
                     variants[variant],
                     sizes[size],
                     className
@@ -66,7 +66,7 @@ export function Section({
     );
 }
 
-/** Technical section header: index numeral + rule + mono label. */
+/** Small labelled section header: blue dot + sentence-case label. */
 export function SectionKicker({
     index,
     label,
@@ -79,18 +79,8 @@ export function SectionKicker({
     dark?: boolean;
 }) {
     return (
-        <div className={cn("flex items-center gap-3", className)}>
-            {index && (
-                <span
-                    className={cn(
-                        "font-mono text-[12px] tabular-nums",
-                        dark ? "text-blue-bright" : "text-blue"
-                    )}
-                >
-                    {index}
-                </span>
-            )}
-            <span className={cn("h-px w-10", dark ? "bg-blue-bright/50" : "bg-blue/40")} />
+        <div className={cn("flex items-center gap-2.5", className)}>
+            <span className={cn("h-2 w-2 rounded-full", dark ? "bg-blue-bright" : "bg-blue")} />
             <span className={dark ? "eyebrow-dark" : "eyebrow"}>{label}</span>
         </div>
     );

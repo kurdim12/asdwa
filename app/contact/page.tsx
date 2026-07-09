@@ -39,8 +39,8 @@ export default function ContactPage() {
     ];
 
     const inputCls =
-        "w-full bg-paper border border-ink/15 px-4 py-3.5 text-ink placeholder:text-ink-faint focus:border-brass focus:outline-none focus:ring-1 focus:ring-brass transition-colors";
-    const labelCls = "font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft";
+        "w-full rounded-xl bg-white border border-steel/15 px-4 py-3.5 text-steel placeholder:text-steel-faint focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue transition-colors";
+    const labelCls = "text-[13px] font-medium text-steel-soft";
 
     return (
         <main className="bg-paper min-h-screen">
@@ -66,7 +66,7 @@ export default function ContactPage() {
                                 return (
                                     <Reveal key={i} width="100%" delay={i * 0.06}>
                                         <div className="flex items-start gap-5 py-7 border-b border-ink/10">
-                                            <div className="w-11 h-11 border border-ink/15 flex items-center justify-center text-brass shrink-0">
+                                            <div className="w-11 h-11 rounded-full bg-sky flex items-center justify-center text-blue shrink-0">
                                                 <Icon size={20} />
                                             </div>
                                             <div>
@@ -88,7 +88,7 @@ export default function ContactPage() {
                     {/* Form */}
                     <div className="lg:col-span-7">
                         <Reveal width="100%" delay={0.15}>
-                            <div className="bg-surface border border-ink/10 p-8 md:p-12">
+                            <div className="rounded-2xl md:rounded-[28px] bg-panel p-8 md:p-12">
                                 <h2 className="display text-3xl text-ink mb-8">
                                     {language === "ar" ? "أرسل رسالة" : "Send a message"}
                                 </h2>
@@ -159,12 +159,12 @@ export default function ContactPage() {
             {/* Map */}
             <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pb-20 md:pb-28" dir={direction}>
                 <div className="flex items-center gap-3 mb-6">
-                    <span className="h-px w-8 bg-brass/50" />
+                    <span className="h-2 w-2 rounded-full bg-blue" />
                     <span className="eyebrow">
                         {language === "ar" ? "موقعنا" : "Find us"}
                     </span>
                 </div>
-                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-concrete border border-ink/10">
+                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden rounded-2xl md:rounded-[28px] bg-panel border border-steel/10">
                     <iframe
                         src="https://maps.google.com/maps?q=Abdullah%20Ghosheh%20Street%2C%207th%20Circle%2C%20Amman%2C%20Jordan&z=15&output=embed"
                         title={language === "ar" ? "خريطة الموقع" : "Office location map"}

@@ -49,16 +49,16 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
 
     const chipCls = (active: boolean) =>
         cn(
-            "font-mono text-[11px] uppercase tracking-[0.14em] px-4 py-2 border transition-all",
+            "text-[13.5px] font-medium px-5 py-2 rounded-full border transition-all",
             active
-                ? "bg-charcoal text-paper border-charcoal"
-                : "bg-transparent text-ink-soft border-ink/20 hover:border-ink hover:text-ink"
+                ? "bg-blue text-white border-blue"
+                : "bg-white text-steel-soft border-steel/15 hover:border-blue/50 hover:text-blue"
         );
 
     return (
-        <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-14 md:py-20" dir={direction}>
+        <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-12 md:py-16" dir={direction}>
             {/* Filters */}
-            <div className="flex flex-wrap gap-2.5 mb-12 pb-8 border-b border-ink/10">
+            <div className="flex flex-wrap items-center gap-2.5 mb-12">
                 <button onClick={() => setFilter("all")} className={chipCls(filter === "all")}>
                     {t(filterAll)}
                 </button>
@@ -71,13 +71,13 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                         {t(cat.name)}
                     </button>
                 ))}
-                <span className="ms-auto self-center font-mono text-[11px] tracking-[0.14em] text-ink-faint">
-                    {String(filtered.length).padStart(2, "0")} {language === "ar" ? "مشروع" : "projects"}
+                <span className="ms-auto text-[13.5px] text-steel-faint tabular-nums">
+                    {filtered.length} {language === "ar" ? "مشروع" : "projects"}
                 </span>
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
                 <AnimatePresence mode="popLayout">
                     {filtered.map((project) => (
                         <motion.div
@@ -89,30 +89,27 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <Link href={`/projects/${encodeURIComponent(project.name)}`} className="group block">
-                                <div className="relative aspect-[4/3] overflow-hidden bg-concrete">
+                                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-panel">
                                     {project.thumbnail && (
                                         <img
                                             src={project.thumbnail}
                                             alt={t(project.title)}
-                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
+                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
                                         />
                                     )}
-                                    <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
-                                    <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/30 transition-colors duration-300 flex items-center justify-center">
-                                        <span className="opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 bg-paper text-ink px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] inline-flex items-center gap-2">
-                                            {language === "ar" ? "عرض" : "View"}
-                                            <ArrowUpRight size={14} />
-                                        </span>
-                                    </div>
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
+                                    <span className="absolute top-3.5 end-3.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-steel opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all shadow-card">
+                                        <ArrowUpRight size={16} />
+                                    </span>
                                 </div>
                                 <div className="mt-5">
-                                    <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-brass mb-2">
+                                    <div className="text-[12.5px] font-medium text-blue mb-1.5">
                                         {project.categoryNames?.filter(Boolean).join(" · ")}
                                     </div>
-                                    <h3 className="display text-xl md:text-2xl text-ink group-hover:text-brass transition-colors leading-snug">
+                                    <h3 className="text-[19px] font-semibold leading-snug text-steel group-hover:text-blue transition-colors">
                                         {t(project.title)}
                                     </h3>
-                                    <p className="mt-2 text-sm text-ink-soft leading-relaxed line-clamp-2">
+                                    <p className="mt-2 text-[14px] text-steel-soft leading-relaxed line-clamp-2">
                                         {clean(t(project.description))}
                                     </p>
                                 </div>

@@ -60,10 +60,10 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                         key={cat.id}
                         onClick={() => changeTab(cat.id)}
                         className={cn(
-                            "font-mono text-[11px] uppercase tracking-[0.14em] px-4 py-2 border transition-all",
+                            "text-[13.5px] font-medium px-5 py-2 rounded-full border transition-all",
                             activeTab === cat.id
-                                ? "bg-charcoal text-paper border-charcoal"
-                                : "bg-transparent text-ink-soft border-ink/20 hover:border-ink hover:text-ink"
+                                ? "bg-blue text-white border-blue"
+                                : "bg-white text-steel-soft border-steel/15 hover:border-blue/50 hover:text-blue"
                         )}
                     >
                         {cat.label[language]}
@@ -87,8 +87,8 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                                 onClick={() => setSelected(cert)}
                                 className="group text-start"
                             >
-                                <div className="relative aspect-[3/4] overflow-hidden bg-surface border border-ink/10 group-hover:border-brass/50 transition-colors">
-                                    <div className="absolute inset-3 overflow-hidden bg-concrete">
+                                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-white border border-steel/10 shadow-card group-hover:shadow-card-hover transition-shadow">
+                                    <div className="absolute inset-3 overflow-hidden rounded-xl bg-panel">
                                         <img
                                             src={cert}
                                             alt={title}
@@ -103,7 +103,7 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                                         <h3 className="text-paper text-sm leading-tight mb-2 line-clamp-2" dir="auto">
                                             {title}
                                         </h3>
-                                        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-brass-soft">
+                                        <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-white/90">
                                             <ZoomIn size={13} /> View
                                         </span>
                                     </div>
@@ -120,7 +120,7 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                     <button
                         onClick={() => setPage((p) => Math.max(p - 1, 1))}
                         disabled={page === 1}
-                        className="w-11 h-11 border border-ink/20 flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink"
+                        className="w-11 h-11 rounded-full border border-steel/15 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-steel"
                         aria-label="Previous page"
                     >
                         <ChevronLeft size={20} />
@@ -141,7 +141,7 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                     <button
                         onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
                         disabled={page === totalPages}
-                        className="w-11 h-11 border border-ink/20 flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink"
+                        className="w-11 h-11 rounded-full border border-steel/15 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-steel"
                         aria-label="Next page"
                     >
                         <ChevronRight size={20} />
@@ -179,7 +179,7 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                                 className="max-w-full max-h-[84vh] object-contain shadow-2xl bg-paper"
                             />
                             <div className="mt-4 text-center">
-                                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/60">
+                                <span className="text-[13px] text-white/60">
                                     {language === "ar" ? "وثيقة موثّقة" : "Verified document"}
                                 </span>
                             </div>

@@ -38,16 +38,15 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             : "/images/logo.jpg";
 
     return (
-        <Section className="bg-base overflow-hidden">
-            <div className="absolute inset-0 grid-overlay opacity-40 pointer-events-none" />
-            <div dir={direction} className="relative">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+        <Section className="bg-white">
+            <div dir={direction}>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div>
                         <Reveal>
-                            <SectionKicker index="04" label={language === "ar" ? "أعمال مختارة" : "Selected Works"} />
+                            <SectionKicker label={language === "ar" ? "أعمال مختارة" : "Selected work"} />
                         </Reveal>
                         <Reveal delay={0.1}>
-                            <h2 className="mt-6 display text-3xl md:text-5xl leading-[1.0] text-navy max-w-2xl">
+                            <h2 className="mt-5 display text-3xl md:text-[2.75rem] leading-[1.08] text-steel max-w-xl text-balance">
                                 {t(title)}
                             </h2>
                         </Reveal>
@@ -57,14 +56,14 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     </Reveal>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
                     {/* Image */}
                     <div className="lg:col-span-8 order-1">
-                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-panel tick-frame">
+                        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl md:rounded-[28px] bg-panel">
                             <AnimatePresence mode="wait">
                                 <motion.img
                                     key={image}
-                                    initial={{ opacity: 0, scale: 1.05 }}
+                                    initial={{ opacity: 0, scale: 1.04 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -73,16 +72,15 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />
                             </AnimatePresence>
-                            <div className="absolute inset-0 ring-1 ring-inset ring-navy/10" />
-                            <div className="absolute top-4 end-4 bg-navy px-3 py-1.5 font-mono text-[11px] tracking-[0.16em] text-white">
-                                <span className="text-blue-bright">{String(activeIndex + 1).padStart(2, "0")}</span>
-                                <span className="text-white/50"> / {String(projects.length).padStart(2, "0")}</span>
+                            <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl md:rounded-[28px]" />
+                            <div className="absolute top-4 end-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-[13px] font-medium text-steel shadow-card tabular-nums">
+                                {activeIndex + 1} / {projects.length}
                             </div>
                         </div>
                     </div>
 
                     {/* Content */}
-                    <div className="lg:col-span-4 order-2 flex flex-col justify-between border-t-2 border-navy lg:border-t-0 pt-8 lg:pt-0">
+                    <div className="lg:col-span-4 order-2 flex flex-col justify-between pt-2">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeIndex}
@@ -91,18 +89,18 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                 exit={{ opacity: 0, y: -8 }}
                                 transition={{ duration: 0.4 }}
                             >
-                                <h3 className="display text-2xl md:text-3xl leading-tight text-navy text-balance">
+                                <h3 className="display text-2xl md:text-3xl leading-tight text-steel text-balance">
                                     {t(current.title)}
                                 </h3>
-                                <p className="mt-5 text-steel-soft leading-relaxed line-clamp-5">
+                                <p className="mt-4 text-[15.5px] text-steel-soft leading-relaxed line-clamp-5">
                                     {clean(t(current.description))}
                                 </p>
                                 <Link
                                     href={`/projects/${encodeURIComponent(current.title.en)}`}
-                                    className="link-arrow mt-8"
+                                    className="link-arrow mt-7"
                                 >
                                     {t(viewProject)}
-                                    <ArrowUpRight size={15} />
+                                    <ArrowUpRight size={16} />
                                 </Link>
                             </motion.div>
                         </AnimatePresence>
@@ -111,14 +109,14 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                         <div className="flex items-center gap-3 mt-10" dir="ltr">
                             <button
                                 onClick={prev}
-                                className="w-12 h-12 border border-steel/25 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors"
+                                className="h-12 w-12 rounded-full border border-steel/15 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors"
                                 aria-label="Previous"
                             >
                                 <ArrowLeft size={18} />
                             </button>
                             <button
                                 onClick={next}
-                                className="w-12 h-12 border border-steel/25 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors"
+                                className="h-12 w-12 rounded-full border border-steel/15 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors"
                                 aria-label="Next"
                             >
                                 <ArrowRight size={18} />

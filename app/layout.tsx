@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Archivo, IBM_Plex_Mono, Noto_Kufi_Arabic } from "next/font/google";
+import { Inter, Schibsted_Grotesk, IBM_Plex_Mono, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./providers";
 
@@ -8,11 +8,10 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
-const archivo = Archivo({
+const displayFont = Schibsted_Grotesk({
   subsets: ["latin"],
-  variable: "--font-archivo",
+  variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700", "800", "900"],
 });
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -60,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${archivo.variable} ${plexMono.variable} ${notoKufi.variable} bg-base text-steel font-sans antialiased selection:bg-blue selection:text-white overflow-x-hidden`}
+        className={`${inter.variable} ${displayFont.variable} ${plexMono.variable} ${notoKufi.variable} bg-base text-steel font-sans antialiased selection:bg-blue selection:text-white overflow-x-hidden`}
       >
         <LanguageProvider>{children}</LanguageProvider>
       </body>

@@ -57,12 +57,12 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
                 <div className="absolute inset-0 z-10 mx-auto max-w-8xl px-6 md:px-10 lg:px-16 flex flex-col justify-end pb-14 md:pb-16">
                     <Link
                         href="/projects"
-                        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/80 hover:text-paper mb-6 transition-colors w-fit"
+                        className="inline-flex items-center gap-2 text-[14px] font-medium text-white/80 hover:text-white mb-6 transition-colors w-fit"
                     >
                         <ArrowLeft size={16} /> {t(labels.back)}
                     </Link>
                     <Reveal width="100%">
-                        <div className="font-mono text-[11px] uppercase tracking-label text-brass-soft mb-4">
+                        <div className="text-[13.5px] font-medium text-white/80 mb-3">
                             {t(categoryName)}
                         </div>
                         <h1 className="display text-4xl md:text-6xl lg:text-7xl leading-[0.98] text-paper max-w-4xl text-balance">
@@ -77,8 +77,8 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                     {/* Sidebar */}
                     <aside className="lg:col-span-4">
-                        <div className="lg:sticky lg:top-28 border border-ink/10 bg-surface p-7">
-                            <h3 className="font-mono text-[11px] uppercase tracking-label text-ink-soft pb-5 mb-5 border-b border-ink/10">
+                        <div className="lg:sticky lg:top-28 rounded-2xl bg-panel p-7">
+                            <h3 className="text-[13px] font-semibold text-steel-soft pb-5 mb-5 border-b border-steel/10">
                                 {t(labels.details)}
                             </h3>
                             <ul className="space-y-5">

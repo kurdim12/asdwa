@@ -43,20 +43,20 @@ export default function AboutPage() {
 
             <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 py-16 md:py-24" dir={direction}>
                 {/* Tabs */}
-                <div className="flex flex-wrap gap-2 border-b border-ink/10 mb-14">
+                <div className="flex flex-wrap gap-2 mb-12">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`relative px-5 py-4 font-mono text-[12px] uppercase tracking-[0.14em] transition-colors ${
-                                activeTab === tab.id ? "text-ink" : "text-ink-faint hover:text-ink-soft"
+                            className={`relative z-0 px-5 py-2.5 rounded-full text-[14px] font-medium transition-colors ${
+                                activeTab === tab.id ? "text-white" : "text-steel-soft hover:text-steel"
                             }`}
                         >
                             {t(tab.label)}
                             {activeTab === tab.id && (
                                 <motion.div
                                     layoutId="aboutTab"
-                                    className="absolute -bottom-px inset-x-0 h-0.5 bg-brass"
+                                    className="absolute inset-0 rounded-full bg-blue -z-10"
                                 />
                             )}
                         </button>
@@ -85,7 +85,7 @@ export default function AboutPage() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         download
-                                        className="inline-flex items-center gap-2 bg-charcoal text-paper px-6 h-12 font-mono text-[12px] uppercase tracking-[0.16em] hover:bg-brass hover:text-white transition-colors"
+                                        className="inline-flex items-center gap-2 rounded-full bg-blue text-white px-7 h-12 text-[14.5px] font-medium hover:bg-blue-dim transition-colors"
                                     >
                                         <Award size={16} />
                                         {language === "ar" ? "تحميل ملف الشركة" : "Download Company Profile"}
@@ -138,14 +138,14 @@ export default function AboutPage() {
                                         {chairmanSection?.content?.[language]}
                                     </blockquote>
                                     <div className="flex items-center gap-4 mt-10">
-                                        <div className="w-14 h-14 bg-charcoal text-paper flex items-center justify-center display text-xl">
+                                        <div className="w-14 h-14 rounded-full bg-sky text-blue flex items-center justify-center display text-xl">
                                             MK
                                         </div>
                                         <div>
                                             <div className="text-ink font-medium">
                                                 {language === "ar" ? "مروان الكردي" : "Marwan Alkurdi"}
                                             </div>
-                                            <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-brass mt-1">
+                                            <div className="text-[13px] font-medium text-blue mt-1">
                                                 {language === "ar" ? "رئيس مجلس الإدارة والمؤسس" : "Chairman & Founder"}
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@ export default function AboutPage() {
                                         {membershipsSection?.content?.[language]}
                                     </p>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ink/10 border border-ink/10">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         {[
                                             { en: "First Grade Contractor (JCA)", ar: "مقاول درجة أولى (نقابة المقاولين)" },
                                             { en: "Arab Contractors Union", ar: "اتحاد المقاولين العرب" },
@@ -175,7 +175,7 @@ export default function AboutPage() {
                                             { en: "Intl Real Estate Valuation (FIABCI)", ar: "الاتحاد العالمي للعقارات (FIABCI)" },
                                             { en: "Aqaba Special Economic Zone (ASEZA)", ar: "سلطة منطقة العقبة الاقتصادية (ASEZA)" },
                                         ].map((item, i) => (
-                                            <div key={i} className="bg-paper p-5 flex items-center gap-3">
+                                            <div key={i} className="rounded-2xl bg-panel p-5 flex items-center gap-3">
                                                 <Award className="text-brass shrink-0" size={20} />
                                                 <span className="text-ink text-sm">
                                                     {language === "ar" ? item.ar : item.en}
@@ -203,15 +203,15 @@ export default function AboutPage() {
                     {/* Sidebar image */}
                     <div className="lg:col-span-5">
                         <Reveal width="100%">
-                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-concrete lg:sticky lg:top-28">
+                            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl md:rounded-[28px] bg-panel lg:sticky lg:top-28">
                                 <img
                                     src="/images/projects/Quds Swiemeh Road/DSC00508.JPG"
                                     alt="Marwan Ahmad Alkurdi & Partners"
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />
-                                <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
+                                <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl md:rounded-[28px]" />
                                 <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-charcoal/80 to-transparent">
-                                    <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass-soft">
+                                    <div className="text-[13px] font-medium text-white/80">
                                         {language === "ar" ? "منذ ١٩٨١" : "Since 1981"}
                                     </div>
                                     <div className="mt-1 display text-2xl text-paper">

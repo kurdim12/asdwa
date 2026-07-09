@@ -36,19 +36,19 @@ export default function NewsPage() {
                             href={`/news/${featured.id}`}
                             className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pb-16 mb-16 border-b border-ink/10"
                         >
-                            <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-concrete">
+                            <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden rounded-2xl md:rounded-[28px] bg-panel">
                                 <img
                                     src={`/${featured.image}`}
                                     alt={featured.title[language]}
                                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
-                                <div className="absolute top-4 start-4 bg-charcoal text-paper font-mono text-[10px] uppercase tracking-[0.16em] px-3 py-1.5">
+                                <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
+                                <div className="absolute top-4 start-4 rounded-full bg-white/90 backdrop-blur text-steel text-[12px] font-medium px-3.5 py-1.5 shadow-card">
                                     {featured.category}
                                 </div>
                             </div>
                             <div className="lg:col-span-5">
-                                <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-faint mb-4">
+                                <div className="flex items-center gap-2 text-[13px] text-steel-faint mb-4">
                                     <Calendar size={13} />
                                     <span>{featured.date}</span>
                                 </div>
@@ -72,19 +72,19 @@ export default function NewsPage() {
                     {rest.map((item, index) => (
                         <Reveal key={item.id} width="100%" delay={(index % 3) * 0.08}>
                             <Link href={`/news/${item.id}`} className="group block h-full">
-                                <div className="relative aspect-[16/11] overflow-hidden bg-concrete">
+                                <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-panel">
                                     <img
                                         src={`/${item.image}`}
                                         alt={item.title[language]}
                                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                                     />
-                                    <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
-                                    <div className="absolute top-3 start-3 bg-paper/90 backdrop-blur text-ink font-mono text-[10px] uppercase tracking-[0.14em] px-2.5 py-1">
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
+                                    <div className="absolute top-3 start-3 rounded-full bg-white/90 backdrop-blur text-steel text-[11.5px] font-medium px-3 py-1 shadow-card">
                                         {item.category}
                                     </div>
                                 </div>
                                 <div className="mt-5">
-                                    <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-faint mb-3">
+                                    <div className="flex items-center gap-2 text-[12.5px] text-steel-faint mb-3">
                                         <Calendar size={12} />
                                         <span>{item.date}</span>
                                     </div>

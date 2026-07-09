@@ -9,79 +9,80 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // --- Structural Blueprint system (brand blue derived from logo) ---
-                base: "#F4F6F8",        // cool off-white canvas
-                surface: "#FFFFFF",     // raised cards
-                panel: "#E8EDF2",       // recessed panels
-                "panel-dark": "#D8DFE7",
+                // --- Light premium system (brand blue from the MK logo) ---
+                base: "#FFFFFF",        // primary canvas
+                surface: "#FFFFFF",
+                panel: "#F5F7FA",       // soft alternating band
+                "panel-dark": "#EAEEF3",
                 navy: {
-                    DEFAULT: "#0B2138", // deep structural navy (dark blocks)
-                    deep: "#071827",    // darkest — footer base
-                    soft: "#12314F",    // raised dark surfaces
+                    DEFAULT: "#0E2440", // reserved for the footer + small chips
+                    deep: "#0A1B31",
+                    soft: "#173456",
                 },
                 blue: {
-                    DEFAULT: "#245A96", // brand blue (logo)
-                    bright: "#3B7BC4",  // hover / links on dark
-                    dim: "#1A4472",
+                    DEFAULT: "#2160A8", // brand accent
+                    bright: "#3A7CC7",
+                    dim: "#194E8C",
                 },
-                sky: "#DCE8F5",         // light blue tint fills
+                sky: "#EAF1F8",         // pale tint fills
                 steel: {
-                    DEFAULT: "#152232", // primary text (cool near-black)
-                    soft: "#5A6B7E",    // secondary text
-                    faint: "#8B99A9",   // tertiary / captions
+                    DEFAULT: "#101D2C", // headings / primary text
+                    soft: "#51637A",    // secondary text
+                    faint: "#8595A8",   // captions
                 },
-                amber: "#E9A13B",       // micro-accent: numerals, markers
+                amber: "#E9A13B",
 
-                // --- Legacy aliases mapped onto the new system ---
-                paper: "#F4F6F8",
-                concrete: "#E8EDF2",
-                "concrete-dark": "#D8DFE7",
+                // --- Legacy aliases mapped onto the light system ---
+                paper: "#FFFFFF",
+                concrete: "#F5F7FA",
+                "concrete-dark": "#EAEEF3",
                 ink: {
-                    DEFAULT: "#152232",
-                    soft: "#5A6B7E",
-                    faint: "#8B99A9",
+                    DEFAULT: "#101D2C",
+                    soft: "#51637A",
+                    faint: "#8595A8",
                 },
                 brass: {
-                    DEFAULT: "#245A96",
-                    soft: "#3B7BC4",
-                    bright: "#3B7BC4",
+                    DEFAULT: "#2160A8",
+                    soft: "#3A7CC7",
+                    bright: "#3A7CC7",
                 },
-                charcoal: "#0B2138",
-                background: "#F4F6F8",
-                foreground: "#152232",
+                charcoal: "#0E2440",
+                background: "#FFFFFF",
+                foreground: "#101D2C",
                 primary: {
-                    DEFAULT: "#245A96",
+                    DEFAULT: "#2160A8",
                     foreground: "#FFFFFF",
                 },
                 secondary: {
-                    DEFAULT: "#0B2138",
-                    foreground: "#F4F6F8",
+                    DEFAULT: "#0E2440",
+                    foreground: "#FFFFFF",
                 },
                 industrial: {
-                    DEFAULT: "#3B7BC4",
-                    blue: "#245A96",
+                    DEFAULT: "#3A7CC7",
+                    blue: "#2160A8",
                 },
                 muted: {
-                    DEFAULT: "#E8EDF2",
-                    foreground: "#5A6B7E",
+                    DEFAULT: "#F5F7FA",
+                    foreground: "#51637A",
                 },
             },
             fontFamily: {
-                display: ["var(--font-archivo)", "system-ui", "sans-serif"],
-                heading: ["var(--font-archivo)", "system-ui", "sans-serif"],
+                display: ["var(--font-display)", "system-ui", "sans-serif"],
+                heading: ["var(--font-display)", "system-ui", "sans-serif"],
                 body: ["var(--font-inter)", "system-ui", "sans-serif"],
                 sans: ["var(--font-inter)", "system-ui", "sans-serif"],
                 mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
                 arabic: ["var(--font-noto-kufi)", "sans-serif"],
             },
             letterSpacing: {
-                label: "0.22em",
+                label: "0.02em",
             },
             maxWidth: {
-                "8xl": "88rem",
+                "8xl": "84rem",
             },
-            backgroundImage: {
-                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+            boxShadow: {
+                card: "0 1px 2px rgba(16,29,44,0.04), 0 8px 24px rgba(16,29,44,0.06)",
+                "card-hover": "0 2px 4px rgba(16,29,44,0.05), 0 16px 40px rgba(16,29,44,0.10)",
             },
             keyframes: {
                 "fade-up": {
@@ -92,15 +93,10 @@ const config: Config = {
                     "0%": { transform: "scale(1)" },
                     "100%": { transform: "scale(1.08)" },
                 },
-                marquee: {
-                    "0%": { transform: "translateX(0)" },
-                    "100%": { transform: "translateX(-50%)" },
-                },
             },
             animation: {
                 "fade-up": "fade-up 0.7s cubic-bezier(0.16,1,0.3,1) forwards",
                 "ken-burns": "ken-burns 16s ease-out forwards",
-                marquee: "marquee 36s linear infinite",
             },
         },
     },
