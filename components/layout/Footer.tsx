@@ -50,11 +50,11 @@ export function Footer() {
                 {/* Middle: link columns */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-16">
                     <div className="col-span-2 md:col-span-1">
-                        {/* White knockout of the brand logo for the dark footer */}
+                        {/* Official white horizontal lockup for the dark footer */}
                         <img
-                            src="/images/logo.png"
+                            src="/images/logo-white.png"
                             alt={t(company.name)}
-                            className="h-16 w-auto object-contain [filter:brightness(0)_invert(1)] opacity-90"
+                            className="w-full max-w-[260px] h-auto object-contain"
                         />
                         <a
                             href={social.facebook}
