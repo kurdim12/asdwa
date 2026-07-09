@@ -38,28 +38,29 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             : "/images/logo.jpg";
 
     return (
-        <Section className="bg-paper">
-            <div dir={direction}>
+        <Section className="bg-base overflow-hidden">
+            <div className="absolute inset-0 grid-overlay opacity-40 pointer-events-none" />
+            <div dir={direction} className="relative">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
                     <div>
                         <Reveal>
                             <SectionKicker index="04" label={language === "ar" ? "أعمال مختارة" : "Selected Works"} />
                         </Reveal>
                         <Reveal delay={0.1}>
-                            <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[1.0] text-ink max-w-2xl">
+                            <h2 className="mt-6 display text-3xl md:text-5xl leading-[1.0] text-navy max-w-2xl">
                                 {t(title)}
                             </h2>
                         </Reveal>
                     </div>
                     <Reveal delay={0.2}>
-                        <p className="text-ink-soft max-w-sm leading-relaxed">{t(description)}</p>
+                        <p className="text-steel-soft max-w-sm leading-relaxed">{t(description)}</p>
                     </Reveal>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                     {/* Image */}
                     <div className="lg:col-span-8 order-1">
-                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-concrete">
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-panel tick-frame">
                             <AnimatePresence mode="wait">
                                 <motion.img
                                     key={image}
@@ -72,16 +73,16 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />
                             </AnimatePresence>
-                            <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />
-                            <div className="absolute top-4 end-4 bg-paper/90 backdrop-blur px-3 py-1.5 font-mono text-[11px] tracking-[0.16em] text-ink">
-                                <span className="text-brass">{String(activeIndex + 1).padStart(2, "0")}</span>
-                                <span className="text-ink-faint"> / {String(projects.length).padStart(2, "0")}</span>
+                            <div className="absolute inset-0 ring-1 ring-inset ring-navy/10" />
+                            <div className="absolute top-4 end-4 bg-navy px-3 py-1.5 font-mono text-[11px] tracking-[0.16em] text-white">
+                                <span className="text-blue-bright">{String(activeIndex + 1).padStart(2, "0")}</span>
+                                <span className="text-white/50"> / {String(projects.length).padStart(2, "0")}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Content */}
-                    <div className="lg:col-span-4 order-2 flex flex-col justify-between border-t border-ink/10 lg:border-t-0 pt-8 lg:pt-0">
+                    <div className="lg:col-span-4 order-2 flex flex-col justify-between border-t-2 border-navy lg:border-t-0 pt-8 lg:pt-0">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeIndex}
@@ -90,10 +91,10 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                 exit={{ opacity: 0, y: -8 }}
                                 transition={{ duration: 0.4 }}
                             >
-                                <h3 className="font-display text-3xl md:text-4xl leading-tight text-ink text-balance">
+                                <h3 className="display text-2xl md:text-3xl leading-tight text-navy text-balance">
                                     {t(current.title)}
                                 </h3>
-                                <p className="mt-5 text-ink-soft leading-relaxed line-clamp-5">
+                                <p className="mt-5 text-steel-soft leading-relaxed line-clamp-5">
                                     {clean(t(current.description))}
                                 </p>
                                 <Link
@@ -110,14 +111,14 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                         <div className="flex items-center gap-3 mt-10" dir="ltr">
                             <button
                                 onClick={prev}
-                                className="w-12 h-12 border border-ink/20 flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors"
+                                className="w-12 h-12 border border-steel/25 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors"
                                 aria-label="Previous"
                             >
                                 <ArrowLeft size={18} />
                             </button>
                             <button
                                 onClick={next}
-                                className="w-12 h-12 border border-ink/20 flex items-center justify-center text-ink hover:bg-ink hover:text-paper transition-colors"
+                                className="w-12 h-12 border border-steel/25 flex items-center justify-center text-steel hover:bg-blue hover:border-blue hover:text-white transition-colors"
                                 aria-label="Next"
                             >
                                 <ArrowRight size={18} />

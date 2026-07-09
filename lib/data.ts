@@ -261,7 +261,7 @@ export const COMPANY_DATA = {
         "image": "images/legacy_45_years.png"
     },
     "hero": {
-        "est": { "en": "Est. 1979 • Amman, Jordan", "ar": "تأسست عام 1979 • عمّان، الأردن" },
+        "est": { "en": "Est. 1981 • Amman, Jordan", "ar": "تأسست عام 1981 • عمّان، الأردن" },
         "title": { "en": "Building Legacy", "ar": "بناء الإرث" },
         "subtitle": {
             "en": "Pioneering major infrastructure, dams, and specialized engineering projects across the Kingdom for over 45 years.",

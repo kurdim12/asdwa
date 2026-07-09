@@ -67,7 +67,7 @@ function NewsArticlePage({ id }: { id: string }) {
                                     <Clock size={13} /> {language === "ar" ? "٣ دقائق" : "3 min read"}
                                 </span>
                             </div>
-                            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[0.98] text-paper text-balance">
+                            <h1 className="display text-4xl md:text-6xl lg:text-7xl leading-[0.98] text-paper text-balance">
                                 {title}
                             </h1>
                         </div>
@@ -92,7 +92,7 @@ function NewsArticlePage({ id }: { id: string }) {
 
                     <article className="lg:col-span-8 lg:col-start-4">
                         <Reveal width="100%">
-                            <p className="font-display text-2xl md:text-3xl leading-relaxed text-ink border-s-2 border-brass ps-6 mb-12">
+                            <p className="text-2xl md:text-3xl font-medium leading-relaxed text-navy border-s-4 border-blue ps-6 mb-12">
                                 {paragraphs[0]}
                             </p>
                             {paragraphs.length > 1 && (
@@ -104,7 +104,7 @@ function NewsArticlePage({ id }: { id: string }) {
                             {quote && (
                                 <div className="my-14 relative">
                                     <Quote className="absolute -top-6 -start-4 text-brass/15 w-24 h-24 -z-10" />
-                                    <blockquote className="font-display text-3xl md:text-4xl leading-tight text-ink text-center px-4 md:px-10 border-y border-ink/10 py-12 italic">
+                                    <blockquote className="text-2xl md:text-4xl font-medium leading-snug text-navy text-center px-4 md:px-10 border-y-2 border-blue/20 py-12">
                                         {quote}
                                     </blockquote>
                                 </div>

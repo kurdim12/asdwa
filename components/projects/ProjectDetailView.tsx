@@ -65,7 +65,7 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
                         <div className="font-mono text-[11px] uppercase tracking-label text-brass-soft mb-4">
                             {t(categoryName)}
                         </div>
-                        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[0.98] text-paper max-w-4xl text-balance">
+                        <h1 className="display text-4xl md:text-6xl lg:text-7xl leading-[0.98] text-paper max-w-4xl text-balance">
                             {t(project.title)}
                         </h1>
                     </Reveal>
@@ -103,7 +103,7 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
                     {/* Main */}
                     <div className="lg:col-span-8">
                         <Reveal width="100%">
-                            <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                            <h2 className="display text-3xl md:text-4xl text-ink mb-6">
                                 {t(labels.about)}
                             </h2>
                             <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line text-pretty">
@@ -115,7 +115,7 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
                         </Reveal>
 
                         <div className="mt-14">
-                            <h3 className="font-display text-2xl text-ink mb-2">{t(labels.gallery)}</h3>
+                            <h3 className="display text-2xl text-ink mb-2">{t(labels.gallery)}</h3>
                             {galleryImages.length > 0 ? (
                                 <LightboxGallery images={galleryImages} title={t(project.title)} />
                             ) : (

@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "outline" | "ghost" | "dark";
+    variant?: "primary" | "outline" | "ghost" | "dark" | "light";
     size?: "sm" | "md" | "lg";
 }
 
@@ -10,12 +10,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = "primary", size = "md", ...props }, ref) => {
         const variants = {
             primary:
-                "bg-charcoal text-paper hover:bg-brass hover:text-white transition-colors duration-300",
+                "bg-blue text-white hover:bg-navy transition-colors duration-300",
             dark:
-                "bg-brass text-white hover:bg-charcoal transition-colors duration-300",
+                "bg-navy text-white hover:bg-blue transition-colors duration-300",
+            light:
+                "bg-white text-navy hover:bg-sky transition-colors duration-300",
             outline:
-                "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper transition-colors duration-300",
-            ghost: "text-ink/70 hover:text-ink hover:bg-ink/5 transition-colors",
+                "border border-steel/30 text-steel hover:border-blue hover:bg-blue hover:text-white transition-colors duration-300",
+            ghost: "text-steel/70 hover:text-steel hover:bg-steel/5 transition-colors",
         };
 
         const sizes = {
@@ -64,21 +66,32 @@ export function Section({
     );
 }
 
-/** A small labelled section header used across pages. */
+/** Technical section header: index numeral + rule + mono label. */
 export function SectionKicker({
     index,
     label,
     className,
+    dark = false,
 }: {
     index?: string;
     label: string;
     className?: string;
+    dark?: boolean;
 }) {
     return (
         <div className={cn("flex items-center gap-3", className)}>
-            {index && <span className="index-num text-[12px]">{index}</span>}
-            <span className="h-px w-8 bg-brass/50" />
-            <span className="eyebrow">{label}</span>
+            {index && (
+                <span
+                    className={cn(
+                        "font-mono text-[12px] tabular-nums",
+                        dark ? "text-blue-bright" : "text-blue"
+                    )}
+                >
+                    {index}
+                </span>
+            )}
+            <span className={cn("h-px w-10", dark ? "bg-blue-bright/50" : "bg-blue/40")} />
+            <span className={dark ? "eyebrow-dark" : "eyebrow"}>{label}</span>
         </div>
     );
 }

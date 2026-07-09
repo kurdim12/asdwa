@@ -9,46 +9,66 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // --- New light architectural / editorial system ---
-                paper: "#F3F1EC",       // warm off-white canvas
-                surface: "#FFFFFF",     // cards / raised surfaces
-                concrete: "#E7E3DB",    // muted panel fill
-                "concrete-dark": "#DAD5CB",
+                // --- Structural Blueprint system (brand blue derived from logo) ---
+                base: "#F4F6F8",        // cool off-white canvas
+                surface: "#FFFFFF",     // raised cards
+                panel: "#E8EDF2",       // recessed panels
+                "panel-dark": "#D8DFE7",
+                navy: {
+                    DEFAULT: "#0B2138", // deep structural navy (dark blocks)
+                    deep: "#071827",    // darkest — footer base
+                    soft: "#12314F",    // raised dark surfaces
+                },
+                blue: {
+                    DEFAULT: "#245A96", // brand blue (logo)
+                    bright: "#3B7BC4",  // hover / links on dark
+                    dim: "#1A4472",
+                },
+                sky: "#DCE8F5",         // light blue tint fills
+                steel: {
+                    DEFAULT: "#152232", // primary text (cool near-black)
+                    soft: "#5A6B7E",    // secondary text
+                    faint: "#8B99A9",   // tertiary / captions
+                },
+                amber: "#E9A13B",       // micro-accent: numerals, markers
+
+                // --- Legacy aliases mapped onto the new system ---
+                paper: "#F4F6F8",
+                concrete: "#E8EDF2",
+                "concrete-dark": "#D8DFE7",
                 ink: {
-                    DEFAULT: "#18160F", // near-black warm charcoal (text)
-                    soft: "#6E6A61",    // secondary text
-                    faint: "#9C978C",   // tertiary / captions
+                    DEFAULT: "#152232",
+                    soft: "#5A6B7E",
+                    faint: "#8B99A9",
                 },
                 brass: {
-                    DEFAULT: "#9A7B2F", // refined architectural gold (accessible on paper)
-                    soft: "#B7935A",
-                    bright: "#C8A24A",
+                    DEFAULT: "#245A96",
+                    soft: "#3B7BC4",
+                    bright: "#3B7BC4",
                 },
-                charcoal: "#141209",    // dark contrast blocks / footer
-
-                // --- Legacy token aliases (mapped to light system for safety) ---
-                background: "#F3F1EC",
-                foreground: "#18160F",
+                charcoal: "#0B2138",
+                background: "#F4F6F8",
+                foreground: "#152232",
                 primary: {
-                    DEFAULT: "#9A7B2F",
+                    DEFAULT: "#245A96",
                     foreground: "#FFFFFF",
                 },
                 secondary: {
-                    DEFAULT: "#141209",
-                    foreground: "#F3F1EC",
+                    DEFAULT: "#0B2138",
+                    foreground: "#F4F6F8",
                 },
                 industrial: {
-                    DEFAULT: "#C8A24A",
-                    blue: "#4A6E8A",
+                    DEFAULT: "#3B7BC4",
+                    blue: "#245A96",
                 },
                 muted: {
-                    DEFAULT: "#E7E3DB",
-                    foreground: "#6E6A61",
+                    DEFAULT: "#E8EDF2",
+                    foreground: "#5A6B7E",
                 },
             },
             fontFamily: {
-                display: ["var(--font-fraunces)", "Georgia", "serif"],
-                heading: ["var(--font-fraunces)", "Georgia", "serif"],
+                display: ["var(--font-archivo)", "system-ui", "sans-serif"],
+                heading: ["var(--font-archivo)", "system-ui", "sans-serif"],
                 body: ["var(--font-inter)", "system-ui", "sans-serif"],
                 sans: ["var(--font-inter)", "system-ui", "sans-serif"],
                 mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
@@ -62,8 +82,6 @@ const config: Config = {
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "grid-lines":
-                    "linear-gradient(to right, rgba(24,22,15,0.06) 1px, transparent 1px)",
             },
             keyframes: {
                 "fade-up": {
@@ -74,10 +92,15 @@ const config: Config = {
                     "0%": { transform: "scale(1)" },
                     "100%": { transform: "scale(1.08)" },
                 },
+                marquee: {
+                    "0%": { transform: "translateX(0)" },
+                    "100%": { transform: "translateX(-50%)" },
+                },
             },
             animation: {
                 "fade-up": "fade-up 0.7s cubic-bezier(0.16,1,0.3,1) forwards",
                 "ken-burns": "ken-burns 16s ease-out forwards",
+                marquee: "marquee 36s linear infinite",
             },
         },
     },

@@ -52,7 +52,7 @@ export default function NewsPage() {
                                     <Calendar size={13} />
                                     <span>{featured.date}</span>
                                 </div>
-                                <h2 className="font-display text-3xl md:text-5xl leading-[1.02] text-ink group-hover:text-brass transition-colors text-balance">
+                                <h2 className="display text-3xl md:text-5xl leading-[1.02] text-ink group-hover:text-brass transition-colors text-balance">
                                     {featured.title[language]}
                                 </h2>
                                 <p className="mt-5 text-ink-soft leading-relaxed line-clamp-3">
@@ -88,7 +88,7 @@ export default function NewsPage() {
                                         <Calendar size={12} />
                                         <span>{item.date}</span>
                                     </div>
-                                    <h3 className="font-display text-xl md:text-2xl leading-snug text-ink group-hover:text-brass transition-colors">
+                                    <h3 className="display text-xl md:text-2xl leading-snug text-ink group-hover:text-brass transition-colors">
                                         {item.title[language]}
                                     </h3>
                                     <p className="mt-3 text-sm text-ink-soft leading-relaxed line-clamp-2">

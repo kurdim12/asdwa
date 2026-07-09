@@ -55,7 +55,7 @@ function ServicesContent() {
                                 </div>
                                 <div className="mt-6 flex items-start justify-between gap-4">
                                     <div>
-                                        <h2 className="font-display text-2xl md:text-3xl text-ink group-hover:text-brass transition-colors">
+                                        <h2 className="display text-2xl md:text-3xl text-ink group-hover:text-brass transition-colors">
                                             {t(service.title)}
                                         </h2>
                                         <p className="mt-3 text-ink-soft leading-relaxed line-clamp-3 max-w-md">

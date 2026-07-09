@@ -11,6 +11,7 @@ interface PageHeaderProps {
     align?: "start" | "center";
 }
 
+/** Dark navy blueprint band used at the top of every inner page. */
 export function PageHeader({
     index,
     kicker,
@@ -23,12 +24,20 @@ export function PageHeader({
 
     return (
         <header
-            className="relative bg-paper border-b border-ink/10 overflow-hidden"
+            className="relative bg-navy text-white overflow-hidden"
             dir={direction}
         >
-            <div className="absolute inset-0 grid-overlay opacity-40 pointer-events-none" />
+            <div className="absolute inset-0 grid-overlay-dark opacity-70 pointer-events-none" />
+            {/* corner crosshairs */}
+            <span className="absolute top-24 start-6 md:start-10 lg:start-16 font-mono text-blue-bright/40 select-none hidden md:block">
+                +
+            </span>
+            <span className="absolute bottom-8 end-6 md:end-10 lg:end-16 font-mono text-blue-bright/40 select-none hidden md:block">
+                +
+            </span>
+
             <div
-                className={`relative mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pt-32 md:pt-44 pb-14 md:pb-20 ${
+                className={`relative mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pt-36 md:pt-48 pb-14 md:pb-20 ${
                     centered ? "text-center" : ""
                 }`}
             >
@@ -38,14 +47,18 @@ export function PageHeader({
                             centered ? "justify-center" : ""
                         }`}
                     >
-                        {index && <span className="index-num text-[12px]">{index}</span>}
-                        <span className="h-px w-8 bg-brass/50" />
-                        <span className="eyebrow">{t(kicker)}</span>
+                        {index && (
+                            <span className="font-mono text-[12px] text-blue-bright tabular-nums">
+                                {index}
+                            </span>
+                        )}
+                        <span className="h-px w-10 bg-blue-bright/50" />
+                        <span className="eyebrow-dark">{t(kicker)}</span>
                     </div>
                 </Reveal>
                 <Reveal width="100%" delay={0.1}>
                     <h1
-                        className={`mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-ink ${
+                        className={`mt-6 display text-4xl md:text-6xl lg:text-7xl leading-[0.95] text-white ${
                             centered ? "mx-auto" : ""
                         }`}
                     >
@@ -55,7 +68,7 @@ export function PageHeader({
                 {subtitle && (
                     <Reveal width="100%" delay={0.2}>
                         <p
-                            className={`mt-6 text-lg md:text-xl text-ink-soft leading-relaxed text-pretty ${
+                            className={`mt-6 text-lg md:text-xl text-white/60 leading-relaxed text-pretty ${
                                 centered ? "mx-auto max-w-2xl" : "max-w-2xl"
                             }`}
                         >
@@ -64,6 +77,9 @@ export function PageHeader({
                     </Reveal>
                 )}
             </div>
+
+            {/* Bottom keyline */}
+            <div className="relative h-1 bg-blue" />
         </header>
     );
 }

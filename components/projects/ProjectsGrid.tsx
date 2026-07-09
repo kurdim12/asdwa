@@ -109,7 +109,7 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                                     <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-brass mb-2">
                                         {project.categoryNames?.filter(Boolean).join(" · ")}
                                     </div>
-                                    <h3 className="font-display text-xl md:text-2xl text-ink group-hover:text-brass transition-colors leading-snug">
+                                    <h3 className="display text-xl md:text-2xl text-ink group-hover:text-brass transition-colors leading-snug">
                                         {t(project.title)}
                                     </h3>
                                     <p className="mt-2 text-sm text-ink-soft leading-relaxed line-clamp-2">

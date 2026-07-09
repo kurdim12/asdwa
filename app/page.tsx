@@ -17,7 +17,7 @@ export default function Home() {
   const projects = getFeaturedProjects();
 
   return (
-    <main className="bg-paper min-h-screen relative">
+    <main className="bg-base min-h-screen relative">
       <Navbar />
 
       <Hero />

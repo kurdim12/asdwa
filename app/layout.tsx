@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, IBM_Plex_Mono, Noto_Kufi_Arabic } from "next/font/google";
+import { Inter, Archivo, IBM_Plex_Mono, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./providers";
 
@@ -8,11 +8,11 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
-const fraunces = Fraunces({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-archivo",
   display: "swap",
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700", "800", "900"],
 });
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${fraunces.variable} ${plexMono.variable} ${notoKufi.variable} bg-paper text-ink font-sans antialiased selection:bg-brass selection:text-white overflow-x-hidden`}
+        className={`${inter.variable} ${archivo.variable} ${plexMono.variable} ${notoKufi.variable} bg-base text-steel font-sans antialiased selection:bg-blue selection:text-white overflow-x-hidden`}
       >
         <LanguageProvider>{children}</LanguageProvider>
       </body>

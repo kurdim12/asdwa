@@ -89,7 +89,7 @@ export default function ContactPage() {
                     <div className="lg:col-span-7">
                         <Reveal width="100%" delay={0.15}>
                             <div className="bg-surface border border-ink/10 p-8 md:p-12">
-                                <h2 className="font-display text-3xl text-ink mb-8">
+                                <h2 className="display text-3xl text-ink mb-8">
                                     {language === "ar" ? "أرسل رسالة" : "Send a message"}
                                 </h2>
                                 <form className="space-y-6" name="contact" method="POST" data-netlify="true">

@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --paper: #f3f1ec;
-  --ink: #18160f;
-  --brass: #9a7b2f;
-  --line: rgba(24, 22, 15, 0.12);
+  --base: #f4f6f8;
+  --steel: #152232;
+  --blue: #245a96;
+  --navy: #0b2138;
+  --line: rgba(21, 34, 50, 0.12);
 }
 
 html {
@@ -15,9 +16,8 @@ html {
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-feature-settings: "ss01", "cv01";
+  background: var(--base);
+  color: var(--steel);
 }
 
 /* ---------- Base type rhythm ---------- */
@@ -28,35 +28,77 @@ body {
   h4,
   h5,
   h6 {
-    font-family: var(--font-fraunces), Georgia, serif;
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-family: var(--font-archivo), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
   ::selection {
-    background: var(--brass);
+    background: var(--blue);
     color: #fff;
   }
 }
 
 @layer components {
-  /* Eyebrow / kicker label — the mono technical tag used across sections */
+  /* Technical eyebrow label used across sections */
   .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-label text-brass;
+    @apply font-mono text-[11px] uppercase tracking-label text-blue;
+  }
+  .eyebrow-dark {
+    @apply font-mono text-[11px] uppercase tracking-label text-blue-bright;
+  }
+
+  /* Display headline — engineered uppercase */
+  .display {
+    @apply font-display font-bold uppercase tracking-tight;
   }
 
   /* Full-bleed hairline divider */
   .hairline {
-    @apply border-t border-ink/10;
+    @apply border-t border-steel/10;
   }
 
-  /* Thin brass link with animated arrow spacing */
+  /* Thin technical link with animated arrow spacing */
   .link-arrow {
-    @apply inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-ink transition-all duration-300 hover:gap-3 hover:text-brass;
+    @apply inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-steel transition-all duration-300 hover:gap-3 hover:text-blue;
   }
 
-  /* Editorial index number (Swiss grid numerals) */
+  /* Index numeral (technical drawing style) */
   .index-num {
-    @apply font-mono text-brass tabular-nums;
+    @apply font-mono text-blue tabular-nums;
+  }
+
+  /* Technical corner ticks (blueprint registration marks) */
+  .tick-frame {
+    position: relative;
+  }
+  .tick-frame::before,
+  .tick-frame::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--blue);
+    border-style: solid;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .tick-frame::before {
+    top: 8px;
+    inset-inline-start: 8px;
+    border-width: 2px 0 0 2px;
+  }
+  .tick-frame::after {
+    bottom: 8px;
+    inset-inline-end: 8px;
+    border-width: 0 2px 2px 0;
+  }
+  .tick-frame:hover::before,
+  .tick-frame:hover::after,
+  .group:hover .tick-frame::before,
+  .group:hover .tick-frame::after {
+    opacity: 1;
   }
 }
 
@@ -76,23 +118,44 @@ body {
     scrollbar-width: none;
   }
 
-  /* Blueprint / architectural grid overlay */
+  /* Blueprint grid overlays */
   .grid-overlay {
     background-image:
-      linear-gradient(to right, rgba(24, 22, 15, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(24, 22, 15, 0.05) 1px, transparent 1px);
-    background-size: 80px 80px;
+      linear-gradient(to right, rgba(36, 90, 150, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(36, 90, 150, 0.07) 1px, transparent 1px);
+    background-size: 72px 72px;
   }
   .grid-overlay-dark {
     background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-    background-size: 80px 80px;
+      linear-gradient(to right, rgba(120, 170, 220, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(120, 170, 220, 0.08) 1px, transparent 1px);
+    background-size: 72px 72px;
   }
 
-  /* Outlined display text (used sparingly for large editorial numerals) */
-  .text-outline-ink {
-    -webkit-text-stroke: 1px rgba(24, 22, 15, 0.35);
+  /* Crosshair marker (+) used at grid intersections */
+  .crosshair {
+    position: relative;
+  }
+  .crosshair::before {
+    content: "+";
+    font-family: var(--font-plex-mono), monospace;
+    font-size: 14px;
+    line-height: 1;
+    color: rgba(36, 90, 150, 0.45);
+  }
+
+  /* Duotone navy photo treatment for dark sections */
+  .photo-navy {
+    filter: saturate(0.85) contrast(1.02);
+  }
+
+  /* Outlined display text for oversized numerals */
+  .text-outline {
+    -webkit-text-stroke: 1.5px rgba(36, 90, 150, 0.4);
+    color: transparent;
+  }
+  .text-outline-light {
+    -webkit-text-stroke: 1.5px rgba(220, 232, 245, 0.35);
     color: transparent;
   }
 }
@@ -109,8 +172,13 @@ body {
   letter-spacing: 0;
 }
 
+:root[lang="ar"] .display {
+  letter-spacing: 0;
+}
+
 :root[lang="ar"] .font-mono,
-:root[lang="ar"] .eyebrow {
+:root[lang="ar"] .eyebrow,
+:root[lang="ar"] .eyebrow-dark {
   font-family: var(--font-noto-kufi), sans-serif;
   letter-spacing: 0.08em;
 }

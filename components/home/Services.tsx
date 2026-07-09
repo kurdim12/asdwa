@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Section, SectionKicker } from "@/components/ui/primitives";
+import { Section } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
 import { ArrowUpRight } from "lucide-react";
@@ -18,21 +18,20 @@ export function Services() {
     const activeImg = `/${(mainServices[active] as any).gallery?.[0] || "images/logo.jpg"}`;
 
     return (
-        <Section className="bg-charcoal text-paper" >
-            <div dir={direction}>
+        <Section className="bg-navy text-white overflow-hidden">
+            <div className="absolute inset-0 grid-overlay-dark opacity-50 pointer-events-none" />
+            <div dir={direction} className="relative">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
                     <div>
                         <Reveal>
                             <div className="flex items-center gap-3">
-                                <span className="index-num text-[12px]">03</span>
-                                <span className="h-px w-8 bg-brass/60" />
-                                <span className="font-mono text-[11px] uppercase tracking-label text-brass-soft">
-                                    {t(label)}
-                                </span>
+                                <span className="font-mono text-[12px] text-blue-bright tabular-nums">03</span>
+                                <span className="h-px w-10 bg-blue-bright/50" />
+                                <span className="eyebrow-dark">{t(label)}</span>
                             </div>
                         </Reveal>
                         <Reveal delay={0.1}>
-                            <h2 className="mt-6 font-display text-4xl md:text-6xl leading-[1.0] text-paper text-balance max-w-2xl">
+                            <h2 className="mt-6 display text-3xl md:text-5xl leading-[1.0] text-white text-balance max-w-2xl">
                                 {t(title)}
                             </h2>
                         </Reveal>
@@ -40,7 +39,7 @@ export function Services() {
                     <Reveal delay={0.2}>
                         <Link
                             href="/services"
-                            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-paper border-b border-brass pb-1 hover:text-brass-soft transition-colors shrink-0"
+                            className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] text-white border-b-2 border-blue-bright pb-1 hover:text-blue-bright transition-colors shrink-0"
                         >
                             {language === "ar" ? "كل الخدمات" : "All services"}
                             <ArrowUpRight size={15} />
@@ -50,29 +49,29 @@ export function Services() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     {/* List */}
-                    <div className="lg:col-span-7 border-t border-white/10">
+                    <div className="lg:col-span-7 border-t border-white/15">
                         {mainServices.map((service, index) => (
                             <Link
                                 key={service.id}
                                 href={`/services/${service.id}`}
                                 onMouseEnter={() => setActive(index)}
-                                className="group block border-b border-white/10 py-7 md:py-8"
+                                className="group block border-b border-white/15 py-7 md:py-8"
                             >
                                 <div className="flex items-start gap-5 md:gap-8">
-                                    <span className="index-num text-sm pt-2">
+                                    <span className="font-mono text-sm text-blue-bright tabular-nums pt-2">
                                         {String(index + 1).padStart(2, "0")}
                                     </span>
                                     <div className="flex-1">
                                         <div className="flex items-center justify-between gap-4">
-                                            <h3 className="font-display text-2xl md:text-4xl text-paper group-hover:text-brass-soft transition-colors">
+                                            <h3 className="display text-xl md:text-3xl text-white group-hover:text-blue-bright transition-colors">
                                                 {t(service.title)}
                                             </h3>
                                             <ArrowUpRight
                                                 size={22}
-                                                className="shrink-0 text-paper/30 group-hover:text-brass-soft group-hover:-translate-y-1 group-hover:translate-x-1 transition-all"
+                                                className="shrink-0 text-white/30 group-hover:text-blue-bright group-hover:-translate-y-1 group-hover:translate-x-1 transition-all"
                                             />
                                         </div>
-                                        <p className="mt-3 text-paper/50 leading-relaxed max-w-xl line-clamp-2">
+                                        <p className="mt-3 text-white/50 leading-relaxed max-w-xl line-clamp-2">
                                             {t(service.description)}
                                         </p>
                                         {/* Mobile thumbnail */}
@@ -80,7 +79,7 @@ export function Services() {
                                             <img
                                                 src={`/${(service as any).gallery?.[0] || "images/logo.jpg"}`}
                                                 alt={t(service.title)}
-                                                className="h-full w-full object-cover"
+                                                className="h-full w-full object-cover photo-navy"
                                             />
                                         </div>
                                     </div>
@@ -91,7 +90,7 @@ export function Services() {
 
                     {/* Sticky preview (desktop) */}
                     <div className="hidden lg:block lg:col-span-5">
-                        <div className="sticky top-28 aspect-[4/5] w-full overflow-hidden bg-white/5">
+                        <div className="sticky top-32 aspect-[4/5] w-full overflow-hidden bg-white/5 border border-white/10">
                             <AnimatePresence mode="wait">
                                 <motion.img
                                     key={activeImg}
@@ -101,12 +100,11 @@ export function Services() {
                                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                                     src={activeImg}
                                     alt={t(mainServices[active].title)}
-                                    className="absolute inset-0 h-full w-full object-cover"
+                                    className="absolute inset-0 h-full w-full object-cover photo-navy"
                                 />
                             </AnimatePresence>
-                            <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
-                            <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-charcoal to-transparent">
-                                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass-soft">
+                            <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-navy to-transparent">
+                                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue-bright">
                                     {t(mainServices[active].title)}
                                 </span>
                             </div>

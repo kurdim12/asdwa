@@ -74,7 +74,7 @@ export default function AboutPage() {
                                     exit={{ opacity: 0, y: -8 }}
                                     className="space-y-8"
                                 >
-                                    <h2 className="font-display text-3xl md:text-4xl text-ink">
+                                    <h2 className="display text-3xl md:text-4xl text-ink">
                                         {t(aboutSection?.title)}
                                     </h2>
                                     <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line text-pretty">
@@ -100,7 +100,7 @@ export default function AboutPage() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -8 }}
                                 >
-                                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                                    <h2 className="display text-3xl md:text-4xl text-ink mb-6">
                                         {t(historySection?.title)}
                                     </h2>
                                     <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line text-pretty">
@@ -116,7 +116,7 @@ export default function AboutPage() {
                                         ].map((m, i) => (
                                             <div key={i} className="relative">
                                                 <span className="absolute -start-[41px] top-1.5 w-4 h-4 bg-brass rounded-full ring-4 ring-paper" />
-                                                <h3 className="font-display text-2xl text-ink mb-1">{m.year}</h3>
+                                                <h3 className="display text-2xl text-ink mb-1">{m.year}</h3>
                                                 <p className="text-ink-soft">{language === "ar" ? m.ar : m.en}</p>
                                             </div>
                                         ))}
@@ -131,14 +131,14 @@ export default function AboutPage() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -8 }}
                                 >
-                                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-8">
+                                    <h2 className="display text-3xl md:text-4xl text-ink mb-8">
                                         {t(chairmanSection?.title)}
                                     </h2>
-                                    <blockquote className="font-display text-2xl md:text-3xl leading-relaxed text-ink italic border-s-2 border-brass ps-6">
+                                    <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed text-navy border-s-4 border-blue ps-6">
                                         {chairmanSection?.content?.[language]}
                                     </blockquote>
                                     <div className="flex items-center gap-4 mt-10">
-                                        <div className="w-14 h-14 bg-charcoal text-paper flex items-center justify-center font-display text-xl">
+                                        <div className="w-14 h-14 bg-charcoal text-paper flex items-center justify-center display text-xl">
                                             MK
                                         </div>
                                         <div>
@@ -160,7 +160,7 @@ export default function AboutPage() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -8 }}
                                 >
-                                    <h2 className="font-display text-3xl md:text-4xl text-ink mb-6">
+                                    <h2 className="display text-3xl md:text-4xl text-ink mb-6">
                                         {t(membershipsSection?.title)}
                                     </h2>
                                     <p className="text-lg text-ink-soft leading-relaxed whitespace-pre-line mb-10 text-pretty">
@@ -186,7 +186,7 @@ export default function AboutPage() {
 
                                     {COMPANY_DATA.about.certifications.images.length > 0 && (
                                         <div className="mt-16 pt-12 border-t border-ink/10">
-                                            <h3 className="font-display text-2xl text-ink mb-6">
+                                            <h3 className="display text-2xl text-ink mb-6">
                                                 {t(COMPANY_DATA.about.certifications.title)}
                                             </h3>
                                             <LightboxGallery
@@ -205,7 +205,7 @@ export default function AboutPage() {
                         <Reveal width="100%">
                             <div className="relative aspect-[3/4] w-full overflow-hidden bg-concrete lg:sticky lg:top-28">
                                 <img
-                                    src="/images/projects/ed084d053511bc9a.jpg"
+                                    src="/images/projects/Quds Swiemeh Road/DSC00508.JPG"
                                     alt="Marwan Ahmad Alkurdi & Partners"
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />
@@ -214,7 +214,7 @@ export default function AboutPage() {
                                     <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass-soft">
                                         {language === "ar" ? "منذ ١٩٨١" : "Since 1981"}
                                     </div>
-                                    <div className="mt-1 font-display text-2xl text-paper">
+                                    <div className="mt-1 display text-2xl text-paper">
                                         {language === "ar" ? "خبرة تبني الثقة" : "Experience that builds trust"}
                                     </div>
                                 </div>
