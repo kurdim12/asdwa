@@ -36,16 +36,17 @@ export function Navbar() {
             >
                 <div className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16">
                     <div className="flex items-center justify-between h-16 md:h-20">
-                        {/* Wordmark */}
-                        <Link href="/" className="flex items-center gap-3 group shrink-0">
-                            <span className="flex flex-col leading-none">
-                                <span className="font-display text-xl md:text-2xl text-ink tracking-tight">
-                                    Alkurdi
-                                </span>
-                                <span className="font-mono text-[9px] uppercase tracking-[0.28em] text-ink-soft mt-1">
-                                    &amp; Partners · Est. 1981
-                                </span>
-                            </span>
+                        {/* Logo */}
+                        <Link
+                            href="/"
+                            className="flex items-center shrink-0"
+                            aria-label={t(COMPANY_DATA.company.name)}
+                        >
+                            <img
+                                src="/images/logo.png"
+                                alt={t(COMPANY_DATA.company.name)}
+                                className="h-11 md:h-14 w-auto object-contain"
+                            />
                         </Link>
 
                         {/* Desktop nav */}

@@ -27,6 +27,7 @@ const notoKufi = Noto_Kufi_Arabic({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mkurdi.com"),
   title: "Marwan Ahmad Alkurdi & Partners — Engineering Jordan's Infrastructure",
   description:
     "45 years of engineering excellence in Jordan — dams, bridges, highways, and specialized infrastructure by Marwan Ahmad Alkurdi & Partners.",

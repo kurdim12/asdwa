@@ -50,10 +50,12 @@ export function Footer() {
                 {/* Middle: link columns */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-16">
                     <div className="col-span-2 md:col-span-1">
-                        <span className="font-display text-2xl text-paper">Alkurdi</span>
-                        <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-paper/40">
-                            &amp; Partners Co. Ltd
-                        </p>
+                        {/* White knockout of the brand logo for the dark footer */}
+                        <img
+                            src="/images/logo.png"
+                            alt={t(company.name)}
+                            className="h-16 w-auto object-contain [filter:brightness(0)_invert(1)] opacity-90"
+                        />
                         <a
                             href={social.facebook}
                             target="_blank"

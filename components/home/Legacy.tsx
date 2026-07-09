@@ -25,7 +25,7 @@ export function Legacy() {
                     <Reveal width="100%">
                         <div className="relative aspect-[4/3] w-full overflow-hidden bg-concrete group">
                             <img
-                                src="/images/hero/2.jpg"
+                                src="/images/projects/c7d5b45beb78e164.jpg"
                                 alt={t(COMPANY_DATA.legacy.title)}
                                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                             />

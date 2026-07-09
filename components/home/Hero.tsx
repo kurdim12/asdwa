@@ -100,8 +100,8 @@ export function Hero() {
                         >
                             <motion.img
                                 style={{ y: imgY }}
-                                src="/images/hero/1.jpg"
-                                alt="Marwan Ahmad Alkurdi & Partners infrastructure project"
+                                src="/images/projects/92b53c01b20a3aaa.jpg"
+                                alt="Al Wehda Dam — Marwan Ahmad Alkurdi & Partners"
                                 className="absolute inset-0 h-[120%] w-full object-cover"
                             />
                             <div className="absolute inset-0 ring-1 ring-inset ring-ink/10" />

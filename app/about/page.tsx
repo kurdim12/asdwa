@@ -81,7 +81,10 @@ export default function AboutPage() {
                                         {aboutSection?.content?.[language]}
                                     </p>
                                     <a
-                                        href="#"
+                                        href="/documents/company_profile.pdf"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        download
                                         className="inline-flex items-center gap-2 bg-charcoal text-paper px-6 h-12 font-mono text-[12px] uppercase tracking-[0.16em] hover:bg-brass hover:text-white transition-colors"
                                     >
                                         <Award size={16} />
@@ -202,7 +205,7 @@ export default function AboutPage() {
                         <Reveal width="100%">
                             <div className="relative aspect-[3/4] w-full overflow-hidden bg-concrete lg:sticky lg:top-28">
                                 <img
-                                    src="/images/hero/3.jpg"
+                                    src="/images/projects/ed084d053511bc9a.jpg"
                                     alt="Marwan Ahmad Alkurdi & Partners"
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />

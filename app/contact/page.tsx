@@ -156,6 +156,26 @@ export default function ContactPage() {
                 </div>
             </section>
 
+            {/* Map */}
+            <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pb-20 md:pb-28" dir={direction}>
+                <div className="flex items-center gap-3 mb-6">
+                    <span className="h-px w-8 bg-brass/50" />
+                    <span className="eyebrow">
+                        {language === "ar" ? "موقعنا" : "Find us"}
+                    </span>
+                </div>
+                <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-concrete border border-ink/10">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Abdullah%20Ghosheh%20Street%2C%207th%20Circle%2C%20Amman%2C%20Jordan&z=15&output=embed"
+                        title={language === "ar" ? "خريطة الموقع" : "Office location map"}
+                        className="absolute inset-0 h-full w-full grayscale-[0.2]"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        style={{ border: 0 }}
+                    />
+                </div>
+            </section>
+
             <Footer />
         </main>
     );
