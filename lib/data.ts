@@ -60,7 +60,7 @@ export const COMPANY_DATA = {
                     {
                         "id": "ongoing",
                         "label": { "ar": "المشاريع قيد التنفيذ", "en": "Ongoing Projects" },
-                        "url": "/projects?category=ongoing"
+                        "url": "/projects?category=9"
                     },
                     {
                         "id": "completed",

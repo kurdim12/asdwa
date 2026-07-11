@@ -39,13 +39,20 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
     const [filter, setFilter] = useState("all");
 
     useEffect(() => {
-        if (categoryParam) setFilter(categoryParam);
-    }, [categoryParam]);
+        if (!categoryParam) return;
+        // Only accept known category ids; legacy values (e.g. "ongoing")
+        // map to their real category or fall back to showing everything.
+        const legacy: Record<string, string> = { ongoing: "9", completed: "all" };
+        const target = legacy[categoryParam] ?? categoryParam;
+        setFilter(categories.some((c) => c.id === target) ? target : "all");
+    }, [categoryParam, categories]);
 
-    const filtered =
+    const matches =
         filter === "all"
             ? allProjects
             : allProjects.filter((p) => p.categoryIds.includes(filter));
+    // Never present an empty page: if a filter has no projects, show all.
+    const filtered = matches.length > 0 ? matches : allProjects;
 
     const chipCls = (active: boolean) =>
         cn(
