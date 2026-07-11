@@ -6,6 +6,17 @@ interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata(props: PageProps) {
+    const params = await props.params;
+    const projectName = decodeURIComponent(params.slug);
+    const project = COMPANY_DATA.projects.all.find(p => p.title.en === projectName);
+    if (!project) return { title: "Project not found" };
+    return {
+        title: project.title.en,
+        description: (project.description.en || "").replace(/\\r\\n|\s+/g, " ").slice(0, 155),
+    };
+}
+
 export async function generateStaticParams() {
     return COMPANY_DATA.projects.all.map((project) => ({
         slug: project.title.en, // Assuming slug is the English title
@@ -54,11 +65,22 @@ export default async function ProjectDetail(props: PageProps) {
         images.push('/images/logo.jpg');
     }
 
+    // Related projects: same primary category, excluding this one
+    const related = COMPANY_DATA.projects.all
+        .filter(p => p.title.en !== project.title.en && p.categories.some(c => project.categories.includes(c)))
+        .slice(0, 3)
+        .map(p => ({
+            name: p.title.en,
+            title: p.title,
+            thumbnail: p.images && p.images.length > 0 ? `/images/projects/${p.images[0]}` : "/images/logo.jpg",
+        }));
+
     return (
         <ProjectDetailView
             project={project}
             categoryName={categoryObj ? categoryObj.name : { en: "Portfolio", ar: "معرض الأعمال" }}
             images={images}
+            related={related}
         />
     );
 }

@@ -7,6 +7,13 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
+export async function generateMetadata(props: PageProps) {
+    const params = await props.params;
+    const service = COMPANY_DATA.services.mainServices.find(s => s.id === params.id);
+    if (!service) return { title: "Service not found" };
+    return { title: service.title.en, description: service.description.en.slice(0, 155) };
+}
+
 export async function generateStaticParams() {
     return COMPANY_DATA.services.mainServices.map((service) => ({
         id: service.id,

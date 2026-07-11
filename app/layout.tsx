@@ -27,7 +27,10 @@ const notoKufi = Noto_Kufi_Arabic({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mkurdi.com"),
-  title: "Marwan Ahmad Alkurdi & Partners — Engineering Jordan's Infrastructure",
+  title: {
+    default: "Marwan Ahmad Alkurdi & Partners — Engineering Jordan's Infrastructure",
+    template: "%s — Marwan Ahmad Alkurdi & Partners",
+  },
   description:
     "45 years of engineering excellence in Jordan — dams, bridges, highways, and specialized infrastructure by Marwan Ahmad Alkurdi & Partners.",
   openGraph: {
@@ -36,16 +39,35 @@ export const metadata: Metadata = {
       "45 years of engineering excellence in Jordan — dams, bridges, highways, and specialized infrastructure.",
     url: "https://mkurdi.com",
     siteName: "Marwan Ahmad Alkurdi & Partners",
-    images: [
-      {
-        url: "/images/logo.png",
-        width: 800,
-        height: 600,
-      },
-    ],
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Marwan Ahmad Alkurdi & Partners",
+    description: "Engineering Jordan's infrastructure since 1981.",
+    images: ["/og.png"],
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Marwan Ahmad Alkurdi & Partners Co. Ltd",
+  alternateName: "شركة مروان أحمد الكردي وشركاؤه المحدودة",
+  url: "https://mkurdi.com",
+  logo: "https://mkurdi.com/images/logo.png",
+  foundingDate: "1981",
+  email: "info@mkurdi.com",
+  telephone: "+96265819489",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Abdullah Ghosheh St., 7th Circle, Building No. 17",
+    addressLocality: "Amman",
+    addressCountry: "JO",
+  },
+  sameAs: ["https://www.facebook.com/mkurdiCom"],
 };
 
 export default function RootLayout({
@@ -58,6 +80,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${displayFont.variable} ${plexMono.variable} ${notoKufi.variable} bg-base text-steel font-sans antialiased selection:bg-blue selection:text-white overflow-x-hidden`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>

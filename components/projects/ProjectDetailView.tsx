@@ -11,13 +11,20 @@ import { clean } from "@/lib/utils";
 import { LightboxGallery } from "@/components/ui/LightboxGallery";
 import { optimizedSrc } from "@/components/ui/Pic";
 
+interface RelatedProject {
+    name: string;
+    title: { en: string; ar: string };
+    thumbnail: string;
+}
+
 interface ProjectDetailViewProps {
     project: typeof COMPANY_DATA.projects.all[0];
     categoryName: any;
     images: string[];
+    related?: RelatedProject[];
 }
 
-export function ProjectDetailView({ project, categoryName, images }: ProjectDetailViewProps) {
+export function ProjectDetailView({ project, categoryName, images, related }: ProjectDetailViewProps) {
     const { t, language, direction } = useLanguage();
     const heroImage = images[0];
 
@@ -30,6 +37,7 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
         about: { en: "About the project", ar: "عن المشروع" },
         gallery: { en: "Project gallery", ar: "معرض الصور" },
         noPhotos: { en: "No photos available for this project.", ar: "لا توجد صور متاحة لهذا المشروع." },
+        related: { en: "Related projects", ar: "مشاريع ذات صلة" },
     };
 
     const milestone = {
@@ -128,6 +136,34 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
                     </div>
                 </div>
             </section>
+
+            {related && related.length > 0 && (
+                <section className="mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pb-20 md:pb-28">
+                    <h2 className="display text-2xl md:text-3xl text-steel mb-8">{t(labels.related)}</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        {related.map((r) => (
+                            <Link
+                                key={r.name}
+                                href={`/projects/${encodeURIComponent(r.name)}`}
+                                className="group block"
+                            >
+                                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-panel">
+                                    <img
+                                        src={optimizedSrc(r.thumbnail, 640)}
+                                        alt={t(r.title)}
+                                        loading="lazy"
+                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
+                                    />
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
+                                </div>
+                                <h3 className="mt-4 text-[17px] font-semibold text-steel group-hover:text-blue transition-colors leading-snug">
+                                    {t(r.title)}
+                                </h3>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             <Footer />
         </main>

@@ -20,6 +20,12 @@ body {
   color: var(--steel);
 }
 
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* ---------- Base type rhythm ---------- */
 @layer base {
   h1,
