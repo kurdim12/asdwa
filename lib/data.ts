@@ -21,6 +21,8 @@ export const COMPANY_DATA = {
     "contact": {
         "phone": "(06) 581 9489",
         "fax": "0096265819488",
+        "whatsapp": "", // intl format e.g. 9627XXXXXXXX — button appears once set
+
         "email": "info@mkurdi.com",
         "hours": {
             "ar": "السبت – الاثنين: 7:30 صباحاً – 4:30 مساءً\nالثلاثاء – الخميس: 7:30 صباحاً – 4:30 مساءً\nالجمعة: مغلق",

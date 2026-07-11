@@ -8,6 +8,7 @@ import { Calendar, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/app/providers";
 import { COMPANY_DATA } from "@/lib/data";
+import { Pic } from "@/components/ui/Pic";
 
 export default function NewsPage() {
     const { language, t, direction } = useLanguage();
@@ -37,10 +38,11 @@ export default function NewsPage() {
                             className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pb-16 mb-16 border-b border-ink/10"
                         >
                             <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden rounded-2xl md:rounded-[28px] bg-panel">
-                                <img
+                                <Pic
                                     src={`/${featured.image}`}
                                     alt={featured.title[language]}
-                                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                                    sizes="(max-width: 1024px) 100vw, 60vw"
+                                    className="transition-transform duration-[1.2s] ease-out group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
                                 <div className="absolute top-4 start-4 rounded-full bg-white/90 backdrop-blur text-steel text-[12px] font-medium px-3.5 py-1.5 shadow-card">
@@ -73,10 +75,11 @@ export default function NewsPage() {
                         <Reveal key={item.id} width="100%" delay={(index % 3) * 0.08}>
                             <Link href={`/news/${item.id}`} className="group block h-full">
                                 <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-panel">
-                                    <img
+                                    <Pic
                                         src={`/${item.image}`}
                                         alt={item.title[language]}
-                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                        className="transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
                                     <div className="absolute top-3 start-3 rounded-full bg-white/90 backdrop-blur text-steel text-[11.5px] font-medium px-3 py-1 shadow-card">

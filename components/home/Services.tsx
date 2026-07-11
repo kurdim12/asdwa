@@ -6,6 +6,7 @@ import { COMPANY_DATA } from "@/lib/data";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/app/providers";
+import { Pic } from "@/components/ui/Pic";
 
 export function Services() {
     const { mainServices } = COMPANY_DATA.services;
@@ -44,10 +45,11 @@ export function Services() {
                                     className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card hover:shadow-card-hover transition-shadow"
                                 >
                                     <div className="relative aspect-[4/3] overflow-hidden">
-                                        <img
+                                        <Pic
                                             src={thumb}
                                             alt={t(service.title)}
-                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                            className="transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
                                         />
                                     </div>
                                     <div className="flex flex-1 flex-col p-5 md:p-6">

@@ -10,6 +10,7 @@ import { useLanguage } from "@/app/providers";
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, ArrowRight } from "lucide-react";
 import { LightboxGallery } from "@/components/ui/LightboxGallery";
+import { Pic } from "@/components/ui/Pic";
 
 export default function AboutPage() {
     const [activeTab, setActiveTab] = useState("overview");
@@ -204,10 +205,10 @@ export default function AboutPage() {
                     <div className="lg:col-span-5">
                         <Reveal width="100%">
                             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl md:rounded-[28px] bg-panel lg:sticky lg:top-28">
-                                <img
+                                <Pic
                                     src="/images/projects/Quds Swiemeh Road/DSC00508.JPG"
                                     alt="Marwan Ahmad Alkurdi & Partners"
-                                    className="absolute inset-0 h-full w-full object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 40vw"
                                 />
                                 <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl md:rounded-[28px]" />
                                 <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-charcoal/80 to-transparent">

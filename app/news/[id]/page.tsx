@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useLanguage } from "@/app/providers";
 import { COMPANY_DATA } from "@/lib/data";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { optimizedSrc } from "@/components/ui/Pic";
 
 export default function ParamWrapper({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
@@ -49,7 +50,7 @@ function NewsArticlePage({ id }: { id: string }) {
             <div className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden bg-concrete">
                 <motion.img
                     style={{ y }}
-                    src={image}
+                    src={optimizedSrc(image, 1920)}
                     alt={title}
                     className="absolute inset-0 h-[115%] w-full object-cover"
                 />

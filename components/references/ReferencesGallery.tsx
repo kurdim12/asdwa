@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ZoomIn, ChevronLeft, ChevronRight, Award, FileCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/app/providers";
+import { optimizedSrc } from "@/components/ui/Pic";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -90,8 +91,9 @@ export function ReferencesGallery({ categories }: { categories: Category[] }) {
                                 <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-white border border-steel/10 shadow-card group-hover:shadow-card-hover transition-shadow">
                                     <div className="absolute inset-3 overflow-hidden rounded-xl bg-panel">
                                         <img
-                                            src={cert}
+                                            src={optimizedSrc(cert, 640)}
                                             alt={title}
+                                            loading="lazy"
                                             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
                                     </div>

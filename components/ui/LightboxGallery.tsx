@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { useLanguage } from "@/app/providers";
+import { optimizedSrc } from "@/components/ui/Pic";
 
 interface GalleryImage {
     src: string;
@@ -57,8 +58,9 @@ export function LightboxGallery({ images, title, defaultOpen = false }: Lightbox
                         className="relative aspect-[4/3] overflow-hidden rounded-xl bg-panel group"
                     >
                         <img
-                            src={`/${img.src}`}
+                            src={optimizedSrc(`/${img.src}`, 640)}
                             alt={`${title} ${i + 1}`}
+                            loading="lazy"
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-xl" />
@@ -103,7 +105,7 @@ export function LightboxGallery({ images, title, defaultOpen = false }: Lightbox
                             onClick={(e) => e.stopPropagation()}
                         >
                             <img
-                                src={`/${normalized[selected].src}`}
+                                src={optimizedSrc(`/${normalized[selected].src}`, 1920)}
                                 alt={`${title} ${selected + 1}`}
                                 className="max-w-full max-h-[78vh] object-contain shadow-2xl"
                             />

@@ -10,6 +10,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { COMPANY_DATA } from "@/lib/data";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/app/providers";
+import { Pic } from "@/components/ui/Pic";
 
 function ServicesContent() {
     const { mainServices } = COMPANY_DATA.services;
@@ -43,10 +44,10 @@ function ServicesContent() {
                                 className={`group block ${isTarget ? "ring-1 ring-brass" : ""}`}
                             >
                                 <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-panel">
-                                    <img
+                                    <Pic
                                         src={thumb}
                                         alt={t(service.title)}
-                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
+                                        className="transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
                                     <div className="absolute top-4 start-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[12.5px] font-medium text-steel shadow-card tabular-nums">

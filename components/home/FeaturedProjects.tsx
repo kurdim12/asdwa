@@ -9,6 +9,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { COMPANY_DATA } from "@/lib/data";
 import { clean } from "@/lib/utils";
+import { optimizedSrc } from "@/components/ui/Pic";
 
 interface Project {
     id: string;
@@ -67,7 +68,7 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    src={image}
+                                    src={optimizedSrc(image, 1920)}
                                     alt={t(current.title)}
                                     className="absolute inset-0 h-full w-full object-cover"
                                 />

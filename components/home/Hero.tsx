@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLanguage } from "@/app/providers";
 import { COMPANY_DATA } from "@/lib/data";
 import { ArrowUpRight } from "lucide-react";
+import { Pic } from "@/components/ui/Pic";
 
 export function Hero() {
     const { language, t, direction } = useLanguage();
@@ -83,10 +84,11 @@ export function Hero() {
                     className="relative mt-14 md:mt-16"
                 >
                     <div className="relative aspect-[16/9] md:aspect-[21/10] w-full overflow-hidden rounded-2xl md:rounded-[28px] bg-panel">
-                        <img
+                        <Pic
                             src="/images/projects/92b53c01b20a3aaa.jpg"
                             alt="Al Wehda Dam — Marwan Ahmad Alkurdi & Partners"
-                            className="absolute inset-0 h-full w-full object-cover"
+                            sizes="100vw"
+                            priority
                         />
                         <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl md:rounded-[28px]" />
 

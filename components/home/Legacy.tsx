@@ -6,6 +6,7 @@ import { COMPANY_DATA } from "@/lib/data";
 import { useLanguage } from "@/app/providers";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { Pic } from "@/components/ui/Pic";
 
 const FACTS = [
     { label: { en: "Founded", ar: "التأسيس" }, value: { en: "1981 · Zarqa", ar: "١٩٨١ · الزرقاء" } },
@@ -24,10 +25,10 @@ export function Legacy() {
                 <div className="lg:col-span-6">
                     <Reveal width="100%">
                         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:rounded-[28px] bg-panel group">
-                            <img
+                            <Pic
                                 src="/images/projects/c7d5b45beb78e164.jpg"
                                 alt={t(COMPANY_DATA.legacy.title)}
-                                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+                                className="transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
                             />
                             <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl md:rounded-[28px]" />
                             {/* Anniversary chip */}

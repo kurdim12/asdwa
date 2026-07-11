@@ -9,6 +9,7 @@ import { ArrowLeft, MapPin, CheckCircle2, Camera } from "lucide-react";
 import { useLanguage } from "@/app/providers";
 import { clean } from "@/lib/utils";
 import { LightboxGallery } from "@/components/ui/LightboxGallery";
+import { optimizedSrc } from "@/components/ui/Pic";
 
 interface ProjectDetailViewProps {
     project: typeof COMPANY_DATA.projects.all[0];
@@ -50,7 +51,7 @@ export function ProjectDetailView({ project, categoryName, images }: ProjectDeta
             <div className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-concrete">
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url('${heroImage}')` }}
+                    style={{ backgroundImage: `url('${optimizedSrc(heroImage, 1920)}')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-charcoal/10" />
 

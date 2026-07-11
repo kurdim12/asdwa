@@ -8,6 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import { COMPANY_DATA } from "@/lib/data";
 import { useLanguage } from "@/app/providers";
 import { cn, clean } from "@/lib/utils";
+import { Pic } from "@/components/ui/Pic";
 
 interface Project {
     name: string;
@@ -98,10 +99,11 @@ export function ProjectsGrid({ categories, allProjects }: ProjectsGridProps) {
                             <Link href={`/projects/${encodeURIComponent(project.name)}`} className="group block">
                                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-panel">
                                     {project.thumbnail && (
-                                        <img
+                                        <Pic
                                             src={project.thumbnail}
                                             alt={t(project.title)}
-                                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
+                                            sizes="(max-width: 768px) 100vw, 33vw"
+                                            className="transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
                                         />
                                     )}
                                     <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
