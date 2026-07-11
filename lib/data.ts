@@ -146,6 +146,7 @@ export const COMPANY_DATA = {
         "mainServices": [
             {
                 "id": "civil_works",
+                "illustration": "/illustrations/dam.svg",
                 "title": { "ar": "الأعمال المدنية", "en": "Civil Works" },
                 "pageId": 101,
                 "icon": "images/s1.png",
@@ -168,6 +169,7 @@ export const COMPANY_DATA = {
             },
             {
                 "id": "specialized",
+                "illustration": "/illustrations/piling-rig.svg",
                 "title": { "ar": "الحقن الهندسي الدولي", "en": "International Injection Co." },
                 "pageId": 15,
                 "icon": "images/s1.png",
@@ -193,6 +195,7 @@ export const COMPANY_DATA = {
             },
             {
                 "id": "equipment",
+                "illustration": "/illustrations/crane.svg",
                 "title": { "ar": "المعدات الخاصة", "en": "Special Equipment" },
                 "pageId": 17,
                 "icon": "images/s2.png",
@@ -216,6 +219,7 @@ export const COMPANY_DATA = {
             },
             {
                 "id": "water_wells",
+                "illustration": "/illustrations/water-well.svg",
                 "title": { "ar": "آبار المياه العميقة", "en": "Deep Water Wells" },
                 "pageId": 18,
                 "icon": "images/s1.png",

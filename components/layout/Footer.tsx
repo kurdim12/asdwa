@@ -14,7 +14,14 @@ export function Footer() {
         COMPANY_DATA.navigation.mainMenu.find((i) => i.id === id);
 
     return (
-        <footer className="relative bg-navy-deep text-white" dir={direction}>
+        <footer className="relative bg-navy-deep text-white overflow-hidden" dir={direction}>
+            {/* Blueprint bridge backdrop */}
+            <img
+                src="/illustrations/blueprint-bridge.svg"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none select-none absolute top-0 end-0 h-[420px] w-auto max-w-none opacity-50"
+            />
             <div className="relative mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pt-20 md:pt-24 pb-10">
                 {/* Top: CTA */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-16 border-b border-white/10">

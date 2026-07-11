@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" stroke="#2160A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="18" y1="158" x2="224" y2="158"/>
+  <!-- crawler -->
+  <rect x="118" y="136" width="92" height="22" rx="11"/>
+  <circle cx="132" cy="147" r="5"/><circle cx="150" cy="147" r="5"/>
+  <circle cx="168" cy="147" r="5"/><circle cx="186" cy="147" r="5"/><circle cx="200" cy="147" r="5"/>
+  <!-- body + cab -->
+  <rect x="122" y="100" width="84" height="32" rx="2"/>
+  <rect x="127" y="104" width="26" height="24" rx="2"/>
+  <line x1="133" y1="104" x2="133" y2="118"/>
+  <line x1="160" y1="108" x2="198" y2="108"/><line x1="160" y1="115" x2="198" y2="115"/>
+  <line x1="160" y1="122" x2="198" y2="122"/>
+  <path d="M192 100 v-12 q0 -5 5 -5 q5 0 5 5 v4"/>
+  <!-- mast -->
+  <line x1="96" y1="22" x2="96" y2="128"/>
+  <line x1="110" y1="22" x2="110" y2="112"/>
+  <path d="M96 34 l14 12 l-14 12 l14 12 l-14 12 l14 12"/>
+  <rect x="88" y="12" width="30" height="14" rx="2"/>
+  <circle cx="96" cy="19" r="2.5"/><circle cx="110" cy="19" r="2.5"/>
+  <line x1="110" y1="48" x2="146" y2="102"/>
+  <!-- rotary head + auger -->
+  <line x1="78" y1="26" x2="78" y2="52"/>
+  <rect x="66" y="52" width="24" height="30" rx="2"/>
+  <line x1="78" y1="82" x2="78" y2="126"/>
+  <path d="M66 126 h24"/>
+  <path d="M66 130 q12 8 24 0 M66 138 q12 8 24 0 M70 146 q8 6 16 0"/>
+  <path d="M78 150 l0 6"/>
+  <path d="M78 26 q0 -8 10 -10 l8 -2"/>
+</svg>

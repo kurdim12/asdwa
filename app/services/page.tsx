@@ -33,6 +33,7 @@ function ServicesContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
                 {mainServices.map((service, index) => {
                     const gallery = (service as any).gallery as string[] | undefined;
+                    const illustration = (service as any).illustration as string | undefined;
                     const thumb = gallery && gallery.length > 0 ? `/${gallery[0]}` : "/images/logo.jpg";
                     const isTarget = service.id === targetGalleryId;
 
@@ -49,6 +50,11 @@ function ServicesContent() {
                                         alt={t(service.title)}
                                         className="transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                                     />
+                                    {illustration && (
+                                        <span className="absolute bottom-4 start-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/95 backdrop-blur p-2.5 shadow-card">
+                                            <img src={illustration} alt="" className="h-full w-full object-contain" />
+                                        </span>
+                                    )}
                                     <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
                                     <div className="absolute top-4 start-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[12.5px] font-medium text-steel shadow-card tabular-nums">
                                         {String(index + 1).padStart(2, "0")}

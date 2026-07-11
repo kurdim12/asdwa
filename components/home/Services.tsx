@@ -37,6 +37,7 @@ export function Services() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                     {mainServices.map((service, index) => {
+                        const illustration = (service as any).illustration as string | undefined;
                         const thumb = `/${(service as any).gallery?.[0] || "images/logo.jpg"}`;
                         return (
                             <Reveal key={service.id} delay={0.1 + index * 0.07} width="100%">
@@ -45,12 +46,22 @@ export function Services() {
                                     className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card hover:shadow-card-hover transition-shadow"
                                 >
                                     <div className="relative aspect-[4/3] overflow-hidden">
-                                        <Pic
-                                            src={thumb}
-                                            alt={t(service.title)}
-                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                                            className="transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
-                                        />
+                                        {illustration ? (
+                                            <div className="absolute inset-0 bg-sky flex items-center justify-center p-6 transition-transform duration-[1.1s] ease-out group-hover:scale-[1.05]">
+                                                <img
+                                                    src={illustration}
+                                                    alt={t(service.title)}
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </div>
+                                        ) : (
+                                            <Pic
+                                                src={thumb}
+                                                alt={t(service.title)}
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                                className="transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
+                                            />
+                                        )}
                                     </div>
                                     <div className="flex flex-1 flex-col p-5 md:p-6">
                                         <h3 className="text-[17px] font-semibold text-steel group-hover:text-blue transition-colors">
