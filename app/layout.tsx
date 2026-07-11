@@ -30,9 +30,6 @@ export const metadata: Metadata = {
   title: "Marwan Ahmad Alkurdi & Partners — Engineering Jordan's Infrastructure",
   description:
     "45 years of engineering excellence in Jordan — dams, bridges, highways, and specialized infrastructure by Marwan Ahmad Alkurdi & Partners.",
-  icons: {
-    icon: "/favicon.ico",
-  },
   openGraph: {
     title: "Marwan Ahmad Alkurdi & Partners",
     description:
