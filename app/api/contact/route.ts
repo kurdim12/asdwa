@@ -23,6 +23,7 @@ export async function POST(request: Request) {
     const name = clean(body.name);
     const email = clean(body.email);
     const subject = clean(body.subject);
+    const inquiry = clean(body.inquiry, 40);
     const message = clean(body.message, MAX_LEN);
 
     if (!name || !email || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
             to: [to],
             reply_to: email,
             subject: `[mkurdi.com] ${subject || "New inquiry"} — ${name}`,
-            text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
+            text: `Name: ${name}\nEmail: ${email}\nInquiry type: ${inquiry || "general"}\nSubject: ${subject}\n\n${message}`,
         }),
     });
 

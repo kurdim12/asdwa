@@ -8,6 +8,13 @@ export const PROJECTS = [
         "categories": [
             "2"
         ],
+        "metrics": [
+            { "value": "96 m", "label": { "en": "Dam height", "ar": "ارتفاع السد" } },
+            { "value": "485 m", "label": { "en": "Crest width", "ar": "عرض السد" } },
+            { "value": "110M m³", "label": { "en": "Storage capacity", "ar": "سعة التخزين" } },
+            { "value": "1.4M m³", "label": { "en": "Roller-compacted concrete", "ar": "الخرسانة المدحولة" } },
+            { "value": "2.5M m³", "label": { "en": "Excavation", "ar": "الحفريات" } }
+        ],
         "description": {
             "ar": "تم إنشاء السد شمال الأردن على الحدود السورية بسعة تخزينية تبلغ 110 ملايين متر مكعب، باستخدام تقنية الخرسانة المدكوكة (RCC). يهدف المشروع إلى تزويد القطاع الزراعي بـ30 مليون م³ من المياه، وتزويد مدينة عمّان بـ50 مليون م³ من مياه الشرب، إضافة إلى إنتاج طاقة كهربائية بقدرة 18,800 ميغاواط/ساعة في المرحلة الثانية. \\r\\n\\r\\n يبلغ ارتفاع السد 96 متراً وبطول أقصاه 485 طولي.",
             "en": "This Dam was constructed in North of Jordan on the border with Syria (Irbid City) having a storage capacity of 110 million cubic meters of water. The Dam construction consisted of using Roller Compacted Concrete (RCC) technology.\\r\\n\\r\\nThe project was aiming to provide 30 Million cubic meters of water for agricultural purposes in addition to the supply of Amman City with 50 Million cubic meters of drinking water as well as energy supply of 18800 Mega Watt / Hr for the second stage.\\r\\n\\r\\nThe constructed Dam height is 96m and width 485 m, the excavation quantity was approx. 2.5 Million cubic meters and the RCC quantity was 1.4 million cubic meters."
@@ -290,6 +297,13 @@ export const PROJECTS = [
         "categories": [
             "1"
         ],
+        "year": "2009",
+        "metrics": [
+            { "value": "4", "label": { "en": "Levels", "ar": "طوابق" } },
+            { "value": "11", "label": { "en": "Entrances", "ar": "مداخل" } },
+            { "value": "12", "label": { "en": "Exits", "ar": "مخارج" } },
+            { "value": "2009", "label": { "en": "Completed", "ar": "سنة الإنجاز" } }
+        ],
         "description": {
             "ar": "يقع جسر الجمرات في منطقة منى بمكة المكرمة وهو جسر مخصص لسير الحجاج لرمي الجمرات أثناء موسم الحج.\\r\\nوتم الانتهاء من إنشاء هذا الجسر المكون من أربعة طوابق في عام 2009.\\r\\nتم تصميم المشروع من قبل شركة دار الهندسة وتنفيذه من قبل المقاول الرئيسي مجموعة بن لادن السعودية، بحيث كانت شركتنا مقاول فرعي لمجموعة بن لادن السعودية.\\r\\nويوفر المشروع 11 مدخلاً  للجمرات و 12 مخرجاً في الاتجاهات الأربعة، إضافة إلى تزويده بمهابط طائرات عامودية لحالات الطوارئ.\\r\\nويحتوي المشروع على أنفاق لحركة المركبات تحت الأرض لإعطاء مساحة أكبر للمشاة في منطقة الجسر ومخارج للإخلاء عن طريق أبراج للطوارئ مرتبطة بالدور الأرضي والأنفاق ومهابط للطائرات.\\r\\nيعتبر جسر الجمرات اكبر جسر مشاه في العالم.",
             "en": "Jamarat Bridge is located in Mena in Holy Mecca and is designed to the pedestrian pilgrims to throw stones during the pilgrimage season. \\r\\n\\r\\nThe project was completed with four floors in 2009.\\r\\n\\r\\nThe project was designed by Dar Al-Handasah and implemented by the main contractor Saudi BinLadin Group. \\r\\n\\r\\nBridges provides 11 entrances and 12 exits in four directions, in addition to providing helipads’ for emergency cases. \\r\\n\\r\\nThe project also contains vehicular underpasses to give more space for pedestrians in the area of the bridge and exits for evacuation by emergency helipads linked to ground floor and tunnels.\\r\\n\\r\\nJamarat Bridge is considered the largest pedestrian bridge in the world."
@@ -368,6 +382,10 @@ export const PROJECTS = [
         },
         "categories": [
             "1"
+        ],
+        "metrics": [
+            { "value": "120 m", "label": { "en": "Total length", "ar": "الطول الكلي" } },
+            { "value": "52 m", "label": { "en": "Maximum span", "ar": "أطول باع" } }
         ],
         "description": {
             "ar": "يقع جسر الملك حسين في منطقة غور الأردن على نهر الأردن ويربط ما بين ضفتي النهر.\\r\\n\\r\\nتميز تصميم الجسر المعلق   (Extra Dosed)بأنه من كمرات صندوقية سابقة الإجهاد وبطول كلي 120 متر ويبلغ بحر الجائز الوسطي 52 متراً.\\r\\n\\r\\nللتغلب على صعوبات التربة تم اختيار الأساسات العميقة /الأوتاد الخرسانية بعمق 32 م وقطر 1.5 متر كما تم استخدام العديد من تكنولوجيا البناء المتطور لإنشاء هذا المعلم الحضاري من تفريغ المياه باستخدام آبار مؤقتة إلى إنشاء جسور فولاذية محملة على مقاطع فولاذية مغروزة في باطن الأرض من أجل عمل حماية لسقايل الجسر المؤقتة من الفيضانات أثناء التنفيذ.",
@@ -706,6 +724,11 @@ export const PROJECTS = [
         },
         "categories": [
             "1"
+        ],
+        "metrics": [
+            { "value": "240 m", "label": { "en": "Total length", "ar": "الطول الكلي" } },
+            { "value": "8", "label": { "en": "Continuous spans", "ar": "باعات متصلة" } },
+            { "value": "30 m", "label": { "en": "Span length", "ar": "طول الباع" } }
         ],
         "description": {
             "ar": "يقع الجسر في جنوب المملكة الاردنية الهاشمية على طريق العقبة-نزول المزفر كما ان الجسر قائم على التقاء وادي اليتم ووادي عمران.\\r\\nيتكون الجسر من 8 بحور متصلة طول كل منها 30 م وبطول كلي 240 متر ومقطعT متغير الارتفاع لجوائز الجسر.\\r\\n\\r\\nاشتمل العمل على توسعة الجسر من خلال زيادة عرض البلاطة لتصبح 2x10.6 م بدلاً من 2x6.4 م وذلك بإضافة اربع جوائز اثنان في كل اتجاه ومن كافة جوانب الجسر",

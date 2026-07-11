@@ -2,6 +2,9 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { Accreditations } from "@/components/home/Accreditations";
+import { Record } from "@/components/home/Record";
+import { Numbers } from "@/components/home/Numbers";
+import { LaunchingGirder } from "@/components/home/LaunchingGirder";
 import { TheCore } from "@/components/home/TheCore";
 import { Legacy } from "@/components/home/Legacy";
 import { Services } from "@/components/home/Services";
@@ -24,8 +27,11 @@ export default function Home() {
       <Hero />
       <Accreditations />
       <TheCore />
+      <Record />
       <Legacy />
+      <Numbers />
       <Services />
+      <LaunchingGirder />
       <FeaturedProjects projects={projects} />
 
       <Footer />

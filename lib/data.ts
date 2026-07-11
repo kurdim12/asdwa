@@ -252,17 +252,17 @@ export const COMPANY_DATA = {
         ]
     },
     "stats": [
-        { "label": { "en": "Years Experience", "ar": "سنوات الخبرة" }, "value": "45+", "icon": "Trophy" },
-        { "label": { "en": "Major Projects", "ar": "المشاريع الكبرى" }, "value": "50+", "icon": "Building" },
-        { "label": { "en": "Expert Engineers", "ar": "مهندسون خبراء" }, "value": "120+", "icon": "Users" },
-        { "label": { "en": "ISO Certified", "ar": "معتمدون بشهادة ISO" }, "value": "9001", "icon": "ShieldCheck" }
+        { "label": { "en": "Years in operation", "ar": "عاماً من العمل" }, "value": "45", "icon": "Trophy" },
+        { "label": { "en": "Documented projects", "ar": "مشروعاً موثقاً" }, "value": "27", "icon": "Building" },
+        { "label": { "en": "Engineering sectors", "ar": "قطاعات هندسية" }, "value": "8", "icon": "Users" },
+        { "label": { "en": "ISO certified", "ar": "معتمدون بشهادة ISO" }, "value": "9001", "icon": "ShieldCheck" }
     ],
     "legacy": {
         "title": { "en": "Engineering the Future of Jordan", "ar": "هندسة مستقبل الأردن" },
         "subtitle": { "en": "Our Legacy", "ar": "إرثنا" },
         "description": {
-            "en": "Marwan Ahmad Alkurdi & Partners Co. Ltd has been a cornerstone of Jordan's infrastructure development for over four decades. From the massive Dissi Pipeline to critical Dam Construction, we deliver engineering solutions that stand the test of time. Authorized by the highest standards and Royal Patronage.",
-            "ar": "تُعد شركة مروان أحمد الكردي وشركاؤه المحدودة ركناً أساسياً في تطوير البنية التحتية في الأردن لأكثر من أربعة عقود. من مشروع ناقل الديسي العملاق إلى مشاريع السدود الحيوية، نقدم حلولاً هندسية تصمد أمام اختبار الزمن، وفق أعلى المعايير وباعتماد رسمي ورعاية ملكية."
+            "en": "Marwan Ahmad Alkurdi & Partners Co. Ltd has been a cornerstone of Jordan's infrastructure development for over four decades. From the Disi water conveyance to roller-compacted-concrete dams, the work is delivered, documented, and still in service — a first-grade classified contractor with the Jordanian Contractors Association.",
+            "ar": "تُعد شركة مروان أحمد الكردي وشركاؤه المحدودة ركناً أساسياً في تطوير البنية التحتية في الأردن لأكثر من أربعة عقود. من مشروع ناقل الديسي إلى سدود الخرسانة المدحولة، أعمالنا منفذة وموثقة وما تزال في الخدمة — مقاول مصنف درجة أولى لدى نقابة مقاولي الإنشاءات الأردنية."
         },
         "image": "images/legacy_45_years.png"
     },
@@ -270,8 +270,8 @@ export const COMPANY_DATA = {
         "est": { "en": "Est. 1981 • Amman, Jordan", "ar": "تأسست عام 1981 • عمّان، الأردن" },
         "title": { "en": "Building Legacy", "ar": "بناء الإرث" },
         "subtitle": {
-            "en": "Pioneering major infrastructure, dams, and specialized engineering projects across the Kingdom for over 45 years.",
-            "ar": "روّاد المشاريع الكبرى للبنية التحتية والسدود والهندسة المتخصصة في مختلف أنحاء المملكة لأكثر من 45 عاماً."
+            "en": "Bridges, dams, highways and water infrastructure — heavy civil works delivered across Jordan and the region since 1981.",
+            "ar": "جسور وسدود وطرق وبنية تحتية مائية — أعمال مدنية ثقيلة منفذة في الأردن والمنطقة منذ عام 1981."
         },
         "cta": {
             "portfolio": { "en": "View Portfolio", "ar": "عرض المشاريع" },
@@ -286,8 +286,8 @@ export const COMPANY_DATA = {
         "privacy": { "en": "Privacy Policy", "ar": "سياسة الخصوصية" },
         "terms": { "en": "Terms of Service", "ar": "شروط الاستخدام" },
         "description": {
-            "en": "Building the foundation of modern infrastructure with over 45 years of excellence in Dams, Power, and Civil Engineering.",
-            "ar": "نبني أسس البنية التحتية الحديثة بخبرة تتجاوز 45 عاماً في مشاريع السدود والطاقة والهندسة المدنية."
+            "en": "Heavy civil contractor delivering bridges, dams, roads and water infrastructure across Jordan since 1981.",
+            "ar": "مقاول أعمال مدنية ثقيلة ينفذ الجسور والسدود والطرق والبنية التحتية المائية في الأردن منذ عام 1981."
         }
     },
     "news": [
@@ -486,8 +486,8 @@ export const COMPANY_DATA = {
             "label": { "ar": "المعايير العالمية", "en": "Global Standards" },
             "title": { "ar": "الجوهر", "en": "The Core" },
             "description": {
-                "ar": "في صميم عملياتنا يكمن التزام راسخ بالدقة الهندسية. نحن لا نبني منشآت فحسب، بل نصمم أنظمة متكاملة تُشغّل الدول.",
-                "en": "At the heart of our operations lies an unwavering commitment to engineering precision. We don't just build structures; we orchestrate complex systems that power nations."
+                "ar": "منذ عام 1981 ننفذ الأعمال المدنية الثقيلة — جسوراً وسدوداً وطرقاً وبنية تحتية مائية وأنظمة إنشائية متخصصة — عملاً يوثَّق مشروعاً بعد مشروع.",
+                "en": "Since 1981 we have delivered heavy civil works — bridges, dams, highways, water infrastructure and specialized construction systems — documented project by project."
             }
         },
         "services": {

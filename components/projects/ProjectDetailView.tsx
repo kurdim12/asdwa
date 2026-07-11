@@ -38,7 +38,17 @@ export function ProjectDetailView({ project, categoryName, images, related }: Pr
         gallery: { en: "Project gallery", ar: "معرض الصور" },
         noPhotos: { en: "No photos available for this project.", ar: "لا توجد صور متاحة لهذا المشروع." },
         related: { en: "Related projects", ar: "مشاريع ذات صلة" },
+        techData: { en: "Technical data", ar: "البيانات الفنية" },
+        techNote: {
+            en: "Figures as recorded in the project documentation.",
+            ar: "الأرقام كما وردت في وثائق المشروع.",
+        },
     };
+
+    const metrics = (project as any).metrics as
+        | { value: string; label: { en: string; ar: string } }[]
+        | undefined;
+    const year = (project as any).year as string | undefined;
 
     const milestone = {
         en: `This project represents a significant milestone in Jordan's infrastructure development. Utilizing state-of-the-art engineering techniques and adhering to the highest safety and quality standards (ISO 9001), ${t(
@@ -97,7 +107,10 @@ export function ProjectDetailView({ project, categoryName, images, related }: Pr
                                 </li>
                                 <li className="flex items-center gap-3 text-ink">
                                     <CheckCircle2 className="text-brass shrink-0" size={18} />
-                                    <span>{t(labels.completed)}</span>
+                                    <span>
+                                        {t(labels.completed)}
+                                        {year ? ` · ${year}` : ""}
+                                    </span>
                                 </li>
                                 <li className="flex items-center gap-3 text-ink">
                                     <Camera className="text-brass shrink-0" size={18} />
@@ -122,6 +135,30 @@ export function ProjectDetailView({ project, categoryName, images, related }: Pr
                                 {t(milestone)}
                             </p>
                         </Reveal>
+
+                        {metrics && metrics.length > 0 && (
+                            <div className="mt-14">
+                                <div className="flex items-baseline justify-between gap-4 mb-6">
+                                    <h3 className="display text-2xl text-ink">{t(labels.techData)}</h3>
+                                    <span className="font-mono text-[11px] text-steel-faint" dir="ltr">
+                                        MK / TECHNICAL SHEET
+                                    </span>
+                                </div>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    {metrics.map((m, i) => (
+                                        <div key={i} className="rounded-2xl bg-panel p-5">
+                                            <div className="display text-2xl md:text-3xl text-steel tabular-nums" dir="ltr">
+                                                {m.value}
+                                            </div>
+                                            <div className="mt-1.5 text-[13px] text-steel-soft leading-snug">
+                                                {t(m.label)}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className="mt-3 text-[12.5px] text-steel-faint">{t(labels.techNote)}</p>
+                            </div>
+                        )}
 
                         <div className="mt-14">
                             <h3 className="display text-2xl text-ink mb-2">{t(labels.gallery)}</h3>

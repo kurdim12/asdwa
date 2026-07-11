@@ -199,6 +199,25 @@ export default function ContactPage() {
                                         </div>
                                         <div className="space-y-2">
                                             <label className={labelCls}>
+                                                {language === "ar" ? "نوع الاستفسار" : "Inquiry type"}
+                                            </label>
+                                            <select name="inquiry" className={inputCls} defaultValue="general">
+                                                <option value="general">
+                                                    {language === "ar" ? "استفسار عام" : "General inquiry"}
+                                                </option>
+                                                <option value="tender">
+                                                    {language === "ar" ? "عطاء / تأهيل مسبق" : "Tender / prequalification"}
+                                                </option>
+                                                <option value="profile">
+                                                    {language === "ar" ? "طلب ملف الشركة" : "Request company profile"}
+                                                </option>
+                                                <option value="capability">
+                                                    {language === "ar" ? "بحث القدرات الفنية" : "Discuss technical capability"}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className={labelCls}>
                                                 {language === "ar" ? "الموضوع" : "Subject"}
                                             </label>
                                             <input

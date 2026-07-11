@@ -34,13 +34,23 @@ export function Footer() {
                                 ? "لنتحدث عن مشروعكم القادم."
                                 : "Let's talk about your next project."}
                         </h2>
-                        <Link
-                            href="/contact"
-                            className="mt-8 inline-flex items-center gap-2 rounded-full text-[15px] font-medium text-navy bg-white px-7 h-12 hover:bg-sky transition-colors"
-                        >
-                            {language === "ar" ? "ابدأ محادثة" : "Start a conversation"}
-                            <ArrowUpRight size={16} />
-                        </Link>
+                        <div className="mt-8 flex flex-wrap gap-3">
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center gap-2 rounded-full text-[15px] font-medium text-navy bg-white px-7 h-12 hover:bg-sky transition-colors"
+                            >
+                                {language === "ar" ? "ابدأ محادثة" : "Start a conversation"}
+                                <ArrowUpRight size={16} />
+                            </Link>
+                            <a
+                                href="/documents/company_profile.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full text-[15px] font-medium text-white border border-white/25 px-7 h-12 hover:bg-white/10 transition-colors"
+                            >
+                                {language === "ar" ? "ملف الشركة (PDF)" : "Company profile (PDF)"}
+                            </a>
+                        </div>
                     </div>
                     <div className="lg:col-span-4 flex flex-col justify-end">
                         <p className="text-white/50 text-sm leading-relaxed max-w-xs">
@@ -130,6 +140,30 @@ export function Footer() {
                                 </a>
                             </li>
                         </ul>
+                    </div>
+                </div>
+
+                {/* Drawing-set title block */}
+                <div
+                    className="mb-8 grid grid-cols-2 md:grid-cols-4 border border-white/15 rounded-xl overflow-hidden font-mono text-[10.5px] tracking-wide text-white/60"
+                    dir="ltr"
+                    aria-hidden="true"
+                >
+                    <div className="px-4 py-3 border-e border-white/15">
+                        <div className="text-white/35">COMPANY</div>
+                        <div className="mt-1 text-white/75">MARWAN A. ALKURDI &amp; PARTNERS CO. LTD.</div>
+                    </div>
+                    <div className="px-4 py-3 md:border-e border-white/15">
+                        <div className="text-white/35">ESTABLISHED</div>
+                        <div className="mt-1 text-white/75">1981</div>
+                    </div>
+                    <div className="px-4 py-3 border-e border-t md:border-t-0 border-white/15">
+                        <div className="text-white/35">LOCATION</div>
+                        <div className="mt-1 text-white/75">AMMAN — JORDAN / 31.95° N, 35.91° E</div>
+                    </div>
+                    <div className="px-4 py-3 border-t md:border-t-0 border-white/15">
+                        <div className="text-white/35">DISCIPLINE</div>
+                        <div className="mt-1 text-white/75">HEAVY CIVIL INFRASTRUCTURE</div>
                     </div>
                 </div>
 
