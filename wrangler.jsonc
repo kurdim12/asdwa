@@ -1,0 +1,35 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	// Must match the Worker name of the Cloudflare Workers Builds project
+	"name": "asdwa",
+	"compatibility_date": "2026-07-11",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference service binding — the service name MUST equal the
+			// worker "name" above, see https://opennext.js.org/cloudflare/caching
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "asdwa"
+		}
+	],
+	"r2_buckets": [
+		// R2 incremental cache — this bucket already exists in the account
+		// (it was created by the first deploy attempt)
+		{
+			"binding": "NEXT_INC_CACHE_R2_BUCKET",
+			"bucket_name": "website-opennext-cache"
+		}
+	],
+	"images": {
+		// Image optimization binding used by the OpenNext worker
+		"binding": "IMAGES"
+	}
+}
