@@ -124,3 +124,11 @@ body {
   font-family: var(--font-noto-kufi), sans-serif;
   letter-spacing: 0;
 }
+
+/* Arabic ascenders/descenders collide at the tight Latin display leading */
+:root[lang="ar"] .display,
+:root[lang="ar"] h1,
+:root[lang="ar"] h2,
+:root[lang="ar"] h3 {
+  line-height: 1.3;
+}

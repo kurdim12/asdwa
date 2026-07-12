@@ -20,7 +20,7 @@ export function Footer() {
                 src="/illustrations/blueprint-bridge.svg"
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none select-none absolute top-0 end-0 h-[420px] w-auto max-w-none opacity-50"
+                className="pointer-events-none select-none hidden lg:block absolute top-0 end-0 h-[420px] w-auto max-w-none opacity-40"
             />
             <div className="relative mx-auto max-w-8xl px-6 md:px-10 lg:px-16 pt-20 md:pt-24 pb-10">
                 {/* Top: CTA */}
