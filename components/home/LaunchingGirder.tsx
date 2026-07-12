@@ -6,9 +6,11 @@ import { Section, SectionKicker } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 import { useLanguage } from "@/app/providers";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { optimizedSrc } from "@/components/ui/Pic";
 
 const STEPS = [
     {
+        photo: "/images/projects/b32049486bf559b5.jpg",
         title: { en: "Piers are cast and surveyed", ar: "صب الركائز ومسحها" },
         text: {
             en: "Reinforced-concrete piers are constructed along the alignment and surveyed to precise levels.",
@@ -16,6 +18,7 @@ const STEPS = [
         },
     },
     {
+        photo: "/images/projects/a74c26b8298b9c58.jpg",
         title: { en: "The launching girder advances", ar: "تتقدم عارضة الإطلاق" },
         text: {
             en: "The steel truss machine positions itself over the next span, supported by the completed deck and the pier ahead.",
@@ -23,6 +26,7 @@ const STEPS = [
         },
     },
     {
+        photo: "/images/projects/1452e54ddc3e12a5.jpg",
         title: { en: "A precast segment is lifted", ar: "رفع القطعة مسبقة الصب" },
         text: {
             en: "Precast prestressed girder segments are hoisted from below — no scaffolding on the ground beneath.",
@@ -30,6 +34,7 @@ const STEPS = [
         },
     },
     {
+        photo: "/images/projects/7aa7d308670e0142.jpg",
         title: { en: "Placed and stressed", ar: "التركيب والشد" },
         text: {
             en: "The segment is set on its bearings and post-tensioned using the BBR prestressing system.",
@@ -37,6 +42,7 @@ const STEPS = [
         },
     },
     {
+        photo: "/images/projects/512a01b833173ee1.jpg",
         title: { en: "The machine launches forward", ar: "تنطلق الآلة إلى الأمام" },
         text: {
             en: "With the span complete, the girder launches itself to the next span and the sequence repeats.",
@@ -82,17 +88,29 @@ export function LaunchingGirder() {
 
                 <Reveal width="100%" delay={0.15}>
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-stretch rounded-2xl md:rounded-[28px] bg-white shadow-card p-6 md:p-10">
-                        {/* Sequence drawing */}
-                        <div className="lg:col-span-7 relative rounded-2xl bg-sky/60 p-4 md:p-6 flex items-center">
+                        {/* Real machine photography + drawing inset */}
+                        <div className="lg:col-span-7 relative rounded-2xl overflow-hidden bg-panel min-h-[280px] md:min-h-[420px]">
                             <img
                                 key={step}
-                                src={`/illustrations/girder-step-${step + 1}.svg`}
+                                src={optimizedSrc(STEPS[step].photo, 1080)}
                                 alt={t(STEPS[step].title)}
-                                className="w-full h-auto animate-fade-up"
+                                className="absolute inset-0 h-full w-full object-cover animate-fade-up"
                             />
-                            <span className="absolute top-4 start-5 font-mono text-[12px] text-blue tabular-nums" dir="ltr">
+                            <div className="absolute inset-0 ring-1 ring-inset ring-steel/10 rounded-2xl" />
+                            <span className="absolute top-4 start-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 font-mono text-[12px] text-blue tabular-nums shadow-card" dir="ltr">
                                 {String(step + 1).padStart(2, "0")} / {String(STEPS.length).padStart(2, "0")}
                             </span>
+                            <span className="absolute top-4 end-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11.5px] font-medium text-steel-soft shadow-card">
+                                {language === "ar" ? "طريق البحر الميت — صور المشروع" : "Dead Sea Parkway — project record"}
+                            </span>
+                            <div className="absolute bottom-4 start-4 hidden sm:block w-40 md:w-52 rounded-xl bg-white/95 backdrop-blur p-2.5 shadow-card">
+                                <img
+                                    src={`/illustrations/girder-step-${step + 1}.svg`}
+                                    alt=""
+                                    aria-hidden="true"
+                                    className="w-full h-auto"
+                                />
+                            </div>
                         </div>
 
                         {/* Step controls */}
