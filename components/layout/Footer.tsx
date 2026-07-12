@@ -83,7 +83,7 @@ export function Footer() {
                             {t(footer?.navigation)}
                         </h3>
                         <ul className="space-y-3 text-[14.5px] text-white/70">
-                            {["about", "services", "projects", "references", "news", "contact"].map(
+                            {["about", "services", "engineering", "projects", "references", "news", "contact"].map(
                                 (id) => (
                                     <li key={id}>
                                         <Link

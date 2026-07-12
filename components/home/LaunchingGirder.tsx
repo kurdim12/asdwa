@@ -146,11 +146,8 @@ export function LaunchingGirder() {
                                         <ArrowRight size={17} />
                                     </button>
                                 </div>
-                                <Link
-                                    href="/projects/Dead%20Sea%20Parkway"
-                                    className="link-arrow text-[14px]"
-                                >
-                                    {language === "ar" ? "مشروع الباركواي" : "See the project"}
+                                <Link href="/engineering" className="link-arrow text-[14px]">
+                                    {language === "ar" ? "لوحات الأسلوب الهندسي" : "Full method sheets"}
                                     <ArrowUpRight size={15} />
                                 </Link>
                             </div>

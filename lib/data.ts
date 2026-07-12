@@ -55,6 +55,11 @@ export const COMPANY_DATA = {
                 "url": "/services"
             },
             {
+                "id": "engineering",
+                "label": { "ar": "الهندسة", "en": "Engineering" },
+                "url": "/engineering"
+            },
+            {
                 "id": "projects",
                 "label": { "ar": "المشاريع", "en": "Projects" },
                 "url": "/projects",

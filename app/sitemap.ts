@@ -6,7 +6,7 @@ const BASE = "https://mkurdi.com";
 export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
 
-    const staticPages = ["", "/about", "/services", "/projects", "/references", "/news", "/contact"].map(
+    const staticPages = ["", "/about", "/services", "/engineering", "/projects", "/references", "/news", "/contact"].map(
         (path) => ({
             url: `${BASE}${path}`,
             lastModified: now,
