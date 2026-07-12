@@ -103,14 +103,6 @@ export function LaunchingGirder() {
                             <span className="absolute top-4 end-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11.5px] font-medium text-steel-soft shadow-card">
                                 {language === "ar" ? "طريق البحر الميت — صور المشروع" : "Dead Sea Parkway — project record"}
                             </span>
-                            <div className="absolute bottom-4 start-4 hidden sm:block w-40 md:w-52 rounded-xl bg-white/95 backdrop-blur p-2.5 shadow-card">
-                                <img
-                                    src={`/illustrations/girder-step-${step + 1}.svg`}
-                                    alt=""
-                                    aria-hidden="true"
-                                    className="w-full h-auto"
-                                />
-                            </div>
                         </div>
 
                         {/* Step controls */}
