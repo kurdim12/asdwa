@@ -17,13 +17,13 @@ const SHEETS = [
         ref: "LG-10",
         title: {
             en: "Self-launching bridge girder plant",
-            ar: "عارضة الإطلاق الذاتي للجسور",
+            ar: "الرافعة الانسحابية",
         },
         text: {
             en: "The company's owned launching-girder plant erects prestressed box-girder bridges by segmental balanced cantilever — building the deck from above, with no falsework on the ground below.",
-            ar: "عارضة الإطلاق المملوكة للشركة تنشئ جسور العوارض الصندوقية مسبقة الإجهاد بأسلوب الكابولي المتوازن — يُبنى السطح من الأعلى دون سقالات على الأرض.",
+            ar: "الرافعة الانسحابية المملوكة للشركة تنشئ جسور العوارض الصندوقية مسبقة الإجهاد بأسلوب الكابولي المتوازن — يُبنى السطح من الأعلى دون سقالات على الأرض.",
         },
-        related: { href: "/projects/Dead%20Sea%20Parkway", label: { en: "Used on the Dead Sea Parkway", ar: "استُخدمت في طريق البحر الميت" } },
+        related: { href: "/projects/Dead%20Sea%20Parkway", label: { en: "Used on the Dead Sea Parkway, Wadi Hamara Bridge, Abu Al-Asal Bridge, Karak Bridge, the Jamarat Bridges and the Irbid Ring Road", ar: "استُخدمت في طريق البحر الميت، جسر وادي حمارة، جسر أبو العسل، جسر الكرك، جسور الجمرات وطريق اربد الدائري" } },
         wide: true,
     },
     {
@@ -32,7 +32,7 @@ const SHEETS = [
         title: { en: "The launching cycle", ar: "دورة الإطلاق" },
         text: {
             en: "Cast, stress, prepare, launch, advance, lock and reset — the typical cycle repeats span after span until the alignment is complete.",
-            ar: "صب، شد، تجهيز، إطلاق، تقدم، تثبيت وإعادة ضبط — تتكرر الدورة باعاً بعد باع حتى اكتمال المحور.",
+            ar: "صب، شد، تجهيز، إطلاق، تقدم، تثبيت وإعادة ضبط — تتكرر الدورة باعاً بعد باع حتى اكتمال الفتحة.",
         },
         wide: true,
     },

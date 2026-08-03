@@ -19,7 +19,7 @@ const STEPS = [
     },
     {
         photo: "/images/projects/a74c26b8298b9c58.jpg",
-        title: { en: "The launching girder advances", ar: "تتقدم عارضة الإطلاق" },
+        title: { en: "The launching girder advances", ar: "تتقدم الرافعة الانسحابية" },
         text: {
             en: "The steel truss machine positions itself over the next span, supported by the completed deck and the pier ahead.",
             ar: "تتمركز الجملة الفولاذية فوق الباع التالي، مستندة إلى السطح المنجز والركيزة الأمامية.",
@@ -46,7 +46,7 @@ const STEPS = [
         title: { en: "The machine launches forward", ar: "تنطلق الآلة إلى الأمام" },
         text: {
             en: "With the span complete, the girder launches itself to the next span and the sequence repeats.",
-            ar: "بعد اكتمال الباع تدفع العارضة نفسها إلى الباع التالي وتتكرر الدورة.",
+            ar: "بعد اكتمال الفتحة تدفع الرافعة نفسها إلى الفتحة التالية وتتكرر الدورة.",
         },
     },
 ];
@@ -80,7 +80,7 @@ export function LaunchingGirder() {
                     <Reveal delay={0.2}>
                         <p className="mt-5 text-lg text-steel-soft leading-relaxed text-pretty">
                             {language === "ar"
-                                ? "على طريق البحر الميت (الباركواي) أُنشئ جسران بقطع مسبقة الصب والإجهاد باستخدام نظام BBR وتقنية عارضة الإطلاق — نهج حاز جائزة التميز في الحفاظ على البيئة لأنه يبني الجسر من الأعلى دون المساس بالأرض تحته."
+                                ? "على طريق البحر الميت (الباركواي) أُنشئ جسران بقطع مسبقة الصب والإجهاد باستخدام نظام BBR وتقنية الرافعة الانسحابية — نهج حاز جائزة التميز في الحفاظ على البيئة لأنه يبني الجسر من الأعلى دون المساس بالأرض تحته."
                                 : "On the Dead Sea Parkway, two bridges were erected with precast prestressed girders using the BBR system and launching-girder technology — an approach that builds the bridge from above, leaving the terrain below untouched, and earned the project an Award of Excellence for preserving the environment."}
                         </p>
                     </Reveal>
